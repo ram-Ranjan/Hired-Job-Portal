@@ -1,4 +1,4 @@
-package com.ty.HiredApp.Exception;
+package com.ty.Hired_JobPortal.Exception;
 
 public class IdNotFoundException extends RuntimeException {
 	private String message;

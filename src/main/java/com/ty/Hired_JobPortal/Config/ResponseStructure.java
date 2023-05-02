@@ -1,4 +1,4 @@
-package com.ty.HiredApp.Config;
+package com.ty.Hired_JobPortal.Config;
 
 import lombok.Data;
 
