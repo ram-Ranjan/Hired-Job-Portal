@@ -1,11 +1,10 @@
 package com.ty.Hired_JobPortal.DTO;
 
-import javax.persistence.Entity;
+import org.springframework.stereotype.Component;
 
 import lombok.Getter;
 import lombok.Setter;
-
-@Entity
+@Component
 @Getter
 @Setter
 public class ApplicantDto {
