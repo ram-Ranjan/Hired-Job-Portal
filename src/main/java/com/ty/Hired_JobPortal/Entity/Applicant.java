@@ -1,0 +1,34 @@
+package com.ty.Hired_JobPortal.Entity;
+
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Entity
+@Getter
+@Setter
+public class Applicant {
+	private int applicantId;
+	private String applicantFirstName;
+	private String applicantLastName;
+	private String applicantEmail;
+	private String applicantPassword;
+	private long applicantContact;
+	private String applicantAddress;
+	
+	@OneToMany
+	private List<Skill> skill;
+	@OneToMany
+	private List<Resume> resume;
+	@OneToMany
+	private List<JobApplicantion> jobApplicantion;
+	@OneToMany
+	private List<Notification> notification;
+	@ManyToMany
+	private List<Job> job;
+}
