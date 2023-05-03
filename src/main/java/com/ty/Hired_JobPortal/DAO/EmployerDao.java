@@ -12,13 +12,12 @@ public class EmployerDao {
 	@Autowired
 	private EmployerRepo employerRepo;
 
-	public Employer saveEmployer(Employer employer) {
+	public Employer addEmployer(Employer employer) {
 		return employerRepo.save(employer);
 	}
 
 	public Employer findEmployerById(int id) {
 		Optional<Employer> optional = employerRepo.findById(id);
-		System.err.println(optional.isEmpty());
 		if (optional.isEmpty()) {
 			return null;
 		} else {
