@@ -19,6 +19,7 @@ public class Employer {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int employerId;
 	private String employerName;
+	private String employerEmail;
 	private String employerPassword;
 	private long employerContact;
 	
