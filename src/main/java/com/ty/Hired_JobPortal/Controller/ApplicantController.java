@@ -19,36 +19,33 @@ import com.ty.Hired_JobPortal.Service.ApplicantService;
 @RestController
 @RequestMapping("/applicant")
 public class ApplicantController {
-	
+
 	@Autowired
 	ApplicantService applicantService;
-	
+
 	@PostMapping
-	public ResponseEntity<ResponseStructure<ApplicantDto>> saveApplicant(@RequestBody Applicant applicant)
-	{
-		return applicantService.saveApplicant(applicant);
+	public ResponseEntity<ResponseStructure<ApplicantDto>> addApplicant(@RequestBody Applicant applicant) {
+		return applicantService.addApplicant(applicant);
 	}
-	
+
 	@GetMapping
-	public ResponseEntity<ResponseStructure<ApplicantDto>> findApplicantById(@RequestParam int applicantId)
-	{
+	public ResponseEntity<ResponseStructure<ApplicantDto>> findApplicantById(@RequestParam int applicantId) {
 		return applicantService.findApplicantById(applicantId);
 	}
-	
+
 	@GetMapping("/email")
-	public ResponseEntity<ResponseStructure<ApplicantDto>> findByApplicantEmail(@RequestParam String applicantEmail)
-	{
+	public ResponseEntity<ResponseStructure<ApplicantDto>> findByApplicantEmail(@RequestParam String applicantEmail) {
 		return applicantService.findByApplicantEmail(applicantEmail);
 	}
-	
+
 	@PutMapping
-	public ResponseEntity<ResponseStructure<ApplicantDto>> updateApplicant(@RequestBody Applicant applicant,int applicantId)
-	{
+	public ResponseEntity<ResponseStructure<ApplicantDto>> updateApplicant(@RequestBody Applicant applicant,
+			int applicantId) {
 		return applicantService.updateApplicant(applicant, applicantId);
 	}
+
 	@DeleteMapping
-	public ResponseEntity<ResponseStructure<ApplicantDto>> deleteApplicantById(@RequestParam int applicantId)
-	{
+	public ResponseEntity<ResponseStructure<ApplicantDto>> deleteApplicantById(@RequestParam int applicantId) {
 		return applicantService.deleteApplicant(applicantId);
 	}
 

@@ -5,12 +5,10 @@ import lombok.Getter;
 @Getter
 public class ApplicantAlreadyExistingWithEmail extends RuntimeException {
 
-	
 	private String message;
 
 	public ApplicantAlreadyExistingWithEmail(String message) {
 		this.message = message;
 	}
-	
-	
+
 }

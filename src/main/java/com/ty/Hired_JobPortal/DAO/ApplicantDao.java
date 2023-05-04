@@ -7,12 +7,13 @@ import org.springframework.stereotype.Repository;
 
 import com.ty.Hired_JobPortal.Entity.Applicant;
 import com.ty.Hired_JobPortal.Repo.ApplicantRepo;
+
 @Repository
 public class ApplicantDao {
 	@Autowired
 	private ApplicantRepo applicantRepo;
 
-	public Applicant saveApplicant(Applicant applicant ) {
+	public Applicant addApplicant(Applicant applicant) {
 		return applicantRepo.save(applicant);
 	}
 
@@ -20,19 +21,17 @@ public class ApplicantDao {
 		Optional<Applicant> optional = applicantRepo.findById(id);
 		if (optional.isEmpty()) {
 			return null;
-		}else {
+		} else {
 			return optional.get();
-		} 
+		}
 	}
 
-	public Applicant updateApplicant(Applicant applicant,int id) {
+	public Applicant updateApplicant(Applicant applicant, int id) {
 		Optional<Applicant> optional = applicantRepo.findById(id);
-		if(optional.isPresent())
-		{
+		if (optional.isPresent()) {
 			applicant.setApplicantId(id);
 			return applicantRepo.save(applicant);
-		}
-		else
+		} else
 			return null;
 	}
 
@@ -46,8 +45,8 @@ public class ApplicantDao {
 			return applicant;
 		}
 	}
-	public Applicant findByApplicantEmail(String applicantEmail)
-	{
+
+	public Applicant findByApplicantEmail(String applicantEmail) {
 		return applicantRepo.findByApplicantEmail(applicantEmail);
 	}
 }

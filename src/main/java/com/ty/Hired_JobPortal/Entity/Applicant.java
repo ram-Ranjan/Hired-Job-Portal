@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -25,13 +26,13 @@ public class Applicant {
 	private String applicantPassword;
 	private long applicantContact;
 	private String applicantAddress;
-	
+
 	@OneToMany
 	private List<Skill> skill;
+	@OneToOne
+	private Resume resume;
 	@OneToMany
-	private List<Resume> resume;
-	@OneToMany
-	private List<JobApplicantion> jobApplicantion;
+	private List<JobApplication> jobApplication;
 	@OneToMany
 	private List<Notification> notification;
 	@ManyToMany

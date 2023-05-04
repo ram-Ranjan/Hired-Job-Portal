@@ -21,25 +21,26 @@ import com.ty.Hired_JobPortal.Service.EmployerService;
 public class EmployerController {
 	@Autowired
 	private EmployerService employerService;
-	
+
 	@PostMapping
-	public ResponseEntity<ResponseStructure<EmployerDto>> addEmployer(@RequestBody Employer employer){
+	public ResponseEntity<ResponseStructure<EmployerDto>> addEmployer(@RequestBody Employer employer) {
 		return employerService.addEmployer(employer);
 	}
-	
+
 	@GetMapping
-	public ResponseEntity<ResponseStructure<EmployerDto>> getEmployer(@RequestParam int employerId){
+	public ResponseEntity<ResponseStructure<EmployerDto>> getEmployer(@RequestParam int employerId) {
 		return employerService.getEmployer(employerId);
 	}
-	
+
 	@PutMapping
-	public ResponseEntity<ResponseStructure<EmployerDto>> updateEmployer(@RequestBody Employer employer, @RequestParam int employerId ){
+	public ResponseEntity<ResponseStructure<EmployerDto>> updateEmployer(@RequestBody Employer employer,
+			@RequestParam int employerId) {
 		return employerService.updateEmployer(employer, employerId);
 	}
-	
+
 	@DeleteMapping
-	public ResponseEntity<ResponseStructure<EmployerDto>> deleteEmployer(@RequestParam int employerId){
+	public ResponseEntity<ResponseStructure<EmployerDto>> deleteEmployer(@RequestParam int employerId) {
 		return employerService.deleteEmployer(employerId);
 	}
-	
+
 }

@@ -11,6 +11,7 @@ import com.ty.Hired_JobPortal.Entity.Notification;
 
 import lombok.Getter;
 import lombok.Setter;
+
 @Component
 @Getter
 @Setter
@@ -18,11 +19,11 @@ public class EmployerDto {
 	private int employerId;
 	private String employerName;
 	private long employerContact;
-	
+
 	@OneToMany
 	private List<Job> job;
-	
+
 	@OneToMany
 	private List<Notification> notification;
-	
+
 }
