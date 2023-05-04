@@ -18,16 +18,22 @@ public class ApplicantDao {
 
 	public Applicant findApplicantById(int id) {
 		Optional<Applicant> optional = applicantRepo.findById(id);
-		System.err.println(optional.isEmpty());
 		if (optional.isEmpty()) {
 			return null;
-		} else {
+		}else {
 			return optional.get();
-		}
+		} 
 	}
 
-	public Applicant updateApplicant(Applicant applicant) {
-		return applicantRepo.save(applicant);
+	public Applicant updateApplicant(Applicant applicant,int id) {
+		Optional<Applicant> optional = applicantRepo.findById(id);
+		if(optional.isPresent())
+		{
+			applicant.setApplicantId(id);
+			return applicantRepo.save(applicant);
+		}
+		else
+			return null;
 	}
 
 	public Applicant deleteApplicantById(int id) {

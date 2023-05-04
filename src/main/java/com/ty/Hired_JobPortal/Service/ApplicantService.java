@@ -10,6 +10,7 @@ import com.ty.Hired_JobPortal.DAO.ApplicantDao;
 import com.ty.Hired_JobPortal.DTO.ApplicantDto;
 import com.ty.Hired_JobPortal.DTO.DtoConfig;
 import com.ty.Hired_JobPortal.Entity.Applicant;
+import com.ty.Hired_JobPortal.Exception.ApplicantAlreadyExistingWithEmail;
 import com.ty.Hired_JobPortal.Exception.ApplicantEmailNotFoundException;
 import com.ty.Hired_JobPortal.Exception.IdNotFoundException;
 
@@ -26,6 +27,8 @@ public class ApplicantService {
 	
 	public ResponseEntity<ResponseStructure<ApplicantDto>> saveApplicant(Applicant applicant){
 		
+		Applicant existingApplicant = applicantDao.findByApplicantEmail(applicant.getApplicantEmail());
+		if(existingApplicant==null) {
 		applicant = applicantDao.saveApplicant(applicant);
 		applicantDto=dtoConfig.setApplicantDtoAttributes(applicant);
 		
@@ -34,16 +37,20 @@ public class ApplicantService {
 		responseStructure.setMessage("Applicant added Successfully!!");
 		responseStructure.setData(applicantDto);
 		return new ResponseEntity<ResponseStructure<ApplicantDto>>(responseStructure, HttpStatus.CREATED);
-	}
+		}
+		else
+			throw new ApplicantAlreadyExistingWithEmail("Applicant Email already used");
+		}
 	
-	public ResponseEntity<ResponseStructure<ApplicantDto>> getApplicantById(int applicantId){
+	public ResponseEntity<ResponseStructure<ApplicantDto>> findApplicantById(int applicantId){
 		Applicant applicant = applicantDao.findApplicantById(applicantId);
 		
 		if(applicant != null) {
 			ResponseStructure<ApplicantDto> responseStructure = new ResponseStructure<>();
 			
+			applicantDto=dtoConfig.setApplicantDtoAttributes(applicant);
 			responseStructure.setStatus(HttpStatus.FOUND.value());
-			responseStructure.setMessage("Employer Found!!");
+			responseStructure.setMessage("Applicant Found!!");
 			responseStructure.setData(applicantDto);
 			return new ResponseEntity<ResponseStructure<ApplicantDto>>(responseStructure, HttpStatus.FOUND); 
 		}
@@ -62,7 +69,7 @@ public class ApplicantService {
 		{
 			ResponseStructure<ApplicantDto> responseStructure = new ResponseStructure<>();
 			
-			updatedApplicant=applicantDao.updateApplicant(existingApplicant);
+			updatedApplicant=applicantDao.updateApplicant(updatedApplicant, id);
 			applicantDto= dtoConfig.setApplicantDtoAttributes(updatedApplicant);
 			
 			responseStructure.setStatus(HttpStatus.OK.value());
@@ -94,21 +101,21 @@ public class ApplicantService {
 		
 		
 	}
-	public ResponseEntity<ResponseStructure<ApplicantDto>> getApplicantByEmail(String applicantEmail){
+	public ResponseEntity<ResponseStructure<ApplicantDto>> findByApplicantEmail(String applicantEmail){
 		Applicant applicant = applicantDao.findByApplicantEmail(applicantEmail);
 		
 		if(applicant != null) {
 			ResponseStructure<ApplicantDto> responseStructure = new ResponseStructure<>();
 			
-			
+			applicantDto=dtoConfig.setApplicantDtoAttributes(applicant);
 			responseStructure.setStatus(HttpStatus.FOUND.value());
-			responseStructure.setMessage("Employer Found!!");
+			responseStructure.setMessage("Applicant Found!!");
 			responseStructure.setData(applicantDto);
 			return new ResponseEntity<ResponseStructure<ApplicantDto>>(responseStructure, HttpStatus.FOUND); 
 		}
 		else {
-			throw new ApplicantEmailNotFoundException("Failed to find the Applicant with given id!!"); 
+			throw new ApplicantEmailNotFoundException("Failed to find the Applicant with given Email!!"); 
 		}
-	}
+	} 
 	
 }
