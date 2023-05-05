@@ -22,11 +22,11 @@ public class Employer {
 	private String employerEmail;
 	private String employerPassword;
 	private long employerContact;
-	
+
 	@OneToMany
 	private List<Job> job;
-	
+
 	@OneToMany
 	private List<Notification> notification;
-	
+
 }

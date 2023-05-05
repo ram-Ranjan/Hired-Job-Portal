@@ -7,18 +7,18 @@ import org.springframework.stereotype.Repository;
 
 import com.ty.Hired_JobPortal.Entity.Applicant;
 import com.ty.Hired_JobPortal.Repo.ApplicantRepo;
+
 @Repository
 public class ApplicantDao {
 	@Autowired
 	private ApplicantRepo applicantRepo;
 
-	public Applicant saveApplicant(Applicant applicant ) {
+	public Applicant addApplicant(Applicant applicant) {
 		return applicantRepo.save(applicant);
 	}
 
 	public Applicant findApplicantById(int id) {
 		Optional<Applicant> optional = applicantRepo.findById(id);
-		System.err.println(optional.isEmpty());
 		if (optional.isEmpty()) {
 			return null;
 		} else {
@@ -26,8 +26,13 @@ public class ApplicantDao {
 		}
 	}
 
-	public Applicant updateApplicant(Applicant applicant) {
-		return applicantRepo.save(applicant);
+	public Applicant updateApplicant(Applicant applicant, int id) {
+		Optional<Applicant> optional = applicantRepo.findById(id);
+		if (optional.isPresent()) {
+			applicant.setApplicantId(id);
+			return applicantRepo.save(applicant);
+		} else
+			return null;
 	}
 
 	public Applicant deleteApplicantById(int id) {
@@ -40,8 +45,8 @@ public class ApplicantDao {
 			return applicant;
 		}
 	}
-	public Applicant findByApplicantEmail(String applicantEmail)
-	{
+
+	public Applicant findByApplicantEmail(String applicantEmail) {
 		return applicantRepo.findByApplicantEmail(applicantEmail);
 	}
 }
