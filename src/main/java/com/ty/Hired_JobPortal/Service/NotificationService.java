@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ty.Hired_JobPortal.Config.ResponseStructure;
 import com.ty.Hired_JobPortal.DAO.NotificationDao;
+import com.ty.Hired_JobPortal.DTO.DtoConfig;
 import com.ty.Hired_JobPortal.DTO.NotificationDto;
 import com.ty.Hired_JobPortal.Entity.Notification;
 import com.ty.Hired_JobPortal.Exception.IdNotFoundException;
@@ -15,42 +16,32 @@ import com.ty.Hired_JobPortal.Exception.IdNotFoundException;
 public class NotificationService {
 	@Autowired
 	private NotificationDao notificationDao;
-
 	@Autowired
 	private NotificationDto notificationDto;
+	@Autowired
+	private DtoConfig dtoConfig;
 
 	public ResponseEntity<ResponseStructure<NotificationDto>> addNotification(Notification notification) {
-		ResponseStructure<NotificationDto> responseStructure = new ResponseStructure<>();
-		Notification notification2 = notificationDao.addNotification(notification);
+		notification = notificationDao.addNotification(notification);
 
-		responseStructure.setStatus(notification2.getNotificationId());
+		notificationDto = dtoConfig.setNotificationDtoAttributes(notification);
+		ResponseStructure<NotificationDto> responseStructure = new ResponseStructure<>();
+		responseStructure.setStatus(HttpStatus.CREATED.value());
 		responseStructure.setMessage("Notification not Added!!");
-		notificationDto.setNotificationId(notification2.getNotificationId());
-		notificationDto.setNotificationType(notification2.getNotificationType());
-		notificationDto.setNotificationMessage(notification2.getNotificationMessage());
-		notificationDto.setNotificationTime(notification2.getNotificationTime());
-		notificationDto.setEmployer(notification2.getEmployer());
-		notificationDto.setApplicant(notification2.getApplicant());
-		notificationDto.setJobApplication(notification2.getJobApplication());
-		responseStructure.setData(notification2);
+		responseStructure.setData(notification);
 		return new ResponseEntity<ResponseStructure<NotificationDto>>(responseStructure, HttpStatus.CREATED);
 	}
 
 	public ResponseEntity<ResponseStructure<NotificationDto>> getNotification(int notificationId) {
-		ResponseStructure<NotificationDto> responseStructure = new ResponseStructure<>();
 		Notification existingNotification = notificationDao.findNotificationById(notificationId);
 
 		if (existingNotification != null) {
+			notificationDto = dtoConfig.setNotificationDtoAttributes(existingNotification);
+
+			ResponseStructure<NotificationDto> responseStructure = new ResponseStructure<>();
 			responseStructure.setStatus(HttpStatus.FOUND.value());
 			responseStructure.setMessage("Notification Found!!");
-			notificationDto.setNotificationId(existingNotification.getNotificationId());
-			notificationDto.setNotificationType(existingNotification.getNotificationType());
-			notificationDto.setNotificationMessage(existingNotification.getNotificationMessage());
-			notificationDto.setNotificationTime(existingNotification.getNotificationTime());
-			notificationDto.setEmployer(existingNotification.getEmployer());
-			notificationDto.setApplicant(existingNotification.getApplicant());
-			notificationDto.setJobApplication(existingNotification.getJobApplication());
-			responseStructure.setData(existingNotification);
+			responseStructure.setData(notificationDto);
 			return new ResponseEntity<ResponseStructure<NotificationDto>>(responseStructure, HttpStatus.CREATED);
 		} else {
 			throw new IdNotFoundException("Failed to find the Notification!!");
@@ -59,19 +50,14 @@ public class NotificationService {
 
 	public ResponseEntity<ResponseStructure<NotificationDto>> updateNotification(Notification updatedNotification,
 			int notificationId) {
-		ResponseStructure<NotificationDto> responseStructure = new ResponseStructure<>();
 		Notification existingNotification = notificationDao.findNotificationById(notificationId);
 
 		if (existingNotification != null) {
 			updatedNotification.setNotificationId(existingNotification.getNotificationId());
 			existingNotification = notificationDao.updateNotification(updatedNotification);
-			notificationDto.setNotificationId(existingNotification.getNotificationId());
-			notificationDto.setNotificationType(existingNotification.getNotificationType());
-			notificationDto.setNotificationMessage(existingNotification.getNotificationMessage());
-			notificationDto.setNotificationTime(existingNotification.getNotificationTime());
-			notificationDto.setEmployer(existingNotification.getEmployer());
-			notificationDto.setApplicant(existingNotification.getApplicant());
-			notificationDto.setJobApplication(existingNotification.getJobApplication());
+			notificationDto = dtoConfig.setNotificationDtoAttributes(existingNotification);
+
+			ResponseStructure<NotificationDto> responseStructure = new ResponseStructure<>();
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Notification Updated!!");
 			responseStructure.setData(notificationDto);
@@ -82,17 +68,11 @@ public class NotificationService {
 	}
 
 	public ResponseEntity<ResponseStructure<NotificationDto>> deleteNotification(int notificationId) {
-		ResponseStructure<NotificationDto> responseStructure = new ResponseStructure<>();
 		Notification existingNotification = notificationDao.deleteNotificationById(notificationId);
 
 		if (existingNotification != null) {
-			notificationDto.setNotificationId(existingNotification.getNotificationId());
-			notificationDto.setNotificationType(existingNotification.getNotificationType());
-			notificationDto.setNotificationMessage(existingNotification.getNotificationMessage());
-			notificationDto.setNotificationTime(existingNotification.getNotificationTime());
-			notificationDto.setEmployer(existingNotification.getEmployer());
-			notificationDto.setApplicant(existingNotification.getApplicant());
-			notificationDto.setJobApplication(existingNotification.getJobApplication());
+			notificationDto = dtoConfig.setNotificationDtoAttributes(existingNotification);
+			ResponseStructure<NotificationDto> responseStructure = new ResponseStructure<>();
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Notification Deleted!!");
 			responseStructure.setData(notificationDto);

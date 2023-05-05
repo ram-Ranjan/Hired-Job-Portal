@@ -5,7 +5,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.ty.Hired_JobPortal.Entity.JobApplication;
 import com.ty.Hired_JobPortal.Entity.Resume;
 import com.ty.Hired_JobPortal.Repo.ResumeRepo;
 
