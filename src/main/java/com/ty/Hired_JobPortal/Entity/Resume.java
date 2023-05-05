@@ -1,12 +1,11 @@
 package com.ty.Hired_JobPortal.Entity;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import lombok.Getter;
@@ -20,10 +19,9 @@ public class Resume {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int resumeId;
 	private String filePath;
-	private LocalDateTime uploadDate;
-	
+	private LocalDate uploadDate;
+
 	@OneToOne
-	private JobApplicantion jobApplicantion;
-	@ManyToOne
-	private Applicant applicant;
+	private JobApplication jobApplicantion;
+	
 }

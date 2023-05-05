@@ -29,7 +29,7 @@ public class JobDto {
 	private LocalDate datePosted;
 	private boolean isFilled;
 	private String jobCategory;
-	
+
 	@ManyToOne
 	private Employer employer;
 	@ManyToMany

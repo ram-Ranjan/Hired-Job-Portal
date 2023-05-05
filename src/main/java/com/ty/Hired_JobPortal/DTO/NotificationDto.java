@@ -23,11 +23,5 @@ public class NotificationDto {
 	private String notificationType;
 	private LocalDateTime notificationTime;
 
-	@ManyToOne
-	private Employer employer;
-	@ManyToOne
-	private Applicant applicant;
-	@OneToOne
-	private JobApplicantion jobApplication;
 
 }
