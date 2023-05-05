@@ -30,7 +30,6 @@ public class ApplicantService {
 
 	@Autowired
 	private DtoConfig dtoConfig;
-	
 	@Autowired
 	ResumeDao resumeDao;
 	@Autowired
@@ -67,14 +66,14 @@ public class ApplicantService {
 			throw new IdNotFoundException("Failed to find the Applicant with given id!!");
 		}
 	}
-	
-	public ResponseEntity<ResponseStructure<ApplicantDto>> findByApplicantEmail(String applicantEmail) {
-		Applicant applicant = applicantDao.findByApplicantEmail(applicantEmail);
 
-		if (applicant != null) {
+	public ResponseEntity<ResponseStructure<ApplicantDto>> findByApplicantEmail(String applicantEmail) {
+		Applicant existingApplicant = applicantDao.findByApplicantEmail(applicantEmail);
+
+		if (existingApplicant != null) {
 			ResponseStructure<ApplicantDto> responseStructure = new ResponseStructure<>();
 
-			applicantDto = dtoConfig.setApplicantDtoAttributes(applicant);
+			applicantDto = dtoConfig.setApplicantDtoAttributes(existingApplicant);
 			responseStructure.setStatus(HttpStatus.FOUND.value());
 			responseStructure.setMessage("Applicant Found!!");
 			responseStructure.setData(applicantDto);
@@ -106,17 +105,16 @@ public class ApplicantService {
 	public ResponseEntity<ResponseStructure<ApplicantDto>> deleteApplicant(int id) {
 		Applicant existingApplicant = applicantDao.findApplicantById(id);
 		if (existingApplicant != null) {
-			
-			List<JobApplication> jobApplicationList= existingApplicant.getJobApplication(); 
+
+			List<JobApplication> jobApplicationList = existingApplicant.getJobApplication();
 			Resume resume = existingApplicant.getResume();
-			
+
 			existingApplicant.setResume(null);
 			existingApplicant.setJobApplication(null);
-			
+
 			resumeDao.deleteResumeById(resume.getResumeId());
-			for(JobApplication jobApplication:jobApplicationList)
-			{
-		  		jobApplicationDao.deleteJobApplicationById(jobApplication.getJobApplicationId()); 
+			for (JobApplication jobApplication : jobApplicationList) {
+				jobApplicationDao.deleteJobApplicationById(jobApplication.getJobApplicationId());
 			}
 			ResponseStructure<ApplicantDto> responseStructure = new ResponseStructure<>();
 			applicantDao.deleteApplicantById(id);
@@ -130,7 +128,5 @@ public class ApplicantService {
 			throw new IdNotFoundException("Applicant doesn't  Exist with  given id");
 
 	}
-
-	
 
 }
