@@ -16,8 +16,8 @@ import com.ty.Hired_JobPortal.DTO.DtoConfig;
 import com.ty.Hired_JobPortal.Entity.Applicant;
 import com.ty.Hired_JobPortal.Entity.JobApplication;
 import com.ty.Hired_JobPortal.Entity.Resume;
-import com.ty.Hired_JobPortal.Exception.ApplicantAlreadyExistingWithEmail;
-import com.ty.Hired_JobPortal.Exception.ApplicantEmailNotFoundException;
+import com.ty.Hired_JobPortal.Exception.EmailAlreadyExistingException;
+import com.ty.Hired_JobPortal.Exception.EmailNotFoundException;
 import com.ty.Hired_JobPortal.Exception.IdNotFoundException;
 
 @Service
@@ -48,7 +48,7 @@ public class ApplicantService {
 			responseStructure.setData(applicantDto);
 			return new ResponseEntity<ResponseStructure<ApplicantDto>>(responseStructure, HttpStatus.CREATED);
 		} else
-			throw new ApplicantAlreadyExistingWithEmail("Applicant Email already used");
+			throw new EmailAlreadyExistingException("Applicant Email already used");
 	}
 
 	public ResponseEntity<ResponseStructure<ApplicantDto>> findApplicantById(int applicantId) {
@@ -79,7 +79,7 @@ public class ApplicantService {
 			responseStructure.setData(applicantDto);
 			return new ResponseEntity<ResponseStructure<ApplicantDto>>(responseStructure, HttpStatus.FOUND);
 		} else {
-			throw new ApplicantEmailNotFoundException("Failed to find the Applicant with given Email!!");
+			throw new EmailNotFoundException("Failed to find the Applicant with given Email!!");
 		}
 	}
 

@@ -23,22 +23,22 @@ public class JobController {
 	private JobService jobService;
 	
 	@PostMapping
-	public ResponseEntity<ResponseStructure<JobDto>> addJob(@RequestBody Job job){
-		return jobService.addJob(job);
+	public ResponseEntity<ResponseStructure<JobDto>> addJob(@RequestBody Job job,@RequestParam int jobId){
+		return jobService.addJob(job, jobId);
 	}
 	
 	@GetMapping
-	public ResponseEntity<ResponseStructure<JobDto>> getJob(@RequestParam int jobId){
+	public ResponseEntity<ResponseStructure<JobDto>> getJobById(@RequestParam int jobId){
 		return jobService.getJob(jobId);
 	}
 	
 	@PutMapping
-	public ResponseEntity<ResponseStructure<JobDto>> updateJob(@RequestBody Job job,@RequestParam int jobId){
+	public ResponseEntity<ResponseStructure<JobDto>> updateJobById(@RequestBody Job job,@RequestParam int jobId){
 		return jobService.updateJob(job, jobId);
 	}
 	
 	@DeleteMapping
-	public ResponseEntity<ResponseStructure<JobDto>> deleteJob(@RequestParam int jobId){
+	public ResponseEntity<ResponseStructure<JobDto>> deleteJobById(@RequestParam int jobId){
 		return jobService.deleteJob(jobId);
 	}
 }

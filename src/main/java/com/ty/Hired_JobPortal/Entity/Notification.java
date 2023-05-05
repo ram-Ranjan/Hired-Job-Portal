@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -21,6 +22,8 @@ public class Notification {
 	private String notificationType;
 	private	LocalDateTime notificationTime;
 	
+	@OneToOne
+	private JobApplication jobApplication;
 	@ManyToOne
 	private Employer employer;
 	@ManyToOne

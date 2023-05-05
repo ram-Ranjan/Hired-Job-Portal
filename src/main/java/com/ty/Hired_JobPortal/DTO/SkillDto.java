@@ -14,5 +14,9 @@ public class SkillDto {
 	private String skillDescription;
 	private String levelRequired;
 
+	@ManyToOne
+	private Job job;
+	@ManyToOne
+	private Applicant applicant;
 
 }
