@@ -17,8 +17,11 @@ public class JobApplication {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int jobApplicationId;
-	private LocalDateTime appliedDate;
-	private int noticePeriodInDays;
+	private LocalDateTime jobApplicationAppliedDate;
+	private int jobApplicationNoticePeriodInDays;
+	private String jobApplicationRefrences;
+	private String jobApplicationWorkExperience;
+	
 	
 	@OneToOne
 	private Notification notification;

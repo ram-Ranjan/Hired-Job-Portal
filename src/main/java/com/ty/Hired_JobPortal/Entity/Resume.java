@@ -1,6 +1,6 @@
 package com.ty.Hired_JobPortal.Entity;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,7 +19,7 @@ public class Resume {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int resumeId;
 	private String filePath;
-	private LocalDate uploadDate;
+	private LocalDateTime uploadDateTime;
 
 	@OneToOne
 	private JobApplication jobApplicantion;
