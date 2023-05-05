@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ty.Hired_JobPortal.Entity.Employer;
 import com.ty.Hired_JobPortal.Repo.EmployerRepo;
+
 @Repository
 public class EmployerDao {
 	@Autowired
