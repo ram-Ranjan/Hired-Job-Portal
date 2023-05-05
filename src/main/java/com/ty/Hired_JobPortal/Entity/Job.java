@@ -25,16 +25,16 @@ public class Job {
 	private String jobDescription;
 	private String companyName;
 	private String jobLocation;
-	private double salary;
+	private String salary;
 	private LocalDate datePosted;
 	private boolean isFilled;
 	private String jobCategory;
-	
+
 	@ManyToOne
 	private Employer employer;
 	@ManyToMany
 	private List<Applicant> applicant;
 	@OneToMany
 	private List<Skill> skill;
-	
+
 }

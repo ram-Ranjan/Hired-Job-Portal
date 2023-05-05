@@ -25,7 +25,7 @@ public class JobDto {
 	private String jobDescription;
 	private String companyName;
 	private String jobLocation;
-	private double salary;
+	private String salary;
 	private LocalDate datePosted;
 	private boolean isFilled;
 	private String jobCategory;
