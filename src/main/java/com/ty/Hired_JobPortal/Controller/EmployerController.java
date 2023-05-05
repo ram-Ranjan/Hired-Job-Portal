@@ -28,19 +28,24 @@ public class EmployerController {
 	}
 
 	@GetMapping
-	public ResponseEntity<ResponseStructure<EmployerDto>> getEmployer(@RequestParam int employerId) {
+	public ResponseEntity<ResponseStructure<EmployerDto>> findEmployerById(@RequestParam int employerId) {
 		return employerService.getEmployer(employerId);
 	}
 
 	@PutMapping
-	public ResponseEntity<ResponseStructure<EmployerDto>> updateEmployer(@RequestBody Employer employer,
+	public ResponseEntity<ResponseStructure<EmployerDto>> updateEmployerById(@RequestBody Employer employer,
 			@RequestParam int employerId) {
 		return employerService.updateEmployer(employer, employerId);
 	}
 
 	@DeleteMapping
-	public ResponseEntity<ResponseStructure<EmployerDto>> deleteEmployer(@RequestParam int employerId) {
+	public ResponseEntity<ResponseStructure<EmployerDto>> deleteEmployerById(@RequestParam int employerId) {
 		return employerService.deleteEmployer(employerId);
+	}
+
+	@GetMapping("/email")
+	public ResponseEntity<ResponseStructure<EmployerDto>> findEmployerByEmail(@RequestParam String employerEmail) {
+		return employerService.findEmployerByEmail(employerEmail);
 	}
 
 }

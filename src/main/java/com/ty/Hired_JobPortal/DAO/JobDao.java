@@ -1,5 +1,7 @@
 package com.ty.Hired_JobPortal.DAO;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,5 +41,44 @@ public class JobDao {
 			jobRepo.delete(job);
 			return job;
 		}
+	}
+
+	public List<Job> findAllJobsByName(String jobName) {
+		Optional<List<Job>> optionalList = jobRepo.findByJobName(jobName);
+		List<Job> jobs = new ArrayList<>();
+		if (optionalList.isEmpty()) {
+			return null;
+		} else {
+			for (Job job : optionalList.get()) {
+				jobs.add(job);
+			}
+		}
+		return jobs;
+	}
+
+	public List<Job> findAllJobsByCompanyName(String companyName) {
+		Optional<List<Job>> optionalList = jobRepo.findByCompanyName(companyName);
+		List<Job> jobs = new ArrayList<>();
+		if (optionalList.isEmpty()) {
+			return null;
+		} else {
+			for (Job job : optionalList.get()) {
+				jobs.add(job);
+			}
+		}
+		return jobs;
+	}
+
+	public List<Job> findAllJobsByJobLocation(String jobLocation) {
+		Optional<List<Job>> optionalList = jobRepo.findByJobLocation(jobLocation);
+		List<Job> jobs = new ArrayList<>();
+		if (optionalList.isEmpty()) {
+			return null;
+		} else {
+			for (Job job : optionalList.get()) {
+				jobs.add(job);
+			}
+		}
+		return jobs;
 	}
 }

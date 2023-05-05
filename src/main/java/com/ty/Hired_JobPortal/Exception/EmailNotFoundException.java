@@ -3,11 +3,11 @@ package com.ty.Hired_JobPortal.Exception;
 import lombok.Getter;
 
 @Getter
-public class ApplicantEmailNotFoundException extends RuntimeException {
+public class EmailNotFoundException extends RuntimeException {
 
 	private String message;
 
-	public ApplicantEmailNotFoundException(String message) {
+	public EmailNotFoundException(String message) {
 		this.message = message;
 	}
 
