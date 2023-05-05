@@ -16,6 +16,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
+
 public class Applicant {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,6 +27,9 @@ public class Applicant {
 	private String applicantPassword;
 	private long applicantContact;
 	private String applicantAddress;
+	private String applicantPostalCode;
+	private String applicantWorkStatus;
+	private String applicantGender;
 
 	@OneToMany
 	private List<Skill> skill;
