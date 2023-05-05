@@ -126,7 +126,6 @@ public class JobService {
 			throw new IdNotFoundException("Failed to delete Job!!");
 		}
 	}
-
 	public ResponseEntity<ResponseStructure<JobDto>> findAllJobsByName(String jobName) {
 		ResponseStructure<JobDto> responseStructure = new ResponseStructure<>();
 		Job existingJob = (Job) jobDao.findAllJobsByName(jobName);
@@ -149,33 +148,10 @@ public class JobService {
 			throw new NameNotFoundException("Failed to find any Job with the Name!!");
 		}
 	}
-
-	public ResponseEntity<ResponseStructure<List<JobDto>>> findAllJobsByCompanyName(String companyName) {
-		ResponseStructure<List<JobDto>> responseStructure = new ResponseStructure<>();
-		List<Job> existingJob = jobDao.findAllJobsByCompanyName(companyName);
-
-		if (existingJob != null) {
-			responseStructure.setStatus(HttpStatus.FOUND.value());
-			responseStructure.setMessage("Jobs Found!!");
-			jobDto.setJobId(existingJob.getJobId());
-			jobDto.setJobName(existingJob.getJobName());
-			jobDto.setCompanyName(existingJob.getCompanyName());
-			jobDto.setJobDescription(existingJob.getJobDescription());
-			jobDto.setJobLocation(existingJob.getJobLocation());
-			jobDto.setSalary(existingJob.getSalary());
-			jobDto.setDatePosted(existingJob.getDatePosted());
-			jobDto.setFilled(existingJob.isFilled());
-			jobDto.setJobCategory(existingJob.getJobCategory());
-			responseStructure.setData(existingJob);
-			return new ResponseEntity<ResponseStructure<List<JobDto>>>(responseStructure, HttpStatus.FOUND);
-		} else {
-			throw new NameNotFoundException("Failed to find any Job with the CompanyName!!");
-		}
-	}
-
-	public ResponseEntity<ResponseStructure<JobDto>> findAllJobsByJobLocation(String jobLocation) {
+	
+	public ResponseEntity<ResponseStructure<JobDto>> findAllJobsByCompanyName(String companyName) {
 		ResponseStructure<JobDto> responseStructure = new ResponseStructure<>();
-		List<Job> existingJob = jobDao.findAllJobsByJobLocation(jobLocation);
+		Job existingJob = (Job) jobDao.findAllJobsByCompanyName(companyName);
 
 		if (existingJob != null) {
 			responseStructure.setStatus(HttpStatus.FOUND.value());
@@ -192,8 +168,35 @@ public class JobService {
 			responseStructure.setData(existingJob);
 			return new ResponseEntity<ResponseStructure<JobDto>>(responseStructure, HttpStatus.FOUND);
 		} else {
+			throw new NameNotFoundException("Failed to find any Job with the CompanyName!!");
+		}
+	}
+	
+	public ResponseEntity<ResponseStructure<JobDto>> findAllJobsByJobLocation(String jobLocation){
+		ResponseStructure<JobDto> responseStructure = new ResponseStructure<>();
+		List<Job> existingJob = jobDao.findAllJobsByJobLocation(jobLocation);
+		
+		if(existingJob != null) {
+			for(Job job : existingJob ) {
+
+			jobDto.setJobId(existingJob.getJobId());
+			jobDto.setJobName(existingJob.getJobName());
+			jobDto.setCompanyName(existingJob.getCompanyName());
+			jobDto.setJobDescription(existingJob.getJobDescription());
+			jobDto.setJobLocation(existingJob.getJobLocation());
+			jobDto.setSalary(existingJob.getSalary());
+			jobDto.setDatePosted(existingJob.getDatePosted());
+			jobDto.setFilled(existingJob.isFilled());
+			jobDto.setJobCategory(existingJob.getJobCategory());
+			responseStructure.setStatus(HttpStatus.FOUND.value());
+			responseStructure.setMessage("Jobs Found!!");
+			responseStructure.setData(existingJob);
+			return new ResponseEntity<ResponseStructure<JobDto>>(responseStructure, HttpStatus.FOUND);
+		}
+		else {
 			throw new LocationNotFoundException("Failed to find any Job with the Location");
 		}
 	}
-
+	
+	
 }
