@@ -3,6 +3,7 @@ package com.ty.Hired_JobPortal.Exception;
 import java.util.HashMap;
 import java.util.List;
 
+import org.springframework.boot.context.properties.bind.Name;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,29 +38,35 @@ public class ApplicationHandler extends ResponseEntityExceptionHandler {
 	public ResponseEntity<ResponseStructure<String>> idNotFoundException(IdNotFoundException ex) {
 		ResponseStructure<String> responseStructure = new ResponseStructure<>();
 		responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
-		responseStructure.setMessage("Id doesn't exist");
+		responseStructure.setMessage("Id doesn't exist!!");
 		responseStructure.setData(ex.getMessage());
 		return new ResponseEntity<ResponseStructure<String>>(responseStructure, HttpStatus.NOT_FOUND);
 	}
 
-	@ExceptionHandler(ApplicantEmailNotFoundException.class)
-	public ResponseEntity<ResponseStructure<String>> applicantEmailNotFoundException(
-			ApplicantEmailNotFoundException ex) {
+	@ExceptionHandler(EmailNotFoundException.class)
+	public ResponseEntity<ResponseStructure<String>> emailNotFoundException(EmailNotFoundException ex) {
 		ResponseStructure<String> responseStructure = new ResponseStructure<>();
 		responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
-		responseStructure.setMessage("Applicant doesn't exist with given email");
+		responseStructure.setMessage("Email doesn't exist!!");
 		responseStructure.setData(ex.getMessage());
 		return new ResponseEntity<ResponseStructure<String>>(responseStructure, HttpStatus.NOT_FOUND);
 	}
 
-	@ExceptionHandler(ApplicantAlreadyExistingWithEmail.class)
-	public ResponseEntity<ResponseStructure<String>> applicantAlreadyExistingWithEmail(
-			ApplicantAlreadyExistingWithEmail ex) {
+	@ExceptionHandler(EmailAlreadyExistingException.class)
+	public ResponseEntity<ResponseStructure<String>> emailAlreadyExisting(EmailAlreadyExistingException ex) {
 		ResponseStructure<String> responseStructure = new ResponseStructure<>();
 		responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
-		responseStructure.setMessage("Applicant Already Existing");
+		responseStructure.setMessage("Email Already Existing!!");
 		responseStructure.setData(ex.getMessage());
 		return new ResponseEntity<ResponseStructure<String>>(responseStructure, HttpStatus.NOT_FOUND);
 	}
 
+	@ExceptionHandler(NameNotFoundException.class)
+	public ResponseEntity<ResponseStructure<String>> nameNotFoundException(NameNotFoundException ex) {
+		ResponseStructure<String> responseStructure = new ResponseStructure<>();
+		responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
+		responseStructure.setMessage("Name Not Found!!");
+		responseStructure.setData(ex.getMessage());
+		return new ResponseEntity<ResponseStructure<String>>(responseStructure,HttpStatus.NOT_FOUND);
+	}
 }

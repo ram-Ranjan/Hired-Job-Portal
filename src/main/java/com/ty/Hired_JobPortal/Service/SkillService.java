@@ -7,9 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ty.Hired_JobPortal.Config.ResponseStructure;
 import com.ty.Hired_JobPortal.DAO.SkillDao;
-import com.ty.Hired_JobPortal.DTO.EmployerDto;
 import com.ty.Hired_JobPortal.DTO.SkillDto;
-import com.ty.Hired_JobPortal.Entity.Employer;
 import com.ty.Hired_JobPortal.Entity.Skill;
 import com.ty.Hired_JobPortal.Exception.IdNotFoundException;
 
