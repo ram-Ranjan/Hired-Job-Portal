@@ -116,7 +116,7 @@ public class ApplicantService {
 			resumeDao.deleteResumeById(resume.getResumeId());
 			for(JobApplication jobApplication:jobApplicationList)
 			{
-				jobApplicationDao.deleteJobApplicationById(jobApplication.getJobApplicationId());
+		  		jobApplicationDao.deleteJobApplicationById(jobApplication.getJobApplicationId()); 
 			}
 			ResponseStructure<ApplicantDto> responseStructure = new ResponseStructure<>();
 			applicantDao.deleteApplicantById(id);
