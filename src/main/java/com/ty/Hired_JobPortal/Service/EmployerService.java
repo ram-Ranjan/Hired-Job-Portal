@@ -34,15 +34,15 @@ public class EmployerService {
 
 	public ResponseEntity<ResponseStructure<EmployerDto>> getEmployer(int employerId) {
 		ResponseStructure<EmployerDto> responseStructure = new ResponseStructure<>();
-		Employer employer = employerDao.findEmployerById(employerId);
+		Employer existingEmployer = employerDao.findEmployerById(employerId);
 
-		if (employer != null) {
+		if (existingEmployer != null) {
 			responseStructure.setStatus(HttpStatus.FOUND.value());
 			responseStructure.setMessage("Employer Found!!");
-			employerDto.setEmployerId(employer.getEmployerId());
-			employerDto.setEmployerName(employer.getEmployerName());
-			employerDto.setEmployerContact(employer.getEmployerContact());
-			employerDto.setJob(employer.getJob());
+			employerDto.setEmployerId(existingEmployer.getEmployerId());
+			employerDto.setEmployerName(existingEmployer.getEmployerName());
+			employerDto.setEmployerContact(existingEmployer.getEmployerContact());
+			employerDto.setJob(existingEmployer.getJob());
 			responseStructure.setData(employerDto);
 			return new ResponseEntity<ResponseStructure<EmployerDto>>(responseStructure, HttpStatus.FOUND);
 		} else {
@@ -77,11 +77,11 @@ public class EmployerService {
 		Employer employer = employerDao.deleteEmployerById(employerId);
 
 		if (employer != null) {
-			responseStructure.setStatus(HttpStatus.OK.value());
-			responseStructure.setMessage("Employer Deleted!!");
 			employerDto.setEmployerId(employer.getEmployerId());
 			employerDto.setEmployerName(employer.getEmployerName());
 			employerDto.setEmployerContact(employer.getEmployerContact());
+			responseStructure.setStatus(HttpStatus.OK.value());
+			responseStructure.setMessage("Employer Deleted!!");
 			responseStructure.setData(employerDto);
 			return new ResponseEntity<ResponseStructure<EmployerDto>>(responseStructure, HttpStatus.OK);
 		} else {
