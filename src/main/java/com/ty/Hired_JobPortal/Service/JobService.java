@@ -40,7 +40,7 @@ public class JobService {
 			jobs.add(job);
 			existingEmployer.setJob(jobs);
 			employerDao.updateEmployer(existingEmployer);
-			
+
 			jobDto = dtoConfig.setJobDtoAttributes(job);
 			jobDto.setEmployer(existingEmployer);
 			responseStructure.setStatus(HttpStatus.CREATED.value());
@@ -126,8 +126,7 @@ public class JobService {
 			throw new NameNotFoundException("Failed to find any Job with the CompanyName!!");
 	}
 
-	public ResponseEntity<ResponseStructure<List<JobDto>>> findAllJobsByCompanyName(String companyName) 
-	{
+	public ResponseEntity<ResponseStructure<List<JobDto>>> findAllJobsByCompanyName(String companyName) {
 		ResponseStructure<List<JobDto>> responseStructure = new ResponseStructure<>();
 		List<Job> existingJobs = jobDao.findAllJobsByCompanyName(companyName);
 
@@ -142,9 +141,9 @@ public class JobService {
 				responseStructure.setData(jobLists);
 			}
 			return new ResponseEntity<ResponseStructure<List<JobDto>>>(responseStructure, HttpStatus.FOUND);
-			} else 
+		} else
 			throw new NameNotFoundException("Failed to find any Job with the CompanyName!!");
-		}
+}
 
 	public ResponseEntity<ResponseStructure<List<JobDto>>> findAllJobsByJobLocation(String jobLocation) {
 		ResponseStructure<List<JobDto>> responseStructure = new ResponseStructure<>();

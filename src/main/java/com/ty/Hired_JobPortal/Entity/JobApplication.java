@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -27,16 +29,18 @@ public class JobApplication {
 	@PositiveOrZero
 	private int jobApplicationNoticePeriodInDays;
 	@NotBlank(message = "Job Application shouldn't be blank")
-	@NotNull(message = "Job Application shouln't be null")
+	@NotNull(message = "Job Application shouldn't be null")
 	private String jobApplicationRefrences;
 	@NotBlank(message = "Work Experience shouldn't be blank")
-	@NotNull(message = "Work Experience shouln't be null")
+	@NotNull(message = "Work Experience shouldn't be null")
 	private String jobApplicationWorkExperience;
 	
 	
-	@OneToOne
+	@OneToOne //uni
 	private Notification notification;
-	@OneToOne
+	
+	@ManyToOne
+	@JoinColumn
 	private Resume resume;
 	
 	
