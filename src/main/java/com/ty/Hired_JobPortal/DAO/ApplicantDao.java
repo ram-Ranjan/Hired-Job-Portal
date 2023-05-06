@@ -26,6 +26,7 @@ public class ApplicantDao {
 		}
 	}
 
+
 	public Applicant updateApplicant(Applicant applicant, int id) {
 		Optional<Applicant> optional = applicantRepo.findById(id);
 		if (optional.isPresent()) {
