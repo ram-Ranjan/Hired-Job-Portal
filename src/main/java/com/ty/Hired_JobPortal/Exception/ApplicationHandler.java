@@ -3,7 +3,6 @@ package com.ty.Hired_JobPortal.Exception;
 import java.util.HashMap;
 import java.util.List;
 
-import org.springframework.boot.context.properties.bind.Name;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -66,6 +65,22 @@ public class ApplicationHandler extends ResponseEntityExceptionHandler {
 		ResponseStructure<String> responseStructure = new ResponseStructure<>();
 		responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
 		responseStructure.setMessage("Name Not Found!!");
+		responseStructure.setData(ex.getMessage());
+		return new ResponseEntity<ResponseStructure<String>>(responseStructure,HttpStatus.NOT_FOUND);
+	}
+	@ExceptionHandler(EmployerNameNotFoundException.class)
+	public ResponseEntity<ResponseStructure<String>> employerNameNotFoundException(EmployerNameNotFoundException ex) {
+		ResponseStructure<String> responseStructure = new ResponseStructure<>();
+		responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
+		responseStructure.setMessage("EmployerName Not Found!!");
+		responseStructure.setData(ex.getMessage());
+		return new ResponseEntity<ResponseStructure<String>>(responseStructure,HttpStatus.NOT_FOUND);
+	}
+	@ExceptionHandler(LocationNotFoundException.class)
+	public ResponseEntity<ResponseStructure<String>> locationNotFoundException(LocationNotFoundException ex) {
+		ResponseStructure<String> responseStructure = new ResponseStructure<>();
+		responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
+		responseStructure.setMessage("Location Not Found!!");
 		responseStructure.setData(ex.getMessage());
 		return new ResponseEntity<ResponseStructure<String>>(responseStructure,HttpStatus.NOT_FOUND);
 	}

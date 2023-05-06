@@ -16,29 +16,41 @@ import com.ty.Hired_JobPortal.DTO.JobApplicationDto;
 import com.ty.Hired_JobPortal.Entity.JobApplication;
 import com.ty.Hired_JobPortal.Service.JobApplicationService;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @RestController
 @RequestMapping("/jobApplication")
 public class JobApplicationController {
 	@Autowired
 	private JobApplicationService jobApplicationService;
-
+	@ApiOperation(value = "Save JobApplication", notes = "API is used to save JobApplication ")
+	@ApiResponses(value = { @ApiResponse(code = 201, message = "succesfully created"),
+			@ApiResponse(code = 400, message = "Id not found for the given JobApplication ID") })
 	@PostMapping
 	public ResponseEntity<ResponseStructure<JobApplicationDto>> addJobApplication(
 			@RequestBody JobApplication jobApplication,@RequestParam int applicantId) {
 		return jobApplicationService.addJobApplication(jobApplication,applicantId);
 	}
-
+	@ApiOperation(value = "Get JobApplication", notes = "API is used to save JobApplication ")
+	@ApiResponses(value = { @ApiResponse(code = 201, message = "Succesfully Found"),
+			@ApiResponse(code = 400, message = "Id not found for the given JobApplication ID") })
 	@GetMapping
 	public ResponseEntity<ResponseStructure<JobApplicationDto>> getJobApplication(@RequestParam int jobApplicationId) {
 		return jobApplicationService.findJobApplicationById(jobApplicationId);
 	}
-
+	@ApiOperation(value = "Update JobApplication", notes = "API is used to save JobApplication ")
+	@ApiResponses(value = { @ApiResponse(code = 201, message = "succesfully updated"),
+			@ApiResponse(code = 400, message = "Id not found for the given JobApplication ID") })
 	@PutMapping
 	public ResponseEntity<ResponseStructure<JobApplicationDto>> updateJobApplication(
 			@RequestBody JobApplication jobApplication, @RequestParam int jobApplicationId) {
 		return jobApplicationService.updateJobApplication(jobApplication, jobApplicationId);
 	}
-
+	@ApiOperation(value = "Deleted JobApplication", notes = "API is used to save JobApplication ")
+	@ApiResponses(value = { @ApiResponse(code = 201, message = "Succesfully Deleted"),
+			@ApiResponse(code = 400, message = "Id not found for the given JobApplication ID") })
 	@DeleteMapping
 	public ResponseEntity<ResponseStructure<JobApplicationDto>> deleteJobApplication(
 			@RequestParam int jobApplicationId) {

@@ -11,6 +11,7 @@ import com.ty.Hired_JobPortal.DTO.DtoConfig;
 import com.ty.Hired_JobPortal.DTO.EmployerDto;
 import com.ty.Hired_JobPortal.Entity.Employer;
 import com.ty.Hired_JobPortal.Exception.EmailNotFoundException;
+import com.ty.Hired_JobPortal.Exception.EmployerNameNotFoundException;
 import com.ty.Hired_JobPortal.Exception.IdNotFoundException;
 
 @Service
@@ -84,9 +85,9 @@ public class EmployerService {
 		}
 	}
 	
-	public ResponseEntity<ResponseStructure<EmployerDto>> findEmployerByEmail(String employerEmail){
+	public ResponseEntity<ResponseStructure<EmployerDto>> findByEmployerEmail(String employerEmail){
 		ResponseStructure<EmployerDto> responseStructure = new ResponseStructure<>();
-		Employer existingEmployer = employerDao.findEmployerByEmail(employerEmail);
+		Employer existingEmployer = employerDao.findByEmployerEmail(employerEmail);
 
 		if (existingEmployer != null) {
 			responseStructure.setStatus(HttpStatus.FOUND.value());
@@ -99,6 +100,23 @@ public class EmployerService {
 			return new ResponseEntity<ResponseStructure<EmployerDto>>(responseStructure, HttpStatus.FOUND);
 		} else {
 			throw new EmailNotFoundException("Failed to find the Employer with Email!!");
+		}
+	}
+	public ResponseEntity<ResponseStructure<EmployerDto>> findByEmployerName(String employerName){
+		ResponseStructure<EmployerDto> responseStructure = new ResponseStructure<>();
+		Employer existingEmployer = employerDao.findByEmployerName(employerName);
+
+		if (existingEmployer != null) {
+			responseStructure.setStatus(HttpStatus.FOUND.value());
+			responseStructure.setMessage("Employer Found!!");
+			employerDto.setEmployerId(existingEmployer.getEmployerId());
+			employerDto.setEmployerName(existingEmployer.getEmployerName());
+			employerDto.setEmployerContact(existingEmployer.getEmployerContact());
+			employerDto.setJob(existingEmployer.getJob());
+			responseStructure.setData(employerDto);
+			return new ResponseEntity<ResponseStructure<EmployerDto>>(responseStructure, HttpStatus.FOUND);
+		} else {
+			throw new EmployerNameNotFoundException("Failed to find the Employer with Name!!");
 		}
 	}
 

@@ -13,6 +13,7 @@ import com.ty.Hired_JobPortal.DAO.EmployerDao;
 import com.ty.Hired_JobPortal.DAO.JobDao;
 import com.ty.Hired_JobPortal.DTO.DtoConfig;
 import com.ty.Hired_JobPortal.DTO.JobDto;
+import com.ty.Hired_JobPortal.Entity.Employer;
 import com.ty.Hired_JobPortal.Entity.Job;
 import com.ty.Hired_JobPortal.Exception.IdNotFoundException;
 import com.ty.Hired_JobPortal.Exception.NameNotFoundException;
@@ -144,9 +145,6 @@ public class JobService {
 			} else 
 			throw new NameNotFoundException("Failed to find any Job with the CompanyName!!");
 		}
-
-
-	}
 
 	public ResponseEntity<ResponseStructure<List<JobDto>>> findAllJobsByJobLocation(String jobLocation) {
 		ResponseStructure<List<JobDto>> responseStructure = new ResponseStructure<>();

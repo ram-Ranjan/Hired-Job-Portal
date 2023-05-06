@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -38,7 +39,9 @@ public class Job {
 	@NotBlank(message = "Job Salary shouldn't be blank")
 	@NotNull(message = "Job Salary shouln't be null")
 	private String salary;
+	@PastOrPresent(message = "Date posted is invalid ")
 	private LocalDate datePosted;
+	@NotNull(message = "isFilled shouln't be null")
 	private boolean isFilled;
 	@NotBlank(message = "Job Category shouldn't be blank")
 	@NotNull(message = "Job Category shouln't be null")

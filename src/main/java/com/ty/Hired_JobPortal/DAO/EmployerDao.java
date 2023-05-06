@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ty.Hired_JobPortal.Entity.Employer;
-import com.ty.Hired_JobPortal.Entity.Job;
 import com.ty.Hired_JobPortal.Repo.EmployerRepo;
 
 @Repository
@@ -41,9 +40,17 @@ public class EmployerDao {
 			return employer;
 		}
 	}
-	
-	public Employer findEmployerByEmail(String employerEmail) {
+	public Employer findByEmployerEmail(String employerEmail) {
 		Optional<Employer> optional = employerRepo.findByEmployerEmail(employerEmail);
+		if(optional.isEmpty()) {
+			return null;
+		}
+		else {
+			return optional.get();
+		}
+	}
+	public Employer findByEmployerName(String employerName) {
+		Optional<Employer> optional = employerRepo.findByEmployerName(employerName);
 		if(optional.isEmpty()) {
 			return null;
 		}
