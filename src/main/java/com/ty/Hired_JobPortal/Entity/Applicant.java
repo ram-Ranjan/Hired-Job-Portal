@@ -9,6 +9,12 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -21,14 +27,31 @@ public class Applicant {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int applicantId;
+	@NotBlank(message = "Applicant FirstName shouldn't be blank")
+	@NotNull(message = "Applicant FirstName shouln't be null")
 	private String applicantFirstName;
+	@NotBlank(message = "Applicant FirstName shouldn't be blank")
+	@NotNull(message = "Applicant FirstName shouln't be null")
 	private String applicantLastName;
+	@Email(message="Email doesn't seems to be in correct format")
 	private String applicantEmail;
+	@NotBlank(message = "Admin Password should not be Empty")
+	@Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$", message = "Password must contain at least one digit, one lowercase, one uppercase letter, one special character and must be at least 8 characters long")
 	private String applicantPassword;
+	@Min(value = 6000000000l, message = "Customer contact must be ten digits and start with 6,7,8 or  9")
+    @Max(value = 9999999999L, message = "Customer contact must be ten digits and start with 6,7,8 or  9")
 	private long applicantContact;
+	@NotBlank(message = "Applicant FirstName shouldn't be blank")
+	@NotNull(message = "Applicant FirstName shouln't be null")
 	private String applicantAddress;
-	private String applicantPostalCode;
+	@Min(value = 100000, message = "Customer contact must be ten digits and start with 6,7,8 or  9")
+    @Max(value = 999999, message = "Customer contact must be ten digits and start with 6,7,8 or  9")
+	private int applicantPostalCode;
+	@NotBlank(message = "Applicant FirstName shouldn't be blank")
+	@NotNull(message = "Applicant FirstName shouln't be null")
 	private String applicantWorkStatus;
+	@NotBlank(message = "Applicant FirstName shouldn't be blank")
+	@NotNull(message = "Applicant FirstName shouln't be null")
 	private String applicantGender;
 
 	@OneToMany

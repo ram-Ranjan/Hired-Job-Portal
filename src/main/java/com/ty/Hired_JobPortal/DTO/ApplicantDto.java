@@ -27,9 +27,10 @@ public class ApplicantDto {
 	private String applicantEmail;
 	private long applicantContact;
 	private String applicantAddress;
-	private String applicantPostalCode;
+	private int applicantPostalCode;
 	private String applicantWorkStatus;
 	private String applicantGender;
+ 	private String highestQualification;
 	
 	@OneToMany
 	private List<Skill> skill;
