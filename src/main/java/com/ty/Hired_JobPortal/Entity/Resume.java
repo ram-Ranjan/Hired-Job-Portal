@@ -7,6 +7,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -18,7 +22,10 @@ public class Resume {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int resumeId;
+	@NotBlank(message = "filePath shouldn't be blank")
+	@NotNull(message = "filePath shouln't be null")
 	private String filePath;
+	@DateTimeFormat
 	private LocalDateTime uploadDateTime;
 
 	@OneToOne

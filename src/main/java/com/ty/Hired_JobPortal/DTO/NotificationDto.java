@@ -2,8 +2,10 @@ package com.ty.Hired_JobPortal.DTO;
 
 import java.time.LocalDateTime;
 
-import org.springframework.stereotype.Component;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
+import org.springframework.stereotype.Component;
 
 import com.ty.Hired_JobPortal.Entity.Applicant;
 import com.ty.Hired_JobPortal.Entity.Employer;
