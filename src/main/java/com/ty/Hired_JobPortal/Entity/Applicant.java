@@ -28,10 +28,10 @@ public class Applicant {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int applicantId;
 	@NotBlank(message = "Applicant FirstName shouldn't be blank")
-	@NotNull(message = "Applicant FirstName shouln't be null")
+	@NotNull(message = "Applicant FirstName shouldn't be null")
 	private String applicantFirstName;
 	@NotBlank(message = "Applicant FirstName shouldn't be blank")
-	@NotNull(message = "Applicant FirstName shouln't be null")
+	@NotNull(message = "Applicant FirstName shouldn't be null")
 	private String applicantLastName;
 	@Email(message="Email doesn't seems to be in correct format")
 	private String applicantEmail;
@@ -42,7 +42,7 @@ public class Applicant {
     @Max(value = 9999999999L, message = "Customer contact must be ten digits and start with 6,7,8 or  9")
 	private long applicantContact;
 	@NotBlank(message = "Applicant FirstName shouldn't be blank")
-	@NotNull(message = "Applicant FirstName shouln't be null")
+	@NotNull(message = "Applicant FirstName shouldn't be null")
 	private String applicantAddress;
 	@Min(value = 100000, message = "Customer contact must be ten digits and start with 6,7,8 or  9")
     @Max(value = 999999, message = "Customer contact must be ten digits and start with 6,7,8 or  9")
@@ -51,17 +51,21 @@ public class Applicant {
 	@NotNull(message = "Applicant FirstName shouln't be null")
 	private String applicantWorkStatus;
 	@NotBlank(message = "Applicant FirstName shouldn't be blank")
-	@NotNull(message = "Applicant FirstName shouln't be null")
+	@NotNull(message = "Applicant FirstName shouldn't be null")
 	private String applicantGender;
 
-	@OneToMany
+	@OneToMany(mappedBy = "applicant")
 	private List<Skill> skill;
-	@OneToOne
+	
+	@OneToOne //uni
 	private Resume resume;
-	@OneToMany
+	
+	@OneToMany //uni
 	private List<JobApplication> jobApplication;
-	@OneToMany
+	
+	@OneToMany(mappedBy = "applicant")
 	private List<Notification> notification;
-	@ManyToMany
+	
+	@ManyToMany(mappedBy = "applicant")
 	private List<Job> job;
 }

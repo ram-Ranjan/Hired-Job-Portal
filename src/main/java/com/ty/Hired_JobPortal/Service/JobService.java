@@ -13,6 +13,7 @@ import com.ty.Hired_JobPortal.DAO.EmployerDao;
 import com.ty.Hired_JobPortal.DAO.JobDao;
 import com.ty.Hired_JobPortal.DTO.DtoConfig;
 import com.ty.Hired_JobPortal.DTO.JobDto;
+import com.ty.Hired_JobPortal.Entity.Employer;
 import com.ty.Hired_JobPortal.Entity.Job;
 import com.ty.Hired_JobPortal.Exception.IdNotFoundException;
 import com.ty.Hired_JobPortal.Exception.NameNotFoundException;
@@ -39,7 +40,7 @@ public class JobService {
 			jobs.add(job);
 			existingEmployer.setJob(jobs);
 			employerDao.updateEmployer(existingEmployer);
-			
+
 			jobDto = dtoConfig.setJobDtoAttributes(job);
 			jobDto.setEmployer(existingEmployer);
 			responseStructure.setStatus(HttpStatus.CREATED.value());
@@ -125,8 +126,7 @@ public class JobService {
 			throw new NameNotFoundException("Failed to find any Job with the CompanyName!!");
 	}
 
-	public ResponseEntity<ResponseStructure<List<JobDto>>> findAllJobsByCompanyName(String companyName) 
-	{
+	public ResponseEntity<ResponseStructure<List<JobDto>>> findAllJobsByCompanyName(String companyName) {
 		ResponseStructure<List<JobDto>> responseStructure = new ResponseStructure<>();
 		List<Job> existingJobs = jobDao.findAllJobsByCompanyName(companyName);
 
@@ -141,11 +141,8 @@ public class JobService {
 				responseStructure.setData(jobLists);
 			}
 			return new ResponseEntity<ResponseStructure<List<JobDto>>>(responseStructure, HttpStatus.FOUND);
-			} else 
+		} else
 			throw new NameNotFoundException("Failed to find any Job with the CompanyName!!");
-		}
-
-
 	}
 
 	public ResponseEntity<ResponseStructure<List<JobDto>>> findAllJobsByJobLocation(String jobLocation) {

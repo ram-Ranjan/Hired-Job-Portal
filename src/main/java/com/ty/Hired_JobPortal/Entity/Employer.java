@@ -26,7 +26,7 @@ public class Employer {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int employerId;
 	@NotBlank(message = "Employer Name shouldn't be blank")
-	@NotNull(message = "Employer Name shouln't be null")
+	@NotNull(message = "Employer Name shouldn't be null")
 	private String employerName;
 	@Email(message="Employer Email doesn't seems to be in correct format")
 	private String employerEmail;
@@ -37,10 +37,10 @@ public class Employer {
     @Max(value = 9999999999L, message = "Customer contact must be ten digits and start with 6,7,8 or  9")
 	private long employerContact;
 
-	@OneToMany
+	@OneToMany(mappedBy = "employer")
 	private List<Job> job;
 
-	@OneToMany
+	@OneToMany(mappedBy = "employer")
 	private List<Notification> notification;
 
 }
