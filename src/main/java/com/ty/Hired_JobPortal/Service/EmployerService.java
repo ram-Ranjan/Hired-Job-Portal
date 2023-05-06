@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ty.Hired_JobPortal.Config.ResponseStructure;
 import com.ty.Hired_JobPortal.DAO.EmployerDao;
+import com.ty.Hired_JobPortal.DTO.DtoConfig;
 import com.ty.Hired_JobPortal.DTO.EmployerDto;
 import com.ty.Hired_JobPortal.Entity.Employer;
 import com.ty.Hired_JobPortal.Exception.EmailNotFoundException;
@@ -16,34 +17,31 @@ import com.ty.Hired_JobPortal.Exception.IdNotFoundException;
 public class EmployerService {
 	@Autowired
 	private EmployerDao employerDao;
-
 	@Autowired
 	private EmployerDto employerDto;
+	@Autowired
+	private DtoConfig dtoConfig;
 
 	public ResponseEntity<ResponseStructure<EmployerDto>> addEmployer(Employer employer) {
-		ResponseStructure<EmployerDto> responseStructure = new ResponseStructure<>();
-		Employer employer2 = employerDao.addEmployer(employer);
 
+		employer = employerDao.addEmployer(employer);
+		employerDto = dtoConfig.setEmployerDtoAttributes(employer);
+		ResponseStructure<EmployerDto> responseStructure = new ResponseStructure<>();
 		responseStructure.setStatus(HttpStatus.CREATED.value());
 		responseStructure.setMessage("Employer added Successfully!!");
-		employerDto.setEmployerId(employer2.getEmployerId());
-		employerDto.setEmployerName(employer2.getEmployerName());
-		employerDto.setEmployerContact(employer2.getEmployerContact());
-		responseStructure.setData(employer2);
+		responseStructure.setData(employerDto);
 		return new ResponseEntity<ResponseStructure<EmployerDto>>(responseStructure, HttpStatus.CREATED);
 	}
 
 	public ResponseEntity<ResponseStructure<EmployerDto>> getEmployer(int employerId) {
-		ResponseStructure<EmployerDto> responseStructure = new ResponseStructure<>();
 		Employer existingEmployer = employerDao.findEmployerById(employerId);
 
 		if (existingEmployer != null) {
+			employerDto = dtoConfig.setEmployerDtoAttributes(existingEmployer);
+
+			ResponseStructure<EmployerDto> responseStructure = new ResponseStructure<>();
 			responseStructure.setStatus(HttpStatus.FOUND.value());
 			responseStructure.setMessage("Employer Found!!");
-			employerDto.setEmployerId(existingEmployer.getEmployerId());
-			employerDto.setEmployerName(existingEmployer.getEmployerName());
-			employerDto.setEmployerContact(existingEmployer.getEmployerContact());
-			employerDto.setJob(existingEmployer.getJob());
 			responseStructure.setData(employerDto);
 			return new ResponseEntity<ResponseStructure<EmployerDto>>(responseStructure, HttpStatus.FOUND);
 		} else {
@@ -52,16 +50,14 @@ public class EmployerService {
 	}
 
 	public ResponseEntity<ResponseStructure<EmployerDto>> updateEmployer(Employer updatedEmployer, int employeeId) {
-		ResponseStructure<EmployerDto> responseStructure = new ResponseStructure<>();
 		Employer existingEmployer = employerDao.findEmployerById(employeeId);
 
 		if (existingEmployer != null) {
 			updatedEmployer.setEmployerId(existingEmployer.getEmployerId());
 			existingEmployer = employerDao.updateEmployer(updatedEmployer);
-			employerDto.setEmployerId(existingEmployer.getEmployerId());
-			employerDto.setEmployerName(existingEmployer.getEmployerName());
-			employerDto.setEmployerContact(existingEmployer.getEmployerContact());
+			employerDto = dtoConfig.setEmployerDtoAttributes(existingEmployer);
 
+			ResponseStructure<EmployerDto> responseStructure = new ResponseStructure<>();
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Employer Updated!!");
 			responseStructure.setData(employerDto);
@@ -74,13 +70,11 @@ public class EmployerService {
 	}
 
 	public ResponseEntity<ResponseStructure<EmployerDto>> deleteEmployer(int employerId) {
-		ResponseStructure<EmployerDto> responseStructure = new ResponseStructure<>();
-		Employer employer = employerDao.deleteEmployerById(employerId);
 
-		if (employer != null) {
-			employerDto.setEmployerId(employer.getEmployerId());
-			employerDto.setEmployerName(employer.getEmployerName());
-			employerDto.setEmployerContact(employer.getEmployerContact());
+		Employer existingEmployer = employerDao.deleteEmployerById(employerId);
+		if (existingEmployer != null) {
+			employerDto = dtoConfig.setEmployerDtoAttributes(existingEmployer);
+			ResponseStructure<EmployerDto> responseStructure = new ResponseStructure<>();
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Employer Deleted!!");
 			responseStructure.setData(employerDto);

@@ -47,6 +47,12 @@ public class ApplicantDao {
 	}
 
 	public Applicant findByApplicantEmail(String applicantEmail) {
-		return applicantRepo.findByApplicantEmail(applicantEmail);
-	}
+		
+		Optional<Applicant> optional = Optional.of(applicantRepo.findByApplicantEmail(applicantEmail));
+		if (optional.isEmpty()) {
+			return null;
+		} else 
+			return optional.get();
+		}
 }
+	

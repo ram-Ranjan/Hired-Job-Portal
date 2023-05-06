@@ -4,19 +4,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.ty.Hired_JobPortal.Entity.Applicant;
+import com.ty.Hired_JobPortal.Entity.Employer;
+import com.ty.Hired_JobPortal.Entity.Job;
 import com.ty.Hired_JobPortal.Entity.JobApplication;
+import com.ty.Hired_JobPortal.Entity.Notification;
 import com.ty.Hired_JobPortal.Entity.Resume;
+import com.ty.Hired_JobPortal.Entity.Skill;
 
 @Component
 public class DtoConfig {
 
 	@Autowired
 	ApplicantDto applicantDto;
-
 	@Autowired
 	JobApplicationDto jobApplicationDto;
 	@Autowired
 	ResumeDto resumeDto;
+	@Autowired
+	EmployerDto employerDto; 
+	@Autowired
+	NotificationDto notificationDto;
+	@Autowired
+	SkillDto skillDto;
+	@Autowired
+	JobDto jobDto;
 
 	public ApplicantDto setApplicantDtoAttributes(Applicant applicant) {
 		applicantDto.setApplicantId(applicant.getApplicantId());
@@ -25,6 +36,9 @@ public class DtoConfig {
 		applicantDto.setApplicantContact(applicant.getApplicantContact());
 		applicantDto.setApplicantEmail((applicant.getApplicantEmail()));
 		applicantDto.setApplicantAddress(applicant.getApplicantAddress());
+		applicantDto.setApplicantPostalCode(applicant.getApplicantPostalCode());
+		applicantDto.setApplicantWorkStatus(applicant.getApplicantWorkStatus());
+		applicantDto.setApplicantGender(applicant.getApplicantGender());
 		return applicantDto;
 	}
 
@@ -40,6 +54,45 @@ public class DtoConfig {
 		resumeDto.setFilePath(resume.getFilePath());
 		resumeDto.setUploadDate(resume.getUploadDate());
 		return resumeDto;
+	}
+	public EmployerDto setEmployerDtoAttributes(Employer employer)
+	{
+		employerDto.setEmployerId(employer.getEmployerId());
+		employerDto.setEmployerName(employer.getEmployerName());
+		employerDto.setEmployerEmail(employer.getEmployerEmail());
+		employerDto.setEmployerContact(employer.getEmployerContact());
+		return employerDto;
+	}
+	public JobDto setJobDtoAttributes(Job job)
+	{
+		jobDto.setJobId(job.getJobId());
+		jobDto.setJobName(job.getJobName());
+		jobDto.setCompanyName(job.getCompanyName());
+		jobDto.setJobDescription(job.getJobDescription());
+		jobDto.setJobLocation(job.getJobLocation());
+		jobDto.setSalary(job.getSalary());
+		jobDto.setDatePosted(job.getDatePosted());
+		jobDto.setFilled(job.isFilled());
+		jobDto.setJobCategory(job.getJobCategory());
+		return jobDto;
+		
+	}
+	public NotificationDto setNotificationDtoAttributes(Notification notification)
+	{
+		notificationDto.setNotificationId(notification.getNotificationId());
+		notificationDto.setNotificationMessage(notification.getNotificationMessage());
+		notificationDto.setNotificationTime(notification.getNotificationTime());
+		notificationDto.setNotificationType(notification.getNotificationType());
+		return notificationDto;
+	}
+	public SkillDto setSkillDtoAttributes(Skill skill)
+	{
+		skillDto.setSkillId(skill.getSkillId());
+		skillDto.setSkillName(skill.getSkillName());
+		skillDto.setSkillDescription(skill.getSkillDescription());
+		skillDto.setLevelRequired(skill.getLevelRequired());
+		return skillDto;
+		
 	}
 
 }
