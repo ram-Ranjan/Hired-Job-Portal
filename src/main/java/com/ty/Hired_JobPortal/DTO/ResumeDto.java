@@ -1,6 +1,6 @@
 package com.ty.Hired_JobPortal.DTO;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import org.springframework.stereotype.Component;
 
@@ -13,6 +13,6 @@ import lombok.Setter;
 public class ResumeDto {
 	private int resumeId;
 	private String filePath;
-	private LocalDate uploadDate;
+	private LocalDateTime uploadDateTime;
 
 }

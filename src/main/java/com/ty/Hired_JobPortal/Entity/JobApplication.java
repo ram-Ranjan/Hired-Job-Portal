@@ -7,6 +7,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -17,8 +22,17 @@ public class JobApplication {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int jobApplicationId;
-	private LocalDateTime appliedDate;
-	private int noticePeriodInDays;
+	@DateTimeFormat
+	private LocalDateTime jobApplicationAppliedDate;
+	@PositiveOrZero
+	private int jobApplicationNoticePeriodInDays;
+	@NotBlank(message = "Job Application shouldn't be blank")
+	@NotNull(message = "Job Application shouln't be null")
+	private String jobApplicationRefrences;
+	@NotBlank(message = "Work Experience shouldn't be blank")
+	@NotNull(message = "Work Experience shouln't be null")
+	private String jobApplicationWorkExperience;
+	
 	
 	@OneToOne
 	private Notification notification;

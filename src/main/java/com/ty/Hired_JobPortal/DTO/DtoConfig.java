@@ -44,15 +44,17 @@ public class DtoConfig {
 
 	public JobApplicationDto setJobApplicationDtoAttributes(JobApplication jobApplication) {
 		jobApplicationDto.setJobApplicationId(jobApplication.getJobApplicationId());
-		jobApplicationDto.setAppliedDate((jobApplication.getAppliedDate()));
-		jobApplicationDto.setNoticePeriodInDays(jobApplication.getNoticePeriodInDays());
+		jobApplicationDto.setJobApplicationAppliedDate((jobApplication.getJobApplicationAppliedDate()));
+		jobApplicationDto.setJobApplicationNoticePeriodInDays(jobApplication.getJobApplicationNoticePeriodInDays());
+		jobApplicationDto.setJobApplicationRefrences(jobApplication.getJobApplicationRefrences());
+		jobApplicationDto.setJobApplicationWorkExperience(jobApplication.getJobApplicationWorkExperience());
 		return jobApplicationDto;
 	}
 
 	public ResumeDto setResumeDtoAttributes(Resume resume) {
 		resumeDto.setResumeId(resume.getResumeId());
 		resumeDto.setFilePath(resume.getFilePath());
-		resumeDto.setUploadDate(resume.getUploadDate());
+		resumeDto.setUploadDateTime(resume.getUploadDateTime());
 		return resumeDto;
 	}
 	public EmployerDto setEmployerDtoAttributes(Employer employer)

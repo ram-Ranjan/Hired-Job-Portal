@@ -13,7 +13,8 @@ import lombok.Setter;
 public class JobApplicationDto {
 
 	private int jobApplicationId;
-	private LocalDateTime appliedDate;
-	private int noticePeriodInDays;
-
+	private LocalDateTime jobApplicationAppliedDate;
+	private int jobApplicationNoticePeriodInDays;
+	private String jobApplicationRefrences;
+	private String jobApplicationWorkExperience;
 }

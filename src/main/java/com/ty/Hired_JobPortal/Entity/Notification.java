@@ -7,7 +7,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -18,15 +21,18 @@ public class Notification {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int notificationId;
+	@NotBlank(message = "Work Experience shouldn't be blank")
+	@NotNull(message = "Work Experience shouln't be null")
 	private String notificationMessage;
+	@NotBlank(message = "Notification Type shouldn't be blank")
+	@NotNull(message = "Notification Type shouln't be null")
 	private String notificationType;
+	@DateTimeFormat
 	private	LocalDateTime notificationTime;
 	
-	@OneToOne
-	private JobApplication jobApplication;
 	@ManyToOne
 	private Employer employer;
-	@ManyToOne
+	@ManyToOne 
 	private Applicant applicant;
 	
 }
