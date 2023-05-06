@@ -16,7 +16,6 @@ public class DtoConfig {
 
 	@Autowired
 	ApplicantDto applicantDto;
-
 	@Autowired
 	JobApplicationDto jobApplicationDto;
 	@Autowired
