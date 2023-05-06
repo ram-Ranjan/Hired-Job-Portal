@@ -25,3 +25,5 @@ public class Resume {
 	private JobApplication jobApplicantion;
 	
 }
+
+

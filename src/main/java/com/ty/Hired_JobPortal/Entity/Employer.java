@@ -1,3 +1,4 @@
+
 package com.ty.Hired_JobPortal.Entity;
 
 import java.util.List;
