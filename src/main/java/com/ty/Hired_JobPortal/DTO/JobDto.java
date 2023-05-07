@@ -3,6 +3,8 @@ package com.ty.Hired_JobPortal.DTO;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -32,9 +34,11 @@ public class JobDto {
 
 	@ManyToOne
 	private Employer employer;
+	
 	@ManyToMany
 	private List<Applicant> applicant;
-	@OneToMany
-	private List<Skill> skill;
+	
+	@ManyToMany
+	private List<Skill> skills;
 
 }

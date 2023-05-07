@@ -32,6 +32,7 @@ public class Skill {
 	private String levelRequired;
 	
 	@ManyToMany(mappedBy = "skills")
+
 	private List<Job> job;
 	
 	@ManyToOne

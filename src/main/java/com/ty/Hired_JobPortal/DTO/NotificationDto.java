@@ -3,13 +3,11 @@ package com.ty.Hired_JobPortal.DTO;
 import java.time.LocalDateTime;
 
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 import org.springframework.stereotype.Component;
 
 import com.ty.Hired_JobPortal.Entity.Applicant;
 import com.ty.Hired_JobPortal.Entity.Employer;
-import com.ty.Hired_JobPortal.Entity.JobApplication;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -23,11 +21,10 @@ public class NotificationDto {
 	private String notificationType;
 	private LocalDateTime notificationTime;
 
-	@OneToOne
-	private JobApplication jobApplication;
 	@ManyToOne
 	private Employer employer;
-	@ManyToOne
+	
+	@ManyToOne 
 	private Applicant applicant;
 
 }
