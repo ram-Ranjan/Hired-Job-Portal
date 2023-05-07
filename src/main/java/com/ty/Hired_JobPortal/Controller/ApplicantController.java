@@ -1,5 +1,7 @@
 package com.ty.Hired_JobPortal.Controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,7 +26,7 @@ public class ApplicantController {
 	ApplicantService applicantService;
 
 	@PostMapping
-	public ResponseEntity<ResponseStructure<ApplicantDto>> addApplicant(@RequestBody Applicant applicant) {
+	public ResponseEntity<ResponseStructure<ApplicantDto>> addApplicant(@Valid@RequestBody Applicant applicant) {
 		return applicantService.addApplicant(applicant);
 	}
 
@@ -39,7 +41,7 @@ public class ApplicantController {
 	}
 
 	@PutMapping
-	public ResponseEntity<ResponseStructure<ApplicantDto>> updateApplicant(@RequestBody Applicant applicant,
+	public ResponseEntity<ResponseStructure<ApplicantDto>> updateApplicant(@Valid @RequestBody Applicant applicant,
 			int applicantId) {
 		return applicantService.updateApplicant(applicant, applicantId);
 	}

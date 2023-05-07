@@ -1,5 +1,7 @@
 package com.ty.Hired_JobPortal.Controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -24,7 +26,7 @@ public class JobController {
 	private JobService jobService;
 	
 	@PostMapping
-	public ResponseEntity<ResponseStructure<JobDto>> addJob(@RequestBody Job job,@RequestParam int employerId){
+	public ResponseEntity<ResponseStructure<JobDto>> addJob(@Valid @RequestBody Job job,@RequestParam int employerId){
 		return jobService.addJob(job, employerId);
 	}
 	
@@ -34,7 +36,7 @@ public class JobController {
 	}
 	
 	@PutMapping
-	public ResponseEntity<ResponseStructure<JobDto>> updateJobById(@RequestBody Job job,@RequestParam int jobId){
+	public ResponseEntity<ResponseStructure<JobDto>> updateJobById(@Valid@RequestBody Job job,@RequestParam int jobId){
 		return jobService.updateJob(job, jobId);
 	}
 	

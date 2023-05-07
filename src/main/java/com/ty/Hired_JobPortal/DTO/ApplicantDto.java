@@ -34,12 +34,16 @@ public class ApplicantDto {
 	
 	@OneToMany
 	private List<Skill> skill;
-	@OneToOne
+	
+	@OneToOne 
 	private Resume resume;
+	
 	@OneToMany
 	private List<JobApplication> jobApplication;
+	
 	@OneToMany
 	private List<Notification> notification;
+	
 	@ManyToMany
 	private List<Job> job;
 

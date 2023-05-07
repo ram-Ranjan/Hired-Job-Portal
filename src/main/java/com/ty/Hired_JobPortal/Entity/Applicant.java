@@ -48,7 +48,7 @@ public class Applicant {
     @Max(value = 999999, message = "Customer contact must be ten digits and start with 6,7,8 or  9")
 	private int applicantPostalCode;
 	@NotBlank(message = "Applicant FirstName shouldn't be blank")
-	@NotNull(message = "Applicant FirstName shouln't be null")
+	@NotNull(message = "Applicant FirstName shouldn't be null")
 	private String applicantWorkStatus;
 	@NotBlank(message = "Applicant FirstName shouldn't be blank")
 	@NotNull(message = "Applicant FirstName shouldn't be null")
