@@ -36,8 +36,10 @@ public class JobApplication {
 	private String jobApplicationWorkExperience;
 	
 	
-	@OneToOne //uni
+	@OneToOne 
 	private Notification notification;
+	@OneToOne
+	private Job job;
 	
 	@ManyToOne
 	@JoinColumn

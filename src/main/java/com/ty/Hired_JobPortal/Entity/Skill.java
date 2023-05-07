@@ -1,5 +1,7 @@
 package com.ty.Hired_JobPortal.Entity;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,10 +32,10 @@ public class Skill {
 	private String levelRequired;
 	
 	@ManyToMany(mappedBy = "skills")
-	private Job job;
+	private List<Job> job;
 	
 	@ManyToOne
-	@JoinColumn(name = "skillId")
+	@JoinColumn(name = "applicantId")
 	private Applicant applicant;
 	
 }
