@@ -34,15 +34,15 @@ public class JobService {
 		ResponseStructure<JobDto> responseStructure = new ResponseStructure<>();
 		Employer existingEmployer = employerDao.findEmployerById(employerId);
 		if (existingEmployer != null) {
-			job.setEmployer(existingEmployer);
 			job = jobDao.addJob(job);
+			job.setEmployer(existingEmployer);
+
 			List<Job> jobs = existingEmployer.getJob();
 			jobs.add(job);
 			existingEmployer.setJob(jobs);
 			employerDao.updateEmployer(existingEmployer);
 
 			jobDto = dtoConfig.setJobDtoAttributes(job);
-			jobDto.setEmployer(existingEmployer);
 			responseStructure.setStatus(HttpStatus.CREATED.value());
 			responseStructure.setMessage("Job added Successfully!!");
 			responseStructure.setData(jobDto);

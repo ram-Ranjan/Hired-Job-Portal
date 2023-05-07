@@ -1,5 +1,8 @@
 package com.ty.Hired_JobPortal.DTO;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -76,6 +79,7 @@ public class DtoConfig {
 		jobDto.setDatePosted(job.getDatePosted());
 		jobDto.setFilled(job.isFilled());
 		jobDto.setJobCategory(job.getJobCategory());
+		jobDto.setEmployer(job.getEmployer());
 		return jobDto;
 		
 	}
@@ -87,12 +91,14 @@ public class DtoConfig {
 		notificationDto.setNotificationType(notification.getNotificationType());
 		return notificationDto;
 	}
+
 	public SkillDto setSkillDtoAttributes(Skill skill)
 	{
 		skillDto.setSkillId(skill.getSkillId());
 		skillDto.setSkillName(skill.getSkillName());
 		skillDto.setSkillDescription(skill.getSkillDescription());
 		skillDto.setLevelRequired(skill.getLevelRequired());
+		skillDto.setJob(skill.getJob());
 		return skillDto;
 		
 	}

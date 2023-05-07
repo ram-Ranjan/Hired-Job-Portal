@@ -1,5 +1,7 @@
 package com.ty.Hired_JobPortal.Controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,7 +31,7 @@ public class JobApplicationController {
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "succesfully created"),
 			@ApiResponse(code = 400, message = "Id not found for the given JobApplication ID") })
 	@PostMapping
-	public ResponseEntity<ResponseStructure<JobApplicationDto>> addJobApplication(
+	public ResponseEntity<ResponseStructure<JobApplicationDto>> addJobApplication(@Valid 
 			@RequestBody JobApplication jobApplication,@RequestParam int applicantId) {
 		return jobApplicationService.addJobApplication(jobApplication,applicantId);
 	}
@@ -45,7 +47,7 @@ public class JobApplicationController {
 			@ApiResponse(code = 400, message = "Id not found for the given JobApplication ID") })
 	@PutMapping
 	public ResponseEntity<ResponseStructure<JobApplicationDto>> updateJobApplication(
-			@RequestBody JobApplication jobApplication, @RequestParam int jobApplicationId) {
+			@Valid @RequestBody JobApplication jobApplication, @RequestParam int jobApplicationId) {
 		return jobApplicationService.updateJobApplication(jobApplication, jobApplicationId);
 	}
 	@ApiOperation(value = "Deleted JobApplication", notes = "API is used to save JobApplication ")

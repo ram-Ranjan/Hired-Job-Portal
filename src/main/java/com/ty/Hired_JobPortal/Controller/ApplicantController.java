@@ -33,7 +33,7 @@ public class ApplicantController {
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "succesfully created"),
 			@ApiResponse(code = 400, message = "Id not found for the given Applicant ID") })
 	@PostMapping
-	public ResponseEntity<ResponseStructure<ApplicantDto>> addApplicant(@Valid@RequestBody Applicant applicant) {
+	public ResponseEntity<ResponseStructure<ApplicantDto>> addApplicant(@Valid @RequestBody Applicant applicant) {
 		return applicantService.addApplicant(applicant);
 	}
 	@ApiOperation(value = "Find  Applicant by Id", notes = "API is used to save Applicant ")
