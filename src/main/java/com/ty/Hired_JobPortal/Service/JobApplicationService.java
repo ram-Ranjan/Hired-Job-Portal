@@ -8,9 +8,11 @@ import org.springframework.stereotype.Service;
 import com.ty.Hired_JobPortal.Config.ResponseStructure;
 import com.ty.Hired_JobPortal.DAO.ApplicantDao;
 import com.ty.Hired_JobPortal.DAO.JobApplicationDao;
+import com.ty.Hired_JobPortal.DAO.JobDao;
 import com.ty.Hired_JobPortal.DTO.DtoConfig;
 import com.ty.Hired_JobPortal.DTO.JobApplicationDto;
 import com.ty.Hired_JobPortal.Entity.Applicant;
+import com.ty.Hired_JobPortal.Entity.Job;
 import com.ty.Hired_JobPortal.Entity.JobApplication;
 import com.ty.Hired_JobPortal.Exception.IdNotFoundException;
 
@@ -25,24 +27,31 @@ public class JobApplicationService {
 	private ApplicantDao applicantDao;
 	@Autowired
 	private DtoConfig dtoConfig;
+	@Autowired
+	private JobDao jobDao;
 
-	public ResponseEntity<ResponseStructure<JobApplicationDto>> addJobApplication(JobApplication jobApplication,int applicantId) {
+	public ResponseEntity<ResponseStructure<JobApplicationDto>> addJobApplication(JobApplication jobApplication,
+			int applicantId, int jobId) {
 
 		Applicant existingApplicant = applicantDao.findApplicantById(applicantId);
-		if(existingApplicant!= null)
-		{
-		jobApplication = jobApplicationDao.addJobApplication(jobApplication);
-		jobApplicationDto = dtoConfig.setJobApplicationDtoAttributes(jobApplication);
+		if (existingApplicant != null) {
+			Job existingJob = jobDao.findJobById(jobId);
+			if(existingJob!=null)
+			{
+			jobApplication = jobApplicationDao.addJobApplication(jobApplication);
+			jobApplicationDto = dtoConfig.setJobApplicationDtoAttributes(jobApplication);
 
-		ResponseStructure<JobApplicationDto> responseStructure = new ResponseStructure<>();
-		responseStructure.setStatus(HttpStatus.CREATED.value());
-		responseStructure.setMessage("Job Application added Successfully!!");
-		responseStructure.setData(jobApplicationDto);
-		return new ResponseEntity<ResponseStructure<JobApplicationDto>>(responseStructure, HttpStatus.CREATED);
-		}
-		else
+			ResponseStructure<JobApplicationDto> responseStructure = new ResponseStructure<>();
+			responseStructure.setStatus(HttpStatus.CREATED.value());
+			responseStructure.setMessage("Job Application added Successfully!!");
+			responseStructure.setData(jobApplicationDto);
+			return new ResponseEntity<ResponseStructure<JobApplicationDto>>(responseStructure, HttpStatus.CREATED);
+			}
+			else
+				throw new IdNotFoundException("Applicant Id Doesn't exist");
+			} else
 			throw new IdNotFoundException("Applicant Id Doesn't exist");
-		}
+	}
 
 	public ResponseEntity<ResponseStructure<JobApplicationDto>> findJobApplicationById(int id) {
 		JobApplication existingJobApplication = jobApplicationDao.findJobApplicationById(id);

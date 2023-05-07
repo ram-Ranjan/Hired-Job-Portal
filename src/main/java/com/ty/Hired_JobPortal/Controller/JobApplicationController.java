@@ -31,9 +31,11 @@ public class JobApplicationController {
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "succesfully created"),
 			@ApiResponse(code = 400, message = "Id not found for the given JobApplication ID") })
 	@PostMapping
-	public ResponseEntity<ResponseStructure<JobApplicationDto>> addJobApplication(@Valid 
-			@RequestBody JobApplication jobApplication,@RequestParam int applicantId) {
-		return jobApplicationService.addJobApplication(jobApplication,applicantId);
+
+	public ResponseEntity<ResponseStructure<JobApplicationDto>> addJobApplication(
+			@RequestBody JobApplication jobApplication,@RequestParam int applicantId,@RequestParam  int jobId) {
+		return jobApplicationService.addJobApplication(jobApplication,applicantId,jobId);
+
 	}
 	@ApiOperation(value = "Get JobApplication", notes = "API is used to save JobApplication ")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Succesfully Found"),

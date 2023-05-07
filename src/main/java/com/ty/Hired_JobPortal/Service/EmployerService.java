@@ -24,7 +24,9 @@ public class EmployerService {
 	private DtoConfig dtoConfig;
 
 	public ResponseEntity<ResponseStructure<EmployerDto>> addEmployer(Employer employer) {
-		
+
+		Employer existingEmployer = employerDao.findByEmployerEmail(employer.getEmployerEmail());
+		if(existingEmployer==null) {
 		employer = employerDao.addEmployer(employer);
 		employerDto = dtoConfig.setEmployerDtoAttributes(employer);
 		ResponseStructure<EmployerDto> responseStructure = new ResponseStructure<>();
@@ -32,7 +34,9 @@ public class EmployerService {
 		responseStructure.setMessage("Employer added Successfully!!");
 		responseStructure.setData(employerDto);
 		return new ResponseEntity<ResponseStructure<EmployerDto>>(responseStructure, HttpStatus.CREATED);
-	}
+		}
+		throw new EmailNotFoundException("Employer Email already existing");
+		}
 
 	public ResponseEntity<ResponseStructure<EmployerDto>> getEmployer(int employerId) {
 		Employer existingEmployer = employerDao.findEmployerById(employerId);

@@ -35,9 +35,13 @@ public class JobApplication {
 	@NotBlank(message = "Work Experience shouldn't be blank")
 	@NotNull(message = "Work Experience shouldn't be null")
 	private String jobApplicationWorkExperience;
-
-	@OneToOne // uni
+	
+	
+	@OneToOne 
 	private Notification notification;
+	@OneToOne
+	private Job job;
+	
 
 	@ManyToOne
 	@JoinColumn

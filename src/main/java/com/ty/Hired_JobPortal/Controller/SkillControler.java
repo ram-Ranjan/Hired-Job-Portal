@@ -34,14 +34,14 @@ public class SkillControler {
 		return skillService.addSkill(skill,jobId);
 	}
 	@ApiOperation(value = "Get Skill", notes = "API is used to find Skill ")
-	@ApiResponses(value = { @ApiResponse(code = 201, message = "succesfully created"),
+	@ApiResponses(value = { @ApiResponse(code = 201, message = "succesfully Found"),
 			@ApiResponse(code = 400, message = "Skill not found for the given Skill ID") })
 	@GetMapping
 	public ResponseEntity<ResponseStructure<SkillDto>> getSkill(@RequestParam int skillId) {
 		return skillService.getSkill(skillId);
 	}
 	@ApiOperation(value = "Update Skill", notes = "API is used to Update Skill ")
-	@ApiResponses(value = { @ApiResponse(code = 201, message = "succesfully created"),
+	@ApiResponses(value = { @ApiResponse(code = 201, message = "Succesfully Updated"),
 			@ApiResponse(code = 400, message = "Skill not found for the given Skill ID") })
 	@PutMapping
 	public ResponseEntity<ResponseStructure<SkillDto>> updateSkill(@RequestBody Skill skill,
@@ -49,7 +49,7 @@ public class SkillControler {
 		return skillService.updateSkill(skill, skillId);
 	}
 	@ApiOperation(value = "Delete Skill", notes = "API is used to delete Skill ")
-	@ApiResponses(value = { @ApiResponse(code = 201, message = "succesfully created"),
+	@ApiResponses(value = { @ApiResponse(code = 201, message = "succesfully deleted"),
 			@ApiResponse(code = 400, message = "Skill not found for the given Skill ID") })
 	@DeleteMapping
 	public ResponseEntity<ResponseStructure<SkillDto>> deleteSkill(@RequestParam int skillId) {

@@ -82,22 +82,7 @@ public class ApplicantService {
 			throw new EmailNotFoundException("Failed to find the Applicant with given Email!!");
 		}
 	}
-	public ResponseEntity<ResponseStructure<ApplicantDto>> findByApplicantGender(String applicantGender) {
-		Applicant existingApplicant = applicantDao.findByApplicantEmail(applicantGender);
-
-		if (existingApplicant != null) {
-			ResponseStructure<ApplicantDto> responseStructure = new ResponseStructure<>();
-
-			applicantDto = dtoConfig.setApplicantDtoAttributes(existingApplicant);
-			responseStructure.setStatus(HttpStatus.FOUND.value());
-			responseStructure.setMessage("Applicant Found!!");
-			responseStructure.setData(applicantDto);
-			return new ResponseEntity<ResponseStructure<ApplicantDto>>(responseStructure, HttpStatus.FOUND);
-		} else {
-			throw new EmailNotFoundException("Failed to find the Applicant with given Gender!!");
-		}
-	}
-
+	
 
 	public ResponseEntity<ResponseStructure<ApplicantDto>> updateApplicant(Applicant updatedApplicant, int id) {
 
