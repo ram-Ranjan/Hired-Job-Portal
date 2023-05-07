@@ -1,5 +1,7 @@
 package com.ty.Hired_JobPortal.Controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,7 +31,7 @@ public class EmployerController {
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "succesfully created"),
 			@ApiResponse(code = 400, message = "Id not found for the given Admin ID") })
 	@PostMapping
-	public ResponseEntity<ResponseStructure<EmployerDto>> addEmployer(@RequestBody Employer employer) {
+	public ResponseEntity<ResponseStructure<EmployerDto>> addEmployer(@Valid @RequestBody Employer employer) {
 		return employerService.addEmployer(employer);
 	}
 	@ApiOperation(value = "Save Admin", notes = "API is used to save Admin ")
@@ -43,7 +45,7 @@ public class EmployerController {
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "succesfully created"),
 			@ApiResponse(code = 400, message = "Id not found for the given Admin ID") })
 	@PutMapping
-	public ResponseEntity<ResponseStructure<EmployerDto>> updateEmployerById(@RequestBody Employer employer,
+	public ResponseEntity<ResponseStructure<EmployerDto>> updateEmployerById(@Valid @RequestBody Employer employer,
 			@RequestParam int employerId) {
 		return employerService.updateEmployer(employer, employerId);
 	}

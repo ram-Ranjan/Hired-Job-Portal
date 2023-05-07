@@ -15,6 +15,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -38,6 +40,7 @@ public class Employer {
 	private long employerContact;
 
 	@OneToMany(mappedBy = "employer")
+	@JsonIgnore
 	private List<Job> job;
 
 	@OneToMany(mappedBy = "employer")

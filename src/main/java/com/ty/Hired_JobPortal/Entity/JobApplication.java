@@ -17,6 +17,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Getter;
 import lombok.Setter;
+
 @Entity
 @Getter
 @Setter
@@ -34,14 +35,12 @@ public class JobApplication {
 	@NotBlank(message = "Work Experience shouldn't be blank")
 	@NotNull(message = "Work Experience shouldn't be null")
 	private String jobApplicationWorkExperience;
-	
-	
-	@OneToOne //uni
+
+	@OneToOne // uni
 	private Notification notification;
-	
+
 	@ManyToOne
 	@JoinColumn
 	private Resume resume;
-	
-	
+
 }

@@ -27,26 +27,26 @@ public class Job {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int jobId;
 	@NotBlank(message = "Job Name shouldn't be blank")
-	@NotNull(message = "Job Name shouln't be null")
+	@NotNull(message = "Job Name shouldn't be null")
 	private String jobName;
 	@NotBlank(message = "Job Description shouldn't be blank")
-	@NotNull(message = "Job Description shouln't be null")
+	@NotNull(message = "Job Description shouldn't be null")
 	private String jobDescription;
 	@NotBlank(message = "Company Name shouldn't be blank")
-	@NotNull(message = "Company Name shouln't be null")
+	@NotNull(message = "Company Name shouldn't be null")
 	private String companyName;
 	@NotBlank(message = "Job Location shouldn't be blank")
-	@NotNull(message = "Job Location shouln't be null")
+	@NotNull(message = "Job Location shouldn't be null")
 	private String jobLocation;
 	@NotBlank(message = "Job Salary shouldn't be blank")
-	@NotNull(message = "Job Salary shouln't be null")
+	@NotNull(message = "Job Salary shouldn't be null")
 	private String salary;
 	@PastOrPresent(message = "Date posted is invalid ")
 	private LocalDate datePosted;
 	@NotNull(message = "isFilled shouln't be null")
 	private boolean isFilled;
 	@NotBlank(message = "Job Category shouldn't be blank")
-	@NotNull(message = "Job Category shouln't be null")
+	@NotNull(message = "Job Category shouldn't be null")
 	private String jobCategory;
 
 	@ManyToOne
@@ -59,6 +59,6 @@ public class Job {
 	
 	@ManyToMany
 	@JoinTable
-	private List<Skill> skills;
+	private List<Skill> skill;
 
 }

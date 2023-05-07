@@ -24,7 +24,7 @@ public class EmployerService {
 	private DtoConfig dtoConfig;
 
 	public ResponseEntity<ResponseStructure<EmployerDto>> addEmployer(Employer employer) {
-
+		
 		employer = employerDao.addEmployer(employer);
 		employerDto = dtoConfig.setEmployerDtoAttributes(employer);
 		ResponseStructure<EmployerDto> responseStructure = new ResponseStructure<>();

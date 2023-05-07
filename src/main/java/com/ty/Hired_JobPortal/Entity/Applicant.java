@@ -30,8 +30,8 @@ public class Applicant {
 	@NotBlank(message = "Applicant FirstName shouldn't be blank")
 	@NotNull(message = "Applicant FirstName shouldn't be null")
 	private String applicantFirstName;
-	@NotBlank(message = "Applicant FirstName shouldn't be blank")
-	@NotNull(message = "Applicant FirstName shouldn't be null")
+	@NotBlank(message = "Applicant Last Name shouldn't be blank")
+	@NotNull(message = "Applicant Last Name shouldn't be null")
 	private String applicantLastName;
 	@Email(message="Email doesn't seems to be in correct format")
 	private String applicantEmail;
@@ -41,17 +41,17 @@ public class Applicant {
 	@Min(value = 6000000000l, message = "Customer contact must be ten digits and start with 6,7,8 or  9")
     @Max(value = 9999999999L, message = "Customer contact must be ten digits and start with 6,7,8 or  9")
 	private long applicantContact;
-	@NotBlank(message = "Applicant FirstName shouldn't be blank")
-	@NotNull(message = "Applicant FirstName shouldn't be null")
+	@NotBlank(message = "Applicant Address shouldn't be blank")
+	@NotNull(message = "Applicant Address shouldn't be null")
 	private String applicantAddress;
-	@Min(value = 100000, message = "Customer contact must be ten digits and start with 6,7,8 or  9")
-    @Max(value = 999999, message = "Customer contact must be ten digits and start with 6,7,8 or  9")
+	@Min(value = 100000, message = "Postal Code must be Six digits")
+    @Max(value = 999999, message = "Postal Code must be Six digit")
 	private int applicantPostalCode;
-	@NotBlank(message = "Applicant FirstName shouldn't be blank")
-	@NotNull(message = "Applicant FirstName shouln't be null")
+	@NotBlank(message = "Applicant WorkStatus shouldn't be blank")
+	@NotNull(message = "Applicant WorkStatus shouldn't be null")
 	private String applicantWorkStatus;
-	@NotBlank(message = "Applicant FirstName shouldn't be blank")
-	@NotNull(message = "Applicant FirstName shouldn't be null")
+	@NotBlank(message = "Applicant Gender shouldn't be blank")
+	@NotNull(message = "Applicant Gender shouldn't be null")
 	private String applicantGender;
 
 	@OneToMany(mappedBy = "applicant")
