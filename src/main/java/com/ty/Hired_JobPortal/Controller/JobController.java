@@ -92,6 +92,13 @@ public class JobController {
 	public ResponseEntity<ResponseStructure<List<JobDto>>> getAllJobsByJobLocation(@RequestParam String jobLocation) {
 		return jobService.findAllJobsByJobLocation(jobLocation);
 	}
+	@ApiOperation(value = "Get Job", notes = "API is used to find Job ")
+	@ApiResponses(value = { @ApiResponse(code = 201, message = "succesfully found"),
+			@ApiResponse(code = 400, message = "Job not found for the given Job Location") })
+	@GetMapping("/skillId")
+	public ResponseEntity<ResponseStructure<List<JobDto>>> getJobsBySkillId(@RequestParam int skillId) {
+		return jobService.findJobsBySkillId(skillId);
+	}
 	
 	
 }

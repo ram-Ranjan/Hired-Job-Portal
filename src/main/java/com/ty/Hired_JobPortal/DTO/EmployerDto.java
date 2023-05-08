@@ -7,7 +7,6 @@ import javax.persistence.OneToMany;
 import org.springframework.stereotype.Component;
 
 import com.ty.Hired_JobPortal.Entity.Job;
-import com.ty.Hired_JobPortal.Entity.Notification;
 
 import lombok.Getter;
 import lombok.Setter;

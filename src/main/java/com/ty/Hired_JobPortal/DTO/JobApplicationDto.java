@@ -2,7 +2,6 @@ package com.ty.Hired_JobPortal.DTO;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
