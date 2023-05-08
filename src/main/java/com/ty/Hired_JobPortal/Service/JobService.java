@@ -74,14 +74,15 @@ public class JobService {
 	}
 
 	public ResponseEntity<ResponseStructure<JobDto>> updateJob(Job updatedJob, int jobId) {
+		ResponseStructure<JobDto> responseStructure = new ResponseStructure<>();
 		Job existingJob = jobDao.findJobById(jobId);
 
 		if (existingJob != null) {
 			updatedJob.setJobId(existingJob.getJobId());
+			updatedJob.setEmployer(existingJob.getEmployer());
 			existingJob = jobDao.updateJob(updatedJob);
 			jobDto = dtoConfig.setJobDtoAttributes(existingJob);
 
-			ResponseStructure<JobDto> responseStructure = new ResponseStructure<>();
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Job Updated!!");
 			responseStructure.setData(jobDto);
@@ -191,6 +192,7 @@ public class JobService {
 				return new ResponseEntity<ResponseStructure<List<JobDto>>>(responseStructure, HttpStatus.FOUND);
 			} else
 				throw new IdNotFoundException("Failed to find any Job!!");
+
 
 		} else
 			throw new NameNotFoundException("Failed to find any Skill with the passed SkillName!!");
