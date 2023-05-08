@@ -31,8 +31,7 @@ public class Skill {
 	@NotNull(message = "levelRequired shouldn't be null")
 	private String levelRequired;
 	
-	@ManyToMany(mappedBy = "skills")
-
+	@ManyToMany(mappedBy = "skill")
 	private List<Job> job;
 	
 	@ManyToOne

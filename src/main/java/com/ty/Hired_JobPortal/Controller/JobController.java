@@ -1,5 +1,7 @@
 package com.ty.Hired_JobPortal.Controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +43,20 @@ public class JobController {
 	public ResponseEntity<ResponseStructure<JobDto>> getJobById(@RequestParam int jobId){
 		return jobService.getJob(jobId);
 	}
+	@ApiOperation(value = "Get Job", notes = "API is used to save Job ")
+	@ApiResponses(value = { @ApiResponse(code = 201, message = "succesfully found"),
+			@ApiResponse(code = 400, message = "Id not found for the given Job ID") })
+	@GetMapping("/jobTitle")
+	public ResponseEntity<ResponseStructure<List<JobDto>>> getAllJobsByName(@Valid @RequestParam String jobName){
+		return jobService.findAllJobsByName(jobName);
+	}
+//	@ApiOperation(value = "Get Job", notes = "API is used to save Job ")
+//	@ApiResponses(value = { @ApiResponse(code = 201, message = "succesfully found"),
+//			@ApiResponse(code = 400, message = "Id not found for the given Job ID") })
+//	@GetMapping
+//	public ResponseEntity<ResponseStructure<JobDto>> getJobById(@RequestParam int jobId){
+//		return jobService.getJob(jobId);
+//	}
 	@ApiOperation(value = "Update Job", notes = "API is used to save Job ")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "succesfully update"),
 			@ApiResponse(code = 400, message = "Id not found for the given Job ID") })

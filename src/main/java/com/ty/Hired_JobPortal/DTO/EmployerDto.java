@@ -24,7 +24,4 @@ public class EmployerDto {
 	@OneToMany
 	private List<Job> job;
 
-	@OneToMany
-	private List<Notification> notification;
-
 }
