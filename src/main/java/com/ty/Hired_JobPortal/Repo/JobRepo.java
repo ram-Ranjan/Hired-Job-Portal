@@ -12,8 +12,8 @@ import com.ty.Hired_JobPortal.Entity.Job;
 public interface JobRepo extends JpaRepository<Job, Integer> {
 	@Query("Select j from Job j where j.jobName = :jobName")
 	public Optional<List<Job>> findByJobName(@Param ("jobName")String jobName);
-	@Query("Select j from Job j where j.jobName = :companyName")
+	@Query("Select j from Job j where j.companyName = :companyName")
 	public Optional<List<Job>> findByCompanyName(@Param ("companyName")String companyName);
-	@Query("Select j from Job j where j.jobName = :jobLocation")
+	@Query("Select j from Job j where j.jobLocation = :jobLocation")
 	public Optional<List<Job>> findByJobLocation(@Param ("jobLocation")String jobLocation);
 }
