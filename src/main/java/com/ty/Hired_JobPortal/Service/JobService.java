@@ -118,6 +118,8 @@ public class JobService {
 		if (existingJobs != null) {
 			for (Job job : existingJobs) {
 				jobDto = dtoConfig.setJobDtoAttributes(job);
+				JobDto jobDto = dtoConfig.setJobDtoAttributes(job);
+				List<JobDto> jobLists = new ArrayList<>();
 				jobLists.add(jobDto);
 
 			}
@@ -138,7 +140,8 @@ public class JobService {
 
 		if (existingJobs != null) {
 			for (Job job : existingJobs) {
-				jobDto = dtoConfig.setJobDtoAttributes(job);
+				JobDto jobDto = dtoConfig.setJobDtoAttributes(job);
+				List<JobDto> jobLists = new ArrayList<>();
 				jobLists.add(jobDto);
 			}
 			responseStructure.setStatus(HttpStatus.FOUND.value());
@@ -148,7 +151,7 @@ public class JobService {
 
 			return new ResponseEntity<ResponseStructure<List<JobDto>>>(responseStructure, HttpStatus.FOUND);
 		} else
-			throw new NameNotFoundException("Failed to find any Job with the CompanyName!!");
+			throw new NameNotFoundException("Failed to find any Job with the Company Name!!");
 	}
 
 	public ResponseEntity<ResponseStructure<List<JobDto>>> findAllJobsByJobLocation(String jobLocation) {
@@ -158,16 +161,15 @@ public class JobService {
 
 		if (existingJobs != null) {
 			for (Job job : existingJobs) {
-				jobDto = dtoConfig.setJobDtoAttributes(job);
+				JobDto jobDto = dtoConfig.setJobDtoAttributes(job);
 				jobLists.add(jobDto);
-				
 			}
 			responseStructure.setStatus(HttpStatus.FOUND.value());
 			responseStructure.setMessage("Jobs Found!!");
 			responseStructure.setData(jobLists);
 			return new ResponseEntity<ResponseStructure<List<JobDto>>>(responseStructure, HttpStatus.FOUND);
 		} else {
-			throw new NameNotFoundException("Failed to find any Job with the CompanyName!!");
+			throw new NameNotFoundException("Failed to find any Job with the Job Location!!");
 		}
 	}
 	
@@ -184,13 +186,12 @@ public class JobService {
 			for (Job job : existingJobs) {
 				jobDto = dtoConfig.setJobDtoAttributes(job);
 				jobLists.add(jobDto);
-				
-			}
+        	}
 			responseStructure.setStatus(HttpStatus.FOUND.value());
 			responseStructure.setMessage("Jobs Found!!");
 			responseStructure.setData(jobLists);
 			return new ResponseEntity<ResponseStructure<List<JobDto>>>(responseStructure, HttpStatus.FOUND);
-		}
+					}
 		else
 			throw new IdNotFoundException("Failed to find any Job with the SkillName!!");
 		
@@ -198,3 +199,27 @@ public class JobService {
 		throw new NameNotFoundException("Failed to find any Skill with the passed SkillName!!");
 	}
 	}
+
+public ResponseEntity<ResponseStructure<List<JobDto>>> findAllJobsByEmployerId(int employerId){
+		ResponseStructure<List<JobDto>> responseStructure = new ResponseStructure<>();
+		Employer existingEmployer = employerDao.findEmployerById(employerId);
+		List<JobDto> jobLists = new ArrayList<>();
+		
+		if(existingEmployer != null) {
+			List<Job> existingJobs = existingEmployer.getJob();
+			for(Job job : existingJobs) {
+				JobDto jobDto = dtoConfig.setJobDtoAttributes(job);
+				jobLists.add(jobDto);
+			}
+			responseStructure.setStatus(HttpStatus.FOUND.value());
+			responseStructure.setMessage("Jobs Found!!");
+			responseStructure.setData(jobLists);
+			return new ResponseEntity<ResponseStructure<List<JobDto>>>(responseStructure, HttpStatus.FOUND);
+
+		} else {
+			throw new NameNotFoundException("Failed to find any Job with the Employer Name!!");
+		}
+				
+			}
+
+}
