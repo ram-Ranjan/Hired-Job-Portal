@@ -40,4 +40,12 @@ public class SkillDao {
 			return skill;
 		}
 	}
+	public Skill findbySkillName(String skillName) {
+		Optional<Skill> optional = skillRepo.findBySkillName(skillName);
+		if (optional.isEmpty()) {
+			return null;
+		} else {
+			return optional.get();
+		}
+	}
 }

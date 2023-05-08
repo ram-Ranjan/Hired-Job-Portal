@@ -43,12 +43,12 @@ public class Job {
 	@PastOrPresent(message = "Date posted is invalid ")
 	private LocalDate datePosted;
 	@NotNull(message = "isFilled shouln't be null")
-	private boolean isFilled;
+	private boolean jobFilled;
 	@NotBlank(message = "Job Category shouldn't be blank")
 	@NotNull(message = "Job Category shouldn't be null")
 	private String jobCategory;
 
-	@ManyToOne
+	@ManyToOne 
 	@JoinColumn(name = "employerId")
 	private Employer employer;
 	

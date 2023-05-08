@@ -3,12 +3,10 @@ package com.ty.Hired_JobPortal.DTO;
 import java.time.LocalDate;
 import java.util.List;
 
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.ty.Hired_JobPortal.Entity.Applicant;
@@ -19,6 +17,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Component
+@Scope(value= "prototype")
 @Getter
 @Setter
 public class JobDto {
@@ -29,7 +28,7 @@ public class JobDto {
 	private String jobLocation;
 	private String salary;
 	private LocalDate datePosted;
-	private boolean isFilled;
+	private boolean jobFilled;
 	private String jobCategory;
 
 	@ManyToOne
