@@ -9,10 +9,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.ty.Hired_JobPortal.Config.ResponseStructure;
+import com.ty.Hired_JobPortal.DAO.ApplicantDao;
 import com.ty.Hired_JobPortal.DAO.JobDao;
 import com.ty.Hired_JobPortal.DAO.SkillDao;
 import com.ty.Hired_JobPortal.DTO.DtoConfig;
 import com.ty.Hired_JobPortal.DTO.SkillDto;
+import com.ty.Hired_JobPortal.Entity.Applicant;
 import com.ty.Hired_JobPortal.Entity.Job;
 import com.ty.Hired_JobPortal.Entity.Skill;
 import com.ty.Hired_JobPortal.Exception.IdNotFoundException;
@@ -27,16 +29,26 @@ public class SkillService {
 	private JobDao jobDao;
 	@Autowired
 	private DtoConfig dtoConfig;
+	@Autowired
+	ApplicantDao applicantDao;
 
-	public ResponseEntity<ResponseStructure<SkillDto>> addSkill(Skill skill, int jobId) {
+	/**
+	 * 
+	 *To be consumed by Employer entity  after while or after adding job to add skills for it
+	 */
+	public ResponseEntity<ResponseStructure<SkillDto>> addSkillbyEmployer(Skill skill, int jobId) {
 		ResponseStructure<SkillDto> responseStructure = new ResponseStructure<>();
 		Job existingJob = jobDao.findJobById(jobId);
 
 		if (existingJob != null) {
 			List<Job> jobs = new ArrayList<>();
 			jobs.add(existingJob);
-			skill = skillDao.addSkill(skill);	
+			List<Skill> skills=new ArrayList<>();
+			skills.add(skill);
+			existingJob.setSkill(skills);
 			skill.setJob(jobs);
+			skill = skillDao.addSkill(skill);	
+			
 			skillDto = dtoConfig.setSkillDtoAttributes(skill);
 			responseStructure.setStatus(HttpStatus.CREATED.value());
 			responseStructure.setMessage("Skill added Successfully!!");
@@ -44,8 +56,29 @@ public class SkillService {
 			return new ResponseEntity<ResponseStructure<SkillDto>>(responseStructure, HttpStatus.CREATED);
 		}
 		else {
-			throw new IdNotFoundException("Failed to find the Job with Skill!!");
+			throw new IdNotFoundException("Failed to find the Job with passed JobId!!");
 		}
+	}
+	/**
+	 * 
+	 *To be consumed by Applicant entity  after creating applicant to add Applicant skills
+	 */
+	public ResponseEntity<ResponseStructure<SkillDto>> addSkillByApplicant(Skill skill, int applicantId) {
+		ResponseStructure<SkillDto> responseStructure = new ResponseStructure<>();
+		Applicant existingApplicant = applicantDao.findApplicantById(applicantId);
+		
+		if (existingApplicant != null) {
+			skill.setApplicant(existingApplicant);
+			skill = skillDao.addSkill(skill);	
+			skillDto = dtoConfig.setSkillDtoAttributes(skill);
+			responseStructure.setStatus(HttpStatus.CREATED.value());
+			responseStructure.setMessage("Skill added Successfully!!");
+			responseStructure.setData(skillDto);
+			return new ResponseEntity<ResponseStructure<SkillDto>>(responseStructure, HttpStatus.CREATED);
+		}
+		else 
+			throw new IdNotFoundException("Failed to find the Applicant with passed ApplicantId!!");
+		
 	}
 
 	public ResponseEntity<ResponseStructure<SkillDto>> getSkill(int skillId) {

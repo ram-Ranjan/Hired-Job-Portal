@@ -23,15 +23,23 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("/skill")
-public class SkillControler {
+public class SkillController {
 	@Autowired
 	private SkillService skillService;
 	@ApiOperation(value = "Save Skill", notes = "API is used to save Skill ")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "succesfully created"),
 			@ApiResponse(code = 400, message = "Skill not found for the given Skill ID") })
-	@PostMapping
-	public ResponseEntity<ResponseStructure<SkillDto>> addSkill(@RequestBody Skill skill,@RequestParam int jobId) {
-		return skillService.addSkill(skill,jobId);
+	@PostMapping("/employer")
+	public ResponseEntity<ResponseStructure<SkillDto>> addSkillbyEmployer(@RequestBody Skill skill,@RequestParam int jobId) {
+		return skillService.addSkillbyEmployer(skill,jobId);
+	}
+	
+	@ApiOperation(value = "Save Skill", notes = "API is used to save Skill ")
+	@ApiResponses(value = { @ApiResponse(code = 201, message = "succesfully created"),
+			@ApiResponse(code = 400, message = "Skill not found for the given Skill ID") })
+	@PostMapping("/applicant")
+	public ResponseEntity<ResponseStructure<SkillDto>> addSkillByApplicant(@RequestBody Skill skill,@RequestParam int applicantId) {
+		return skillService.addSkillbyEmployer(skill,applicantId);
 	}
 	@ApiOperation(value = "Get Skill", notes = "API is used to find Skill ")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "succesfully Found"),

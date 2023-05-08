@@ -3,6 +3,7 @@ package com.ty.Hired_JobPortal.Entity;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -48,15 +49,15 @@ public class Job {
 	@NotNull(message = "Job Category shouldn't be null")
 	private String jobCategory;
 
-	@ManyToOne 
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "employerId")
 	private Employer employer;
 	
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable
 	private List<Applicant> applicant;
 	
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable
 	private List<Skill> skill;
 
