@@ -142,7 +142,10 @@ public class ApplicantService {
 
 		if (existingJob != null) {
 			List<Applicant> applicants = existingJob.getApplicant();
+			existingJob.setApplicant(applicants);
 			for (Applicant applicant : applicants) {
+				List<Job> jobs = applicant.getJob();
+				applicant.setJob(jobs);
 				ApplicantDto applicantDto = dtoConfig.setApplicantDtoAttributes(applicant);
 				applicantLists.add(applicantDto);
 			}
