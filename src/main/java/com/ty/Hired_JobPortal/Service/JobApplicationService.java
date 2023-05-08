@@ -1,5 +1,8 @@
 package com.ty.Hired_JobPortal.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,24 +35,26 @@ public class JobApplicationService {
 
 	public ResponseEntity<ResponseStructure<JobApplicationDto>> addJobApplication(JobApplication jobApplication,
 			int applicantId, int jobId) {
-
+		ResponseStructure<JobApplicationDto> responseStructure = new ResponseStructure<>();
 		Applicant existingApplicant = applicantDao.findApplicantById(applicantId);
+		
 		if (existingApplicant != null) {
 			Job existingJob = jobDao.findJobById(jobId);
-			if(existingJob!=null)
-			{
-			jobApplication = jobApplicationDao.addJobApplication(jobApplication);
-			jobApplicationDto = dtoConfig.setJobApplicationDtoAttributes(jobApplication);
+			if (existingJob != null) {
+				List<Applicant> applicants = new ArrayList<>();
+				applicants.add(existingApplicant);
+				List<Job> jobs = new ArrayList<>();
+				jobs.add(existingJob);
+				jobApplication = jobApplicationDao.addJobApplication(jobApplication);
+				jobApplicationDto = dtoConfig.setJobApplicationDtoAttributes(jobApplication);
 
-			ResponseStructure<JobApplicationDto> responseStructure = new ResponseStructure<>();
-			responseStructure.setStatus(HttpStatus.CREATED.value());
-			responseStructure.setMessage("Job Application added Successfully!!");
-			responseStructure.setData(jobApplicationDto);
-			return new ResponseEntity<ResponseStructure<JobApplicationDto>>(responseStructure, HttpStatus.CREATED);
-			}
-			else
-				throw new IdNotFoundException("Applicant Id Doesn't exist");
+				responseStructure.setStatus(HttpStatus.CREATED.value());
+				responseStructure.setMessage("Job Application added Successfully!!");
+				responseStructure.setData(jobApplicationDto);
+				return new ResponseEntity<ResponseStructure<JobApplicationDto>>(responseStructure, HttpStatus.CREATED);
 			} else
+				throw new IdNotFoundException("Applicant Id Doesn't exist");
+		} else
 			throw new IdNotFoundException("Applicant Id Doesn't exist");
 	}
 

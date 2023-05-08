@@ -27,16 +27,18 @@ import io.swagger.annotations.ApiResponses;
 public class JobApplicationController {
 	@Autowired
 	private JobApplicationService jobApplicationService;
+
 	@ApiOperation(value = "Save JobApplication", notes = "API is used to save JobApplication ")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "succesfully created"),
 			@ApiResponse(code = 400, message = "Id not found for the given JobApplication ID") })
 	@PostMapping
 
-	public ResponseEntity<ResponseStructure<JobApplicationDto>> addJobApplication(
-			@RequestBody JobApplication jobApplication,@RequestParam int applicantId,@RequestParam  int jobId) {
-		return jobApplicationService.addJobApplication(jobApplication,applicantId,jobId);
+	public ResponseEntity<ResponseStructure<JobApplicationDto>> addJobApplication(@Valid 
+			@RequestBody JobApplication jobApplication, @RequestParam int applicantId, @RequestParam int jobId) {
+		return jobApplicationService.addJobApplication(jobApplication, applicantId, jobId);
 
 	}
+
 	@ApiOperation(value = "Get JobApplication", notes = "API is used to save JobApplication ")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Succesfully Found"),
 			@ApiResponse(code = 400, message = "Id not found for the given JobApplication ID") })
@@ -44,6 +46,7 @@ public class JobApplicationController {
 	public ResponseEntity<ResponseStructure<JobApplicationDto>> getJobApplication(@RequestParam int jobApplicationId) {
 		return jobApplicationService.findJobApplicationById(jobApplicationId);
 	}
+
 	@ApiOperation(value = "Update JobApplication", notes = "API is used to save JobApplication ")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "succesfully updated"),
 			@ApiResponse(code = 400, message = "Id not found for the given JobApplication ID") })
@@ -52,6 +55,7 @@ public class JobApplicationController {
 			@Valid @RequestBody JobApplication jobApplication, @RequestParam int jobApplicationId) {
 		return jobApplicationService.updateJobApplication(jobApplication, jobApplicationId);
 	}
+
 	@ApiOperation(value = "Deleted JobApplication", notes = "API is used to save JobApplication ")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Succesfully Deleted"),
 			@ApiResponse(code = 400, message = "Id not found for the given JobApplication ID") })
