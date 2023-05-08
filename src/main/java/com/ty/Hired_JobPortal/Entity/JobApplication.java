@@ -2,6 +2,7 @@ package com.ty.Hired_JobPortal.Entity;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -37,9 +38,9 @@ public class JobApplication {
 	private String jobApplicationWorkExperience;
 	
 	
-	@OneToOne 
+	@OneToOne(cascade = CascadeType.ALL)
 	private Notification notification;
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private Job job;
 	
 

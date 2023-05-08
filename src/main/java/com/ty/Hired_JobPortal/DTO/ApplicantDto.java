@@ -30,7 +30,6 @@ public class ApplicantDto {
 	private int applicantPostalCode;
 	private String applicantWorkStatus;
 	private String applicantGender;
- 	private String highestQualification;
 	
 	@OneToMany
 	private List<Skill> skill;

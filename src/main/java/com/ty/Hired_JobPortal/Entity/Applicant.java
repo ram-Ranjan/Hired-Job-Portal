@@ -2,6 +2,7 @@ package com.ty.Hired_JobPortal.Entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -54,10 +55,10 @@ public class Applicant {
 	@NotNull(message = "Applicant Gender shouldn't be null")
 	private String applicantGender;
 
-	@OneToMany(mappedBy = "applicant")
+	@OneToMany(mappedBy = "applicant",cascade = CascadeType.ALL)
 	private List<Skill> skill;
 	
-	@OneToOne //uni
+	@OneToOne(cascade = CascadeType.ALL)//uni
 	private Resume resume;
 	
 	@OneToMany //uni

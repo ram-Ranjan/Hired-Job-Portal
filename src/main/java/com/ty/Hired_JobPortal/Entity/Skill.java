@@ -2,6 +2,7 @@ package com.ty.Hired_JobPortal.Entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,6 +12,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -31,10 +34,13 @@ public class Skill {
 	@NotNull(message = "levelRequired shouldn't be null")
 	private String levelRequired;
 	
-	@ManyToMany(mappedBy = "skill")
+	
+	@JsonIgnore
+	@ManyToMany(cascade = CascadeType.ALL,mappedBy = "skill")
 	private List<Job> job;
 	
-	@ManyToOne
+	
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "applicantId")
 	private Applicant applicant;
 	
