@@ -29,46 +29,69 @@ import io.swagger.annotations.ApiResponses;
 public class JobController {
 	@Autowired
 	private JobService jobService;
+
 	@ApiOperation(value = "Save Job", notes = "API is used to save Job ")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "succesfully created"),
 			@ApiResponse(code = 400, message = "Id not found for the given Job ID") })
 	@PostMapping
-	public ResponseEntity<ResponseStructure<JobDto>> addJob(@Valid @RequestBody Job job,@RequestParam int employerId){
+	public ResponseEntity<ResponseStructure<JobDto>> addJob(@Valid @RequestBody Job job, @RequestParam int employerId) {
 		return jobService.addJob(job, employerId);
 	}
+	
+
 	@ApiOperation(value = "Get Job", notes = "API is used to save Job ")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "succesfully found"),
 			@ApiResponse(code = 400, message = "Id not found for the given Job ID") })
 	@GetMapping
-	public ResponseEntity<ResponseStructure<JobDto>> getJobById(@RequestParam int jobId){
+	public ResponseEntity<ResponseStructure<JobDto>> getJobById(@RequestParam int jobId) {
 		return jobService.getJob(jobId);
 	}
-	@ApiOperation(value = "Get Job", notes = "API is used to save Job ")
-	@ApiResponses(value = { @ApiResponse(code = 201, message = "succesfully found"),
-			@ApiResponse(code = 400, message = "Id not found for the given Job ID") })
-	@GetMapping("/jobTitle")
-	public ResponseEntity<ResponseStructure<List<JobDto>>> getAllJobsByName(@Valid @RequestParam String jobName){
-		return jobService.findAllJobsByName(jobName);
-	}
-//	@ApiOperation(value = "Get Job", notes = "API is used to save Job ")
-//	@ApiResponses(value = { @ApiResponse(code = 201, message = "succesfully found"),
-//			@ApiResponse(code = 400, message = "Id not found for the given Job ID") })
-//	@GetMapping
-//	public ResponseEntity<ResponseStructure<JobDto>> getJobById(@RequestParam int jobId){
-//		return jobService.getJob(jobId);
-//	}
+	
+	
 	@ApiOperation(value = "Update Job", notes = "API is used to save Job ")
-	@ApiResponses(value = { @ApiResponse(code = 201, message = "succesfully update"),
+	@ApiResponses(value = { @ApiResponse(code = 201, message = "succesfully updated"),
 			@ApiResponse(code = 400, message = "Id not found for the given Job ID") })
 	@PutMapping
-	public ResponseEntity<ResponseStructure<JobDto>> updateJobById(@Valid@RequestBody Job job,@RequestParam int jobId){
+	public ResponseEntity<ResponseStructure<JobDto>> updateJobById(@Valid @RequestBody Job job,
+			@RequestParam int jobId) {
 		return jobService.updateJob(job, jobId);
 	}
+	
+
 	@ApiOperation(value = "Delete Job", notes = "API is used to save Job ")
-	@ApiResponses(value = { @ApiResponse(code = 201, message = "succesfully delete"),
+	@ApiResponses(value = { @ApiResponse(code = 201, message = "succesfully deleted"),
 			@ApiResponse(code = 400, message = "Id not found for the given Job ID") })
 	@DeleteMapping
-	public ResponseEntity<ResponseStructure<JobDto>> deleteJobById(@RequestParam int jobId){
+	public ResponseEntity<ResponseStructure<JobDto>> deleteJobById(@RequestParam int jobId) {
 		return jobService.deleteJob(jobId);
 	}
+	
+
+	@ApiOperation(value = "Get Job", notes = "API is used to find Job ")
+	@ApiResponses(value = { @ApiResponse(code = 201, message = "succesfully found"),
+			@ApiResponse(code = 400, message = "Id not found for the given Job ID") })
+	@GetMapping("/jobName")
+	public ResponseEntity<ResponseStructure<List<JobDto>>> getAllJobsByName(@Valid @RequestParam String jobName) {
+		return jobService.findAllJobsByName(jobName);
+	}
+	
+
+	@ApiOperation(value = "Get Job", notes = "API is used to find Job ")
+	@ApiResponses(value = { @ApiResponse(code = 201, message = "succesfully found"),
+			@ApiResponse(code = 400, message = "Job not found for the given Job Company") })
+	@GetMapping("/companyName")
+	public ResponseEntity<ResponseStructure<List<JobDto>>> getAllJobsByCompanyName(@RequestParam String companyName) {
+		return jobService.findAllJobsByCompanyName(companyName);
+	}
+	
+
+	@ApiOperation(value = "Get Job", notes = "API is used to find Job ")
+	@ApiResponses(value = { @ApiResponse(code = 201, message = "succesfully found"),
+			@ApiResponse(code = 400, message = "Job not found for the given Job Location") })
+	@GetMapping("/jobLocation")
+	public ResponseEntity<ResponseStructure<List<JobDto>>> getAllJobsByJobLocation(@RequestParam String jobLocation) {
+		return jobService.findAllJobsByJobLocation(jobLocation);
+	}
+	
+	
 }

@@ -143,7 +143,7 @@ public class JobService {
 			return new ResponseEntity<ResponseStructure<List<JobDto>>>(responseStructure, HttpStatus.FOUND);
 		} else
 			throw new NameNotFoundException("Failed to find any Job with the CompanyName!!");
-}
+	}
 
 	public ResponseEntity<ResponseStructure<List<JobDto>>> findAllJobsByJobLocation(String jobLocation) {
 		ResponseStructure<List<JobDto>> responseStructure = new ResponseStructure<>();
