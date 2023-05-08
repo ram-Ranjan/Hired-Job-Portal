@@ -1,5 +1,6 @@
 package com.ty.Hired_JobPortal.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,15 +11,18 @@ import org.springframework.stereotype.Service;
 import com.ty.Hired_JobPortal.Config.ResponseStructure;
 import com.ty.Hired_JobPortal.DAO.ApplicantDao;
 import com.ty.Hired_JobPortal.DAO.JobApplicationDao;
+import com.ty.Hired_JobPortal.DAO.JobDao;
 import com.ty.Hired_JobPortal.DAO.ResumeDao;
 import com.ty.Hired_JobPortal.DTO.ApplicantDto;
 import com.ty.Hired_JobPortal.DTO.DtoConfig;
 import com.ty.Hired_JobPortal.Entity.Applicant;
+import com.ty.Hired_JobPortal.Entity.Job;
 import com.ty.Hired_JobPortal.Entity.JobApplication;
 import com.ty.Hired_JobPortal.Entity.Resume;
 import com.ty.Hired_JobPortal.Exception.EmailAlreadyExistingException;
 import com.ty.Hired_JobPortal.Exception.EmailNotFoundException;
 import com.ty.Hired_JobPortal.Exception.IdNotFoundException;
+import com.ty.Hired_JobPortal.Exception.NameNotFoundException;
 
 @Service
 public class ApplicantService {
@@ -29,11 +33,13 @@ public class ApplicantService {
 	private ApplicantDto applicantDto;
 
 	@Autowired
+	private JobDao jobDao;
+	@Autowired
 	private DtoConfig dtoConfig;
 	@Autowired
-	ResumeDao resumeDao;
+	private ResumeDao resumeDao;
 	@Autowired
-	JobApplicationDao jobApplicationDao;
+	private JobApplicationDao jobApplicationDao;
 
 	public ResponseEntity<ResponseStructure<ApplicantDto>> addApplicant(Applicant applicant) {
 
@@ -66,23 +72,6 @@ public class ApplicantService {
 			throw new IdNotFoundException("Failed to find the Applicant with given id!!");
 		}
 	}
-
-	public ResponseEntity<ResponseStructure<ApplicantDto>> findByApplicantEmail(String applicantEmail) {
-		Applicant existingApplicant = applicantDao.findByApplicantEmail(applicantEmail);
-
-		if (existingApplicant != null) {
-			ResponseStructure<ApplicantDto> responseStructure = new ResponseStructure<>();
-
-			applicantDto = dtoConfig.setApplicantDtoAttributes(existingApplicant);
-			responseStructure.setStatus(HttpStatus.FOUND.value());
-			responseStructure.setMessage("Applicant Found!!");
-			responseStructure.setData(applicantDto);
-			return new ResponseEntity<ResponseStructure<ApplicantDto>>(responseStructure, HttpStatus.FOUND);
-		} else {
-			throw new EmailNotFoundException("Failed to find the Applicant with given Email!!");
-		}
-	}
-	
 
 	public ResponseEntity<ResponseStructure<ApplicantDto>> updateApplicant(Applicant updatedApplicant, int id) {
 
@@ -122,7 +111,7 @@ public class ApplicantService {
 			applicantDto = dtoConfig.setApplicantDtoAttributes(existingApplicant);
 
 			responseStructure.setStatus(HttpStatus.OK.value());
-			responseStructure.setMessage("Applicant has been updated");
+			responseStructure.setMessage("Applicant has been deleted");
 			responseStructure.setData(applicantDto);
 			return new ResponseEntity<ResponseStructure<ApplicantDto>>(responseStructure, HttpStatus.OK);
 		} else
@@ -130,4 +119,40 @@ public class ApplicantService {
 
 	}
 
+	public ResponseEntity<ResponseStructure<ApplicantDto>> findApplicantByEmail(String applicantEmail) {
+		Applicant existingApplicant = applicantDao.findByApplicantEmail(applicantEmail);
+
+		if (existingApplicant != null) {
+			ResponseStructure<ApplicantDto> responseStructure = new ResponseStructure<>();
+
+			ApplicantDto  applicantDto = dtoConfig.setApplicantDtoAttributes(existingApplicant);
+			responseStructure.setStatus(HttpStatus.FOUND.value());
+			responseStructure.setMessage("Applicant Found!!");
+			responseStructure.setData(applicantDto);
+			return new ResponseEntity<ResponseStructure<ApplicantDto>>(responseStructure, HttpStatus.FOUND);
+		} else {
+			throw new EmailNotFoundException("Failed to find the Applicant with given Email!!");
+		}
+	}
+
+	public ResponseEntity<ResponseStructure<List<ApplicantDto>>> findApplicantByJobId(int jobId) {
+		ResponseStructure<List<ApplicantDto>> responseStructure = new ResponseStructure<>();
+		Job existingJob = jobDao.findJobById(jobId);
+		List<ApplicantDto> applicantLists = new ArrayList<>();
+
+		if (existingJob != null) {
+			List<Applicant> applicants = existingJob.getApplicant();
+			for (Applicant applicant : applicants) {
+				ApplicantDto applicantDto = dtoConfig.setApplicantDtoAttributes(applicant);
+				applicantLists.add(applicantDto);
+			}
+			responseStructure.setStatus(HttpStatus.FOUND.value());
+			responseStructure.setMessage("Jobs Found!!");
+			responseStructure.setData(applicantLists);
+			return new ResponseEntity<ResponseStructure<List<ApplicantDto>>>(responseStructure, HttpStatus.FOUND);
+		} else {
+			throw new NameNotFoundException("Failed to find any Job with the Job Id!!");
+		}
+
+	}
 }
