@@ -1,9 +1,9 @@
 package com.ty.Hired_JobPortal.Exception;
 
-public class NameNotFoundException extends RuntimeException {
+public class NameNotFoundForSkillException extends RuntimeException {
 	private String message;
 
-	public NameNotFoundException(String message) {
+	public NameNotFoundForSkillException(String message) {
 		this.message = message;
 	}
 

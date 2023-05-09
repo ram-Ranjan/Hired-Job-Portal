@@ -19,7 +19,10 @@ import com.ty.Hired_JobPortal.Entity.Applicant;
 import com.ty.Hired_JobPortal.Entity.Job;
 import com.ty.Hired_JobPortal.Entity.JobApplication;
 import com.ty.Hired_JobPortal.Entity.Notification;
-import com.ty.Hired_JobPortal.Exception.IdNotFoundException;
+import com.ty.Hired_JobPortal.Exception.IdNotFoundForApplicantException;
+import com.ty.Hired_JobPortal.Exception.IdNotFoundForEmployerException;
+import com.ty.Hired_JobPortal.Exception.IdNotFoundForJobApplicationException;
+import com.ty.Hired_JobPortal.Exception.IdNotFoundForJobException;
 
 @Service
 public class JobApplicationService {
@@ -68,13 +71,13 @@ public class JobApplicationService {
 				responseStructure.setData(jobApplicationDto);
 				return new ResponseEntity<ResponseStructure<JobApplicationDto>>(responseStructure, HttpStatus.CREATED);
 			} else
-				throw new IdNotFoundException("Applicant Id Doesn't exist");
+				throw new IdNotFoundForJobException("Applicant Id Doesn't exist");
 		} else
-			throw new IdNotFoundException("Applicant Id Doesn't exist");
+			throw new IdNotFoundForApplicantException("Applicant Id Doesn't exist");
 	}
 
-	public ResponseEntity<ResponseStructure<JobApplicationDto>> findJobApplicationById(int id) {
-		JobApplication existingJobApplication = jobApplicationDao.findJobApplicationById(id);
+	public ResponseEntity<ResponseStructure<JobApplicationDto>> findJobApplicationById(int jobApplicantionId) {
+		JobApplication existingJobApplication = jobApplicationDao.findJobApplicationById(jobApplicantionId);
 
 		if (existingJobApplication != null) {
 			ResponseStructure<JobApplicationDto> responseStructure = new ResponseStructure<>();
@@ -85,7 +88,7 @@ public class JobApplicationService {
 			responseStructure.setData(jobApplicationDto);
 			return new ResponseEntity<ResponseStructure<JobApplicationDto>>(responseStructure, HttpStatus.FOUND);
 		} else {
-			throw new IdNotFoundException("Failed to find the Job Application with given id!!");
+			throw new IdNotFoundForJobApplicationException("Failed to find the Job Application with given id!!");
 		}
 	}
 
@@ -105,7 +108,7 @@ public class JobApplicationService {
 			responseStructure.setData(jobApplicationDto);
 			return new ResponseEntity<ResponseStructure<JobApplicationDto>>(responseStructure, HttpStatus.OK);
 		} else
-			throw new IdNotFoundException("Job Application doesn't  Exist with  given id");
+			throw new IdNotFoundForJobApplicationException("Job Application doesn't  Exist with  given id");
 
 	}
 
@@ -123,7 +126,7 @@ public class JobApplicationService {
 			responseStructure.setData(jobApplicationDto);
 			return new ResponseEntity<ResponseStructure<JobApplicationDto>>(responseStructure, HttpStatus.OK);
 		} else
-			throw new IdNotFoundException("Job Application doesn't  Exist with  given id");
+			throw new IdNotFoundForJobApplicationException("Job Application doesn't  Exist with  given id");
 
 	}
 

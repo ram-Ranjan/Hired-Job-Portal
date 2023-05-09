@@ -33,55 +33,158 @@ public class ApplicationHandler extends ResponseEntityExceptionHandler {
 		return new ResponseEntity<Object>(hashMap, HttpStatus.BAD_REQUEST);
 	}
 
-	@ExceptionHandler(IdNotFoundException.class)
-	public ResponseEntity<ResponseStructure<String>> idNotFoundException(IdNotFoundException ex) {
+	@ExceptionHandler(EmailAlreadyExistingForApplicantException.class)
+	public ResponseEntity<ResponseStructure<String>> emailAlreadyExistingForApplicant(
+			EmailAlreadyExistingForApplicantException ex) {
 		ResponseStructure<String> responseStructure = new ResponseStructure<>();
 		responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
-		responseStructure.setMessage("Id doesn't exist!!");
+		responseStructure.setMessage("Applicant Email Already Existing!!");
 		responseStructure.setData(ex.getMessage());
 		return new ResponseEntity<ResponseStructure<String>>(responseStructure, HttpStatus.NOT_FOUND);
 	}
 
-	@ExceptionHandler(EmailNotFoundException.class)
-	public ResponseEntity<ResponseStructure<String>> emailNotFoundException(EmailNotFoundException ex) {
+	@ExceptionHandler(EmailAlreadyExistingForEmployerException.class)
+	public ResponseEntity<ResponseStructure<String>> emailAlreadyExistingForEmployer(
+			EmailAlreadyExistingForEmployerException ex) {
 		ResponseStructure<String> responseStructure = new ResponseStructure<>();
 		responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
-		responseStructure.setMessage("Email doesn't exist!!");
+		responseStructure.setMessage("Employer Email Already Existing!!");
 		responseStructure.setData(ex.getMessage());
 		return new ResponseEntity<ResponseStructure<String>>(responseStructure, HttpStatus.NOT_FOUND);
 	}
 
-	@ExceptionHandler(EmailAlreadyExistingException.class)
-	public ResponseEntity<ResponseStructure<String>> emailAlreadyExisting(EmailAlreadyExistingException ex) {
+	@ExceptionHandler(EmailNotFoundForApplicantException.class)
+	public ResponseEntity<ResponseStructure<String>> emailNotFoundForApplicantException(
+			EmailNotFoundForApplicantException ex) {
 		ResponseStructure<String> responseStructure = new ResponseStructure<>();
 		responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
-		responseStructure.setMessage("Email Already Existing!!");
+		responseStructure.setMessage("Applicant Email doesn't exist!!");
 		responseStructure.setData(ex.getMessage());
 		return new ResponseEntity<ResponseStructure<String>>(responseStructure, HttpStatus.NOT_FOUND);
 	}
 
-	@ExceptionHandler(NameNotFoundException.class)
-	public ResponseEntity<ResponseStructure<String>> nameNotFoundException(NameNotFoundException ex) {
+	@ExceptionHandler(EmailNotFoundForEmployerException.class)
+	public ResponseEntity<ResponseStructure<String>> emailNotFoundForEmployerException(
+			EmailNotFoundForEmployerException ex) {
 		ResponseStructure<String> responseStructure = new ResponseStructure<>();
 		responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
-		responseStructure.setMessage("Name Not Found!!");
+		responseStructure.setMessage("Employer Email doesn't exist!!");
 		responseStructure.setData(ex.getMessage());
-		return new ResponseEntity<ResponseStructure<String>>(responseStructure,HttpStatus.NOT_FOUND);
+		return new ResponseEntity<ResponseStructure<String>>(responseStructure, HttpStatus.NOT_FOUND);
 	}
-	@ExceptionHandler(EmployerNameNotFoundException.class)
-	public ResponseEntity<ResponseStructure<String>> employerNameNotFoundException(EmployerNameNotFoundException ex) {
+
+	@ExceptionHandler(IdNotFoundForApplicantException.class)
+	public ResponseEntity<ResponseStructure<String>> idNotFoundForApplicantException(
+			IdNotFoundForApplicantException ex) {
 		ResponseStructure<String> responseStructure = new ResponseStructure<>();
 		responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
-		responseStructure.setMessage("EmployerName Not Found!!");
+		responseStructure.setMessage("Applicant Id doesn't exist!!");
 		responseStructure.setData(ex.getMessage());
-		return new ResponseEntity<ResponseStructure<String>>(responseStructure,HttpStatus.NOT_FOUND);
+		return new ResponseEntity<ResponseStructure<String>>(responseStructure, HttpStatus.NOT_FOUND);
 	}
-	@ExceptionHandler(LocationNotFoundException.class)
-	public ResponseEntity<ResponseStructure<String>> locationNotFoundException(LocationNotFoundException ex) {
+
+	@ExceptionHandler(IdNotFoundForEmployerException.class)
+	public ResponseEntity<ResponseStructure<String>> idNotFoundForEmployerException(IdNotFoundForEmployerException ex) {
+		ResponseStructure<String> responseStructure = new ResponseStructure<>();
+		responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
+		responseStructure.setMessage("Employer Id doesn't exist!!");
+		responseStructure.setData(ex.getMessage());
+		return new ResponseEntity<ResponseStructure<String>>(responseStructure, HttpStatus.NOT_FOUND);
+	}
+
+	@ExceptionHandler(IdNotFoundForJobApplicationException.class)
+	public ResponseEntity<ResponseStructure<String>> idNotFoundForJobApplicationException(
+			IdNotFoundForJobApplicationException ex) {
+		ResponseStructure<String> responseStructure = new ResponseStructure<>();
+		responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
+		responseStructure.setMessage("JobApplication Id doesn't exist!!");
+		responseStructure.setData(ex.getMessage());
+		return new ResponseEntity<ResponseStructure<String>>(responseStructure, HttpStatus.NOT_FOUND);
+	}
+
+	@ExceptionHandler(IdNotFoundForJobException.class)
+	public ResponseEntity<ResponseStructure<String>> idNotFoundForJobException(IdNotFoundForJobException ex) {
+		ResponseStructure<String> responseStructure = new ResponseStructure<>();
+		responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
+		responseStructure.setMessage("Job Id doesn't exist!!");
+		responseStructure.setData(ex.getMessage());
+		return new ResponseEntity<ResponseStructure<String>>(responseStructure, HttpStatus.NOT_FOUND);
+	}
+
+	@ExceptionHandler(IdNotFoundForNotificationException.class)
+	public ResponseEntity<ResponseStructure<String>> idNotFoundForNotificationException(
+			IdNotFoundForNotificationException ex) {
+		ResponseStructure<String> responseStructure = new ResponseStructure<>();
+		responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
+		responseStructure.setMessage("Notification Id doesn't exist!!");
+		responseStructure.setData(ex.getMessage());
+		return new ResponseEntity<ResponseStructure<String>>(responseStructure, HttpStatus.NOT_FOUND);
+	}
+
+	@ExceptionHandler(IdNotFoundForResumeException.class)
+	public ResponseEntity<ResponseStructure<String>> idNotFoundExceptionForResume(IdNotFoundForResumeException ex) {
+		ResponseStructure<String> responseStructure = new ResponseStructure<>();
+		responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
+		responseStructure.setMessage("Resume Id doesn't exist!!");
+		responseStructure.setData(ex.getMessage());
+		return new ResponseEntity<ResponseStructure<String>>(responseStructure, HttpStatus.NOT_FOUND);
+	}
+
+	@ExceptionHandler(IdNotFoundForSkillException.class)
+	public ResponseEntity<ResponseStructure<String>> idNotFoundExceptionForSkill(IdNotFoundForSkillException ex) {
+		ResponseStructure<String> responseStructure = new ResponseStructure<>();
+		responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
+		responseStructure.setMessage("Skill Id doesn't exist!!");
+		responseStructure.setData(ex.getMessage());
+		return new ResponseEntity<ResponseStructure<String>>(responseStructure, HttpStatus.NOT_FOUND);
+	}
+
+	@ExceptionHandler(LocationNotFoundForJobException.class)
+	public ResponseEntity<ResponseStructure<String>> locationNotFoundException(LocationNotFoundForJobException ex) {
 		ResponseStructure<String> responseStructure = new ResponseStructure<>();
 		responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
 		responseStructure.setMessage("Location Not Found!!");
 		responseStructure.setData(ex.getMessage());
-		return new ResponseEntity<ResponseStructure<String>>(responseStructure,HttpStatus.NOT_FOUND);
+		return new ResponseEntity<ResponseStructure<String>>(responseStructure, HttpStatus.NOT_FOUND);
 	}
+
+	@ExceptionHandler(NameNotFoundForCompanyException.class)
+	public ResponseEntity<ResponseStructure<String>> nameNotFoundForCompanyException(
+			NameNotFoundForCompanyException ex) {
+		ResponseStructure<String> responseStructure = new ResponseStructure<>();
+		responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
+		responseStructure.setMessage("Company Name Not Found!!");
+		responseStructure.setData(ex.getMessage());
+		return new ResponseEntity<ResponseStructure<String>>(responseStructure, HttpStatus.NOT_FOUND);
+	}
+
+	@ExceptionHandler(NameNotFoundForEmployerException.class)
+	public ResponseEntity<ResponseStructure<String>> employerNameNotFoundException(
+			NameNotFoundForEmployerException ex) {
+		ResponseStructure<String> responseStructure = new ResponseStructure<>();
+		responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
+		responseStructure.setMessage("Employer Name Not Found!!");
+		responseStructure.setData(ex.getMessage());
+		return new ResponseEntity<ResponseStructure<String>>(responseStructure, HttpStatus.NOT_FOUND);
+	}
+
+	@ExceptionHandler(NameNotFoundForJobException.class)
+	public ResponseEntity<ResponseStructure<String>> nameNotFoundForJobException(NameNotFoundForJobException ex) {
+		ResponseStructure<String> responseStructure = new ResponseStructure<>();
+		responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
+		responseStructure.setMessage("Job Name Not Found!!");
+		responseStructure.setData(ex.getMessage());
+		return new ResponseEntity<ResponseStructure<String>>(responseStructure, HttpStatus.NOT_FOUND);
+	}
+
+	@ExceptionHandler(NameNotFoundForSkillException.class)
+	public ResponseEntity<ResponseStructure<String>> employerNameNotFoundForSkillException(
+			NameNotFoundForSkillException ex) {
+		ResponseStructure<String> responseStructure = new ResponseStructure<>();
+		responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
+		responseStructure.setMessage("Skill Name Not Found!!");
+		responseStructure.setData(ex.getMessage());
+		return new ResponseEntity<ResponseStructure<String>>(responseStructure, HttpStatus.NOT_FOUND);
+	}
+
 }

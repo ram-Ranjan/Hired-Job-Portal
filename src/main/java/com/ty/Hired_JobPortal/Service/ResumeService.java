@@ -12,7 +12,9 @@ import com.ty.Hired_JobPortal.DTO.DtoConfig;
 import com.ty.Hired_JobPortal.DTO.ResumeDto;
 import com.ty.Hired_JobPortal.Entity.Applicant;
 import com.ty.Hired_JobPortal.Entity.Resume;
-import com.ty.Hired_JobPortal.Exception.IdNotFoundException;
+import com.ty.Hired_JobPortal.Exception.IdNotFoundForApplicantException;
+import com.ty.Hired_JobPortal.Exception.IdNotFoundForEmployerException;
+import com.ty.Hired_JobPortal.Exception.IdNotFoundForResumeException;
 
 @Service
 public class ResumeService {
@@ -39,12 +41,12 @@ public class ResumeService {
 		return new ResponseEntity<ResponseStructure<ResumeDto>>(responseStructure, HttpStatus.CREATED);
 	}
 		else 
-			throw new IdNotFoundException("Applicant doesn't exist with given id");
+			throw new IdNotFoundForApplicantException("Applicant doesn't exist with given id");
 			
 	}
 
-	public ResponseEntity<ResponseStructure<ResumeDto>> findResumeById(int id) {
-		Resume existingResume = resumeDao.findResumeById(id);
+	public ResponseEntity<ResponseStructure<ResumeDto>> findResumeById(int resumeId) {
+		Resume existingResume = resumeDao.findResumeById(resumeId);
 
 		if (existingResume != null) {
 			ResponseStructure<ResumeDto> responseStructure = new ResponseStructure<>();
@@ -55,18 +57,18 @@ public class ResumeService {
 			responseStructure.setData(resumeDto);
 			return new ResponseEntity<ResponseStructure<ResumeDto>>(responseStructure, HttpStatus.FOUND);
 		} else {
-			throw new IdNotFoundException("Failed to find the Resume with given id!!");
+			throw new IdNotFoundForResumeException("Failed to find the Resume with given id!!");
 		}
 	}
 
-	public ResponseEntity<ResponseStructure<ResumeDto>> updateResume(Resume updatedResume, int id) {
+	public ResponseEntity<ResponseStructure<ResumeDto>> updateResume(Resume updatedResume, int resumeId) {
 
-		Resume existingResume = resumeDao.findResumeById(id);
+		Resume existingResume = resumeDao.findResumeById(resumeId);
 
 		if (existingResume != null) {
 			ResponseStructure<ResumeDto> responseStructure = new ResponseStructure<>();
 
-			updatedResume = resumeDao.updateResume(updatedResume, id);
+			updatedResume = resumeDao.updateResume(updatedResume, resumeId);
 			resumeDto = dtoConfig.setResumeDtoAttributes(updatedResume);
 
 			responseStructure.setStatus(HttpStatus.OK.value());
@@ -74,17 +76,17 @@ public class ResumeService {
 			responseStructure.setData(resumeDto);
 			return new ResponseEntity<ResponseStructure<ResumeDto>>(responseStructure, HttpStatus.OK);
 		} else
-			throw new IdNotFoundException("Resume doesn't  Exist with  given id");
+			throw new IdNotFoundForResumeException("Resume doesn't  Exist with  given id");
 
 	}
 
-	public ResponseEntity<ResponseStructure<ResumeDto>> deleteResumeById(int id) {
+	public ResponseEntity<ResponseStructure<ResumeDto>> deleteResumeById(int resumeId) {
 
-		Resume existingResume = resumeDao.findResumeById(id);
+		Resume existingResume = resumeDao.findResumeById(resumeId);
 		if (existingResume != null) {
 			ResponseStructure<ResumeDto> responseStructure = new ResponseStructure<>();
 
-			resumeDao.deleteResumeById(id);
+			resumeDao.deleteResumeById(resumeId);
 			resumeDto = dtoConfig.setResumeDtoAttributes(existingResume);
 
 			responseStructure.setStatus(HttpStatus.OK.value());
@@ -92,7 +94,7 @@ public class ResumeService {
 			responseStructure.setData(resumeDto);
 			return new ResponseEntity<ResponseStructure<ResumeDto>>(responseStructure, HttpStatus.OK);
 		} else
-			throw new IdNotFoundException("Resume doesn't  Exist with  given id");
+			throw new IdNotFoundForResumeException("Resume doesn't  Exist with  given id");
 
 	}
 

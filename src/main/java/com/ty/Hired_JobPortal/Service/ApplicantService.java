@@ -19,10 +19,11 @@ import com.ty.Hired_JobPortal.Entity.Applicant;
 import com.ty.Hired_JobPortal.Entity.Job;
 import com.ty.Hired_JobPortal.Entity.JobApplication;
 import com.ty.Hired_JobPortal.Entity.Resume;
-import com.ty.Hired_JobPortal.Exception.EmailAlreadyExistingException;
-import com.ty.Hired_JobPortal.Exception.EmailNotFoundException;
-import com.ty.Hired_JobPortal.Exception.IdNotFoundException;
-import com.ty.Hired_JobPortal.Exception.NameNotFoundException;
+import com.ty.Hired_JobPortal.Exception.EmailAlreadyExistingForApplicantException;
+import com.ty.Hired_JobPortal.Exception.EmailNotFoundForApplicantException;
+import com.ty.Hired_JobPortal.Exception.IdNotFoundForApplicantException;
+import com.ty.Hired_JobPortal.Exception.IdNotFoundForJobException;
+import com.ty.Hired_JobPortal.Exception.NameNotFoundForEmployerException;
 
 @Service
 public class ApplicantService {
@@ -54,7 +55,7 @@ public class ApplicantService {
 			responseStructure.setData(applicantDto);
 			return new ResponseEntity<ResponseStructure<ApplicantDto>>(responseStructure, HttpStatus.CREATED);
 		} else
-			throw new EmailAlreadyExistingException("Applicant Email already used");
+			throw new EmailAlreadyExistingForApplicantException("Applicant Email already used");
 	}
 
 	public ResponseEntity<ResponseStructure<ApplicantDto>> findApplicantById(int applicantId) {
@@ -69,7 +70,7 @@ public class ApplicantService {
 			responseStructure.setData(applicantDto);
 			return new ResponseEntity<ResponseStructure<ApplicantDto>>(responseStructure, HttpStatus.FOUND);
 		} else {
-			throw new IdNotFoundException("Failed to find the Applicant with given id!!");
+			throw new IdNotFoundForApplicantException("Failed to find the Applicant with given id!!");
 		}
 	}
 
@@ -88,7 +89,7 @@ public class ApplicantService {
 			responseStructure.setData(applicantDto);
 			return new ResponseEntity<ResponseStructure<ApplicantDto>>(responseStructure, HttpStatus.OK);
 		} else
-			throw new IdNotFoundException("Applicant doesn't  Exist with  given id");
+			throw new IdNotFoundForApplicantException("Applicant doesn't  Exist with  given id");
 
 	}
 
@@ -115,7 +116,7 @@ public class ApplicantService {
 			responseStructure.setData(applicantDto);
 			return new ResponseEntity<ResponseStructure<ApplicantDto>>(responseStructure, HttpStatus.OK);
 		} else
-			throw new IdNotFoundException("Applicant doesn't  Exist with  given id");
+			throw new IdNotFoundForApplicantException("Applicant doesn't  Exist with  given id");
 
 	}
 
@@ -131,7 +132,7 @@ public class ApplicantService {
 			responseStructure.setData(applicantDto);
 			return new ResponseEntity<ResponseStructure<ApplicantDto>>(responseStructure, HttpStatus.FOUND);
 		} else {
-			throw new EmailNotFoundException("Failed to find the Applicant with given Email!!");
+			throw new EmailNotFoundForApplicantException("Failed to find the Applicant with given Email!!");
 		}
 	}
 
@@ -154,7 +155,7 @@ public class ApplicantService {
 			responseStructure.setData(applicantLists);
 			return new ResponseEntity<ResponseStructure<List<ApplicantDto>>>(responseStructure, HttpStatus.FOUND);
 		} else {
-			throw new NameNotFoundException("Failed to find any Job with the Job Id!!");
+			throw new IdNotFoundForJobException("Failed to find any Job with the Job Id!!");
 		}
 
 	}

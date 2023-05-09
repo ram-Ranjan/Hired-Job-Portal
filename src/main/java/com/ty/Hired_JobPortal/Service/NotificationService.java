@@ -10,7 +10,8 @@ import com.ty.Hired_JobPortal.DAO.NotificationDao;
 import com.ty.Hired_JobPortal.DTO.DtoConfig;
 import com.ty.Hired_JobPortal.DTO.NotificationDto;
 import com.ty.Hired_JobPortal.Entity.Notification;
-import com.ty.Hired_JobPortal.Exception.IdNotFoundException;
+import com.ty.Hired_JobPortal.Exception.IdNotFoundForEmployerException;
+import com.ty.Hired_JobPortal.Exception.IdNotFoundForNotificationException;
 
 @Service
 public class NotificationService {
@@ -44,7 +45,7 @@ public class NotificationService {
 			responseStructure.setData(notificationDto);
 			return new ResponseEntity<ResponseStructure<NotificationDto>>(responseStructure, HttpStatus.CREATED);
 		} else {
-			throw new IdNotFoundException("Failed to find the Notification!!");
+			throw new IdNotFoundForNotificationException("Failed to find the Notification!!");
 		}
 	}
 
@@ -63,7 +64,7 @@ public class NotificationService {
 			responseStructure.setData(notificationDto);
 			return new ResponseEntity<ResponseStructure<NotificationDto>>(responseStructure, HttpStatus.CREATED);
 		} else {
-			throw new IdNotFoundException("Failed to Update the Notification!!");
+			throw new IdNotFoundForNotificationException("Failed to Update the Notification!!");
 		}
 	}
 
@@ -78,7 +79,7 @@ public class NotificationService {
 			responseStructure.setData(notificationDto);
 			return new ResponseEntity<ResponseStructure<NotificationDto>>(responseStructure, HttpStatus.CREATED);
 		} else {
-			throw new IdNotFoundException("Failed to Delete the Notification!!");
+			throw new IdNotFoundForNotificationException("Failed to Delete the Notification!!");
 		}
 	}
 }
