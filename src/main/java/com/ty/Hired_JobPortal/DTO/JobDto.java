@@ -28,8 +28,9 @@ public class JobDto {
 	private String jobLocation;
 	private String salary;
 	private LocalDate datePosted;
-	private boolean jobFilled;
+	private String jobStatus;
 	private String jobCategory;
+
 
 	@ManyToOne
 	private Employer employer;

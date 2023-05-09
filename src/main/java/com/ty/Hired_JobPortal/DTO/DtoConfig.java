@@ -31,11 +31,8 @@ public class DtoConfig {
 		applicantDto.setApplicantId(applicant.getApplicantId());
 		applicantDto.setApplicantFirstName((applicant.getApplicantFirstName()));
 		applicantDto.setApplicantLastName(applicant.getApplicantLastName());
-		applicantDto.setApplicantContact(applicant.getApplicantContact());
+		applicantDto.setApplicantContactInfo(applicant.getApplicantContactInfo());
 		applicantDto.setApplicantEmail((applicant.getApplicantEmail()));
-		applicantDto.setApplicantAddress(applicant.getApplicantAddress());
-		applicantDto.setApplicantPostalCode(applicant.getApplicantPostalCode());
-		applicantDto.setApplicantWorkStatus(applicant.getApplicantWorkStatus());
 		applicantDto.setApplicantGender(applicant.getApplicantGender());
 		return applicantDto;
 	}
@@ -43,8 +40,7 @@ public class DtoConfig {
 	public JobApplicationDto setJobApplicationDtoAttributes(JobApplication jobApplication) {
 		jobApplicationDto.setJobApplicationId(jobApplication.getJobApplicationId());
 		jobApplicationDto.setJobApplicationAppliedDate((jobApplication.getJobApplicationAppliedDate()));
-		jobApplicationDto.setJobApplicationNoticePeriodInDays(jobApplication.getJobApplicationNoticePeriodInDays());
-		jobApplicationDto.setJobApplicationRefrences(jobApplication.getJobApplicationRefrences());
+		jobApplicationDto.setNoticePeriod(jobApplication.getNoticePeriod());
 		jobApplicationDto.setJobApplicationWorkExperience(jobApplication.getJobApplicationWorkExperience());
 		return jobApplicationDto;
 	}
@@ -60,7 +56,7 @@ public class DtoConfig {
 		employerDto.setEmployerId(employer.getEmployerId());
 		employerDto.setEmployerName(employer.getEmployerName());
 		employerDto.setEmployerEmail(employer.getEmployerEmail());
-		employerDto.setEmployerContact(employer.getEmployerContact());
+		employerDto.setEmployerContactInfo(employer.getEmployerContactInfo());
 		return employerDto;
 	}
 
@@ -73,7 +69,7 @@ public class DtoConfig {
 		jobDto.setJobLocation(job.getJobLocation());
 		jobDto.setSalary(job.getSalary());
 		jobDto.setDatePosted(job.getDatePosted());
-		jobDto.setJobFilled(job.isJobFilled());
+		jobDto.setJobStatus(job.getJobStatus());
 		jobDto.setJobCategory(job.getJobCategory());
 		jobDto.setEmployer(job.getEmployer());
 		return jobDto;
@@ -92,6 +88,7 @@ public class DtoConfig {
 		skillDto.setSkillId(skill.getSkillId());
 		skillDto.setSkillName(skill.getSkillName());
 		skillDto.setJob(skill.getJobs());
+
 		return skillDto;
 
 	}

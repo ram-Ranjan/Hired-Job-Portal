@@ -18,7 +18,7 @@ public class EmployerDto {
 	private int employerId;
 	private String employerName;
 	private String employerEmail;
-	private long employerContact;
+	private long employerContactInfo;
 
 	@OneToMany
 	private List<Job> job;

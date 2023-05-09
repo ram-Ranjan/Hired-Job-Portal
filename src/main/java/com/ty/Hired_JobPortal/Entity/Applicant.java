@@ -40,17 +40,9 @@ public class Applicant {
 	@Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$", message = "Password must contain at least one digit, one lowercase, one uppercase letter, one special character and must be at least 8 characters long")
 	private String applicantPassword;
 	@Min(value = 6000000000l, message = "Customer contact must be ten digits and start with 6,7,8 or  9")
-	@Max(value = 9999999999L, message = "Customer contact must be ten digits and start with 6,7,8 or  9")
-	private long applicantContact;
-	@NotBlank(message = "Applicant Address shouldn't be blank")
-	@NotNull(message = "Applicant Address shouldn't be null")
-	private String applicantAddress;
-	@Min(value = 100000, message = "Postal Code must be Six digits")
-	@Max(value = 999999, message = "Postal Code must be Six digit")
-	private int applicantPostalCode;
-	@NotBlank(message = "Applicant WorkStatus shouldn't be blank")
-	@NotNull(message = "Applicant WorkStatus shouldn't be null")
-	private String applicantWorkStatus;
+
+    @Max(value = 9999999999L, message = "Customer contact must be ten digits and start with 6,7,8 or  9")
+	private long applicantContactInfo;
 	@NotBlank(message = "Applicant Gender shouldn't be blank")
 	@NotNull(message = "Applicant Gender shouldn't be null")
 	private String applicantGender;
@@ -60,13 +52,13 @@ public class Applicant {
 
 	@OneToOne(cascade = CascadeType.ALL) // uni
 	private Resume resume;
-
-	@OneToMany(cascade = CascadeType.ALL)
+	
+	@OneToMany(cascade = CascadeType.ALL) //uni
 	private List<JobApplication> jobApplication;
 
 	@OneToMany(mappedBy = "applicant")
 	private List<Notification> notification;
-
-	@ManyToMany(mappedBy = "applicant")
+	
+	@ManyToMany(mappedBy = "applicant",cascade = CascadeType.ALL)
 	private List<Job> job;
 }

@@ -39,7 +39,7 @@ public class SkillController {
 			@ApiResponse(code = 400, message = "Skill not found for the given Skill ID") })
 	@PostMapping("/applicant")
 	public ResponseEntity<ResponseStructure<SkillDto>> addSkillByApplicant(@RequestBody Skill skill,@RequestParam int applicantId) {
-		return skillService.addSkillbyEmployer(skill,applicantId);
+		return skillService.addSkillByApplicant(skill,applicantId);
 	}
 	@ApiOperation(value = "Get Skill", notes = "API is used to find Skill ")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "succesfully Found"),
