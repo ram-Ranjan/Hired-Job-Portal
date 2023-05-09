@@ -76,7 +76,7 @@ public class JobService {
 		if (existingJob != null) {
 			updatedJob.setJobId(existingJob.getJobId());
 			updatedJob.setEmployer(existingJob.getEmployer());
-			existingJob = jobDao.updateJob(updatedJob);
+			existingJob = jobDao.updateJob(updatedJob,jobId);
 			jobDto = dtoConfig.setJobDtoAttributes(existingJob);
 
 			responseStructure.setStatus(HttpStatus.OK.value());

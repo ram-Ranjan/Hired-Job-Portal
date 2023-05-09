@@ -48,7 +48,7 @@ public class JobApplicationService {
 
 				List<Applicant> applicants = existingJob.getApplicant();
 				applicants.add(existingApplicant);
-				jobDao.updateJob(existingJob);
+				jobDao.updateJob(existingJob,jobId);
 
 				Notification notification = new Notification();
 				notification.setNotificationMessage("Job Applied for " + existingJob.getJobName());

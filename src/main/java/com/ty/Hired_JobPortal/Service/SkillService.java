@@ -38,11 +38,27 @@ public class SkillService {
 		ResponseStructure<SkillDto> responseStructure = new ResponseStructure<>();
 		Job existingJob = jobDao.findJobById(jobId);
 		if (existingJob != null) {
+			for(String Skill : skills)
+			{
+				Skill existingSkill =skillDao.findbySkillName(Skill);
+				if(existingSkill==null)
+				{
+					Skill newSkill = new Skill();
+					newSkill.setSkillName(Skill);
+					newSkill=skillDao.addSkill(newSkill);
+					
+					existingJob.getSkill().add(newSkill);
+				}
+				else {
+					existingJob.getSkill().add(existingSkill);
+				}
+			}
+			existingJob=jobDao.updateJob(existingJob,existingJob.getJobId());
 
-			// skillDto = dtoConfig.setSkillDtoAttributes(skill);
+
 			responseStructure.setStatus(HttpStatus.CREATED.value());
 			responseStructure.setMessage("Skill added Successfully!!");
-			responseStructure.setData(skillDto);
+			responseStructure.setData(existingJob.getSkill());
 			return new ResponseEntity<ResponseStructure<SkillDto>>(responseStructure, HttpStatus.CREATED);
 		} else {
 			throw new IdNotFoundException("Failed to find the Job with passed JobId!!");

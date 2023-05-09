@@ -28,8 +28,13 @@ public class JobDao {
 		}
 	}
 
-	public Job updateJob(Job job) {
-		return jobRepo.save(job);
+	public Job updateJob(Job job, int id) {
+		Optional<Job> optional = jobRepo.findById(id);
+		if (optional.isPresent()) {
+			job.setJobId(id);
+			return jobRepo.save(job);
+		} else
+			return null;
 	}
 
 	public Job deleteJobById(int jobId) {
