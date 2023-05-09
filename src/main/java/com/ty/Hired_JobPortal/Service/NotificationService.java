@@ -1,14 +1,20 @@
 package com.ty.Hired_JobPortal.Service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.ty.Hired_JobPortal.Config.ResponseStructure;
+import com.ty.Hired_JobPortal.DAO.ApplicantDao;
+import com.ty.Hired_JobPortal.DAO.EmployerDao;
 import com.ty.Hired_JobPortal.DAO.NotificationDao;
 import com.ty.Hired_JobPortal.DTO.DtoConfig;
 import com.ty.Hired_JobPortal.DTO.NotificationDto;
+import com.ty.Hired_JobPortal.Entity.Applicant;
+import com.ty.Hired_JobPortal.Entity.Employer;
 import com.ty.Hired_JobPortal.Entity.Notification;
 import com.ty.Hired_JobPortal.Exception.IdNotFoundException;
 
@@ -20,50 +26,52 @@ public class NotificationService {
 	private NotificationDto notificationDto;
 	@Autowired
 	private DtoConfig dtoConfig;
+	@Autowired
+	ApplicantDao applicantDao;
+	@Autowired
+	EmployerDao employerDao;
 
-	public ResponseEntity<ResponseStructure<NotificationDto>> addNotification(Notification notification) {
-		notification = notificationDao.addNotification(notification);
+	public ResponseEntity<ResponseStructure<List<Notification>>> getNotificationByApplicantId(int applicantId) {
 
-		notificationDto = dtoConfig.setNotificationDtoAttributes(notification);
-		ResponseStructure<NotificationDto> responseStructure = new ResponseStructure<>();
-		responseStructure.setStatus(HttpStatus.CREATED.value());
-		responseStructure.setMessage("Notification not Added!!");
-		responseStructure.setData(notification);
-		return new ResponseEntity<ResponseStructure<NotificationDto>>(responseStructure, HttpStatus.CREATED);
+		Applicant applicant = applicantDao.findApplicantById(applicantId);
+		if (applicant != null) {
+			List<Notification> existingNotifications = notificationDao.findNotificationByApplicant(applicant);
+			if (existingNotifications != null) {
+				for (Notification notification : existingNotifications) {
+					notificationDto = dtoConfig.setNotificationDtoAttributes(notification);
+					notificationDto.setApplicant(applicant);
+				}
+				ResponseStructure<List<Notification>> responseStructure = new ResponseStructure<>();
+				responseStructure.setStatus(HttpStatus.FOUND.value());
+				responseStructure.setMessage("Notification Found!!");
+				responseStructure.setData(existingNotifications);
+				return new ResponseEntity<ResponseStructure<List<Notification>>>(responseStructure, HttpStatus.CREATED);
+			} else
+				throw new IdNotFoundException("Failed to find the Notification!!");
+		} else
+			throw new IdNotFoundException("Failed to find the Applicant Id!!");
 	}
 
-	public ResponseEntity<ResponseStructure<NotificationDto>> getNotification(int notificationId) {
-		Notification existingNotification = notificationDao.findNotificationById(notificationId);
+	public ResponseEntity<ResponseStructure<List<Notification>>> getNotificationbyEmployerId(int employerId) {
 
-		if (existingNotification != null) {
-			notificationDto = dtoConfig.setNotificationDtoAttributes(existingNotification);
-
-			ResponseStructure<NotificationDto> responseStructure = new ResponseStructure<>();
-			responseStructure.setStatus(HttpStatus.FOUND.value());
-			responseStructure.setMessage("Notification Found!!");
-			responseStructure.setData(notificationDto);
-			return new ResponseEntity<ResponseStructure<NotificationDto>>(responseStructure, HttpStatus.CREATED);
+		Employer employer = employerDao.findEmployerById(employerId);
+		if (employer != null) {
+			List<Notification> existingNotifications = notificationDao.findNotificationByEmployer(employer);
+			if (existingNotifications != null) {
+				for (Notification notification : existingNotifications) {
+					notificationDto = dtoConfig.setNotificationDtoAttributes(notification);
+					notificationDto.setEmployer(employer);
+				}
+				ResponseStructure<List<Notification>> responseStructure = new ResponseStructure<>();
+				responseStructure.setStatus(HttpStatus.FOUND.value());
+				responseStructure.setMessage("Notification Found!!");
+				responseStructure.setData(notificationDto);
+				return new ResponseEntity<ResponseStructure<List<Notification>>>(responseStructure, HttpStatus.CREATED);
+			} else {
+				throw new IdNotFoundException("Failed to find the Notification!!");
+			}
 		} else {
-			throw new IdNotFoundException("Failed to find the Notification!!");
-		}
-	}
-
-	public ResponseEntity<ResponseStructure<NotificationDto>> updateNotification(Notification updatedNotification,
-			int notificationId) {
-		Notification existingNotification = notificationDao.findNotificationById(notificationId);
-
-		if (existingNotification != null) {
-			updatedNotification.setNotificationId(existingNotification.getNotificationId());
-			existingNotification = notificationDao.updateNotification(updatedNotification);
-			notificationDto = dtoConfig.setNotificationDtoAttributes(existingNotification);
-
-			ResponseStructure<NotificationDto> responseStructure = new ResponseStructure<>();
-			responseStructure.setStatus(HttpStatus.OK.value());
-			responseStructure.setMessage("Notification Updated!!");
-			responseStructure.setData(notificationDto);
-			return new ResponseEntity<ResponseStructure<NotificationDto>>(responseStructure, HttpStatus.CREATED);
-		} else {
-			throw new IdNotFoundException("Failed to Update the Notification!!");
+			throw new IdNotFoundException("Failed to find the Applicant Id!!");
 		}
 	}
 
