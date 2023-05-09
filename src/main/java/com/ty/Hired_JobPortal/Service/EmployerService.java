@@ -37,6 +37,7 @@ public class EmployerService {
 			return new ResponseEntity<ResponseStructure<EmployerDto>>(responseStructure, HttpStatus.CREATED);
 		}
 		throw new EmailAlreadyExistingForEmployerException("Employer Email already existing");
+
 	}
 
 	public ResponseEntity<ResponseStructure<EmployerDto>> getEmployer(int employerId) {

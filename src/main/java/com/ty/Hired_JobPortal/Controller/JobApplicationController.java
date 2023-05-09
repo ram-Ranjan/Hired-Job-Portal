@@ -33,8 +33,8 @@ public class JobApplicationController {
 			@ApiResponse(code = 400, message = "Id not found for the given JobApplication ID") })
 	@PostMapping
 
-	public ResponseEntity<ResponseStructure<JobApplicationDto>> addJobApplication(@Valid 
-			@RequestBody JobApplication jobApplication, @RequestParam int applicantId, @RequestParam int jobId) {
+	public ResponseEntity<ResponseStructure<JobApplicationDto>> addJobApplication(
+			@Valid @RequestBody JobApplication jobApplication, @RequestParam int applicantId, @RequestParam int jobId) {
 		return jobApplicationService.addJobApplication(jobApplication, applicantId, jobId);
 
 	}

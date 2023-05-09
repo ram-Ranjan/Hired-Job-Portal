@@ -13,6 +13,8 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Getter;
 import lombok.Setter;
 @Entity
@@ -30,10 +32,12 @@ public class Notification {
 	
 	@ManyToOne
 	@JoinColumn(name = "employerId")
+	@JsonIgnore
 	private Employer employer;
 	
 	@ManyToOne 
 	@JoinColumn(name = "applicantId")
+	@JsonIgnore
 	private Applicant applicant;
 	
 }

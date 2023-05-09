@@ -51,10 +51,7 @@ public class JobApplicationService {
 
 				List<Applicant> applicants = existingJob.getApplicant();
 				applicants.add(existingApplicant);
-				List<Job> jobs = existingApplicant.getJob();
-				jobs.add(existingJob);
-				jobDao.updateJob(existingJob);
-				applicantDao.addApplicant(existingApplicant);
+				jobDao.updateJob(existingJob,jobId);
 
 				Notification notification = new Notification();
 				notification.setNotificationMessage("Job Applied for " + existingJob.getJobName());
@@ -62,7 +59,13 @@ public class JobApplicationService {
 				notification.setEmployer(existingJob.getEmployer());
 				notification.setApplicant(existingApplicant);
 				notificationDao.addNotification(notification);
-				
+
+				jobApplication.setJob(existingJob);
+				jobApplication.setResume(existingApplicant.getResume());
+
+				List<JobApplication> exapplications = existingApplicant.getJobApplication();
+				exapplications.add(jobApplication);
+				applicantDao.addApplicant(existingApplicant);
 				jobApplication = jobApplicationDao.addJobApplication(jobApplication);
 				jobApplicationDto = dtoConfig.setJobApplicationDtoAttributes(jobApplication);
 

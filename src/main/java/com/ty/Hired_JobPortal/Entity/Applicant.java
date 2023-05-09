@@ -47,7 +47,7 @@ public class Applicant {
 	@NotNull(message = "Applicant Gender shouldn't be null")
 	private String applicantGender;
 
-	@ManyToMany(mappedBy = "applicants", cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.ALL)
 	private List<Skill> skill;
 
 	@OneToOne(cascade = CascadeType.ALL) // uni
@@ -59,6 +59,4 @@ public class Applicant {
 	@OneToMany(mappedBy = "applicant")
 	private List<Notification> notification;
 	
-	@ManyToMany(mappedBy = "applicant",cascade = CascadeType.ALL)
-	private List<Job> job;
 }

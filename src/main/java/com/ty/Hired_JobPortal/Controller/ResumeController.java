@@ -25,13 +25,16 @@ import io.swagger.annotations.ApiResponses;
 public class ResumeController {
 	@Autowired
 	private ResumeService resumeService;
+
 	@ApiOperation(value = "Save Resume", notes = "API is used to save Resume ")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "succesfully created"),
 			@ApiResponse(code = 400, message = "Resume not found for the given Resume ID") })
 	@PostMapping
-	public ResponseEntity<ResponseStructure<ResumeDto>> addResume(@RequestBody Resume resume,@RequestParam int applicantId) {
-		return resumeService.addResume(resume,applicantId);
+	public ResponseEntity<ResponseStructure<ResumeDto>> addResume(@RequestBody Resume resume,
+			@RequestParam int applicantId) {
+		return resumeService.addResume(resume, applicantId);
 	}
+
 	@ApiOperation(value = "Get Resume", notes = "API is used to Get Resume ")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "succesfully Found"),
 			@ApiResponse(code = 400, message = "Id not found for the given Resume ID") })
@@ -39,6 +42,7 @@ public class ResumeController {
 	public ResponseEntity<ResponseStructure<ResumeDto>> getJobApplication(@RequestParam int resumeId) {
 		return resumeService.findResumeById(resumeId);
 	}
+
 	@ApiOperation(value = "Update Resume", notes = "API is used to Update Resume ")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "succesfully Updated"),
 			@ApiResponse(code = 400, message = "Id not found for the given Resume ID") })
@@ -47,6 +51,7 @@ public class ResumeController {
 			@RequestParam int resumeId) {
 		return resumeService.updateResume(resume, resumeId);
 	}
+
 	@ApiOperation(value = "Delete Resume", notes = "API is used to delete Resume ")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "succesfully deleted"),
 			@ApiResponse(code = 400, message = "Resume not found for the given Resume ID") })

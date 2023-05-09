@@ -26,7 +26,6 @@ public class ApplicantDao {
 		}
 	}
 
-
 	public Applicant updateApplicant(Applicant applicant, int id) {
 		Optional<Applicant> optional = applicantRepo.findById(id);
 		if (optional.isPresent()) {
@@ -48,12 +47,11 @@ public class ApplicantDao {
 	}
 
 	public Applicant findByApplicantEmail(String applicantEmail) {
-		
+
 		Optional<Applicant> optional = applicantRepo.findByApplicantEmail(applicantEmail);
 		if (optional.isEmpty()) {
 			return null;
-		} else 
+		} else
 			return optional.get();
-		}
+	}
 }
-	

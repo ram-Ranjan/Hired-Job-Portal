@@ -27,7 +27,7 @@ public class ResumeService {
 	@Autowired
 	private DtoConfig dtoConfig;
 
-	public ResponseEntity<ResponseStructure<ResumeDto>> addResume(Resume resume,int applicantId) {
+	public ResponseEntity<ResponseStructure<ResumeDto>> addResume(Resume resume, int applicantId) {
 
 		Applicant existingApplicant = applicantDao.findApplicantById(applicantId);
 		if(existingApplicant!= null)
@@ -43,6 +43,7 @@ public class ResumeService {
 		else 
 			throw new IdNotFoundForApplicantException("Applicant doesn't exist with given id");
 			
+
 	}
 
 	public ResponseEntity<ResponseStructure<ResumeDto>> findResumeById(int resumeId) {

@@ -71,7 +71,7 @@ public class ApplicantController {
 	public ResponseEntity<ResponseStructure<ApplicantDto>> findByApplicantEmail(@RequestParam String applicantEmail) {
 		return applicantService.findApplicantByEmail(applicantEmail);
 	}
-	
+
 	@ApiOperation(value = "Find Applicant by Job", notes = "API is used to save Applicant ")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "succesfully found"),
 			@ApiResponse(code = 400, message = "Id not found for the given Applicant ID") })

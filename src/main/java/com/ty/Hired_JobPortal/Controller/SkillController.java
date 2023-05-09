@@ -26,21 +26,25 @@ import io.swagger.annotations.ApiResponses;
 public class SkillController {
 	@Autowired
 	private SkillService skillService;
+
 	@ApiOperation(value = "Save Skill", notes = "API is used to save Skill ")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "succesfully created"),
 			@ApiResponse(code = 400, message = "Skill not found for the given Skill ID") })
 	@PostMapping("/employer")
-	public ResponseEntity<ResponseStructure<SkillDto>> addSkillbyEmployer(@RequestBody Skill skill,@RequestParam int jobId) {
-		return skillService.addSkillbyEmployer(skill,jobId);
+	public ResponseEntity<ResponseStructure<SkillDto>> addSkillbyEmployer(@RequestParam String[] skill,
+			@RequestParam int jobId) {
+		return skillService.addSkillbyEmployer(skill, jobId);
 	}
-	
+
 	@ApiOperation(value = "Save Skill", notes = "API is used to save Skill ")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "succesfully created"),
 			@ApiResponse(code = 400, message = "Skill not found for the given Skill ID") })
 	@PostMapping("/applicant")
-	public ResponseEntity<ResponseStructure<SkillDto>> addSkillByApplicant(@RequestBody Skill skill,@RequestParam int applicantId) {
-		return skillService.addSkillByApplicant(skill,applicantId);
+	public ResponseEntity<ResponseStructure<SkillDto>> addSkillByApplicant(@RequestParam String[] skills,
+			@RequestParam int applicantId) {
+		return skillService.addSkillByApplicant(skills, applicantId);
 	}
+
 	@ApiOperation(value = "Get Skill", notes = "API is used to find Skill ")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "succesfully Found"),
 			@ApiResponse(code = 400, message = "Skill not found for the given Skill ID") })
@@ -48,6 +52,7 @@ public class SkillController {
 	public ResponseEntity<ResponseStructure<SkillDto>> getSkill(@RequestParam int skillId) {
 		return skillService.getSkill(skillId);
 	}
+
 	@ApiOperation(value = "Update Skill", notes = "API is used to Update Skill ")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Succesfully Updated"),
 			@ApiResponse(code = 400, message = "Skill not found for the given Skill ID") })
@@ -56,6 +61,7 @@ public class SkillController {
 			@RequestParam int skillId) {
 		return skillService.updateSkill(skill, skillId);
 	}
+
 	@ApiOperation(value = "Delete Skill", notes = "API is used to delete Skill ")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "succesfully deleted"),
 			@ApiResponse(code = 400, message = "Skill not found for the given Skill ID") })

@@ -17,6 +17,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -54,16 +56,17 @@ public class Job {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "employerId")
 	private Employer employer;
-	
+
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable
+	@JsonIgnore
 	private List<Applicant> applicant;
-	
+
 	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable
 	private List<Skill> skill;
-	
+
 	@OneToMany(mappedBy = "job")
+	@JsonIgnore
 	private List<JobApplication> jobApplication;
 
 }
