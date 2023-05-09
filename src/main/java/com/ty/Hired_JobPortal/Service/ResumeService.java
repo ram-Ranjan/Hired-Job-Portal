@@ -25,22 +25,22 @@ public class ResumeService {
 	@Autowired
 	private DtoConfig dtoConfig;
 
-	public ResponseEntity<ResponseStructure<ResumeDto>> addResume(Resume resume,int applicantId) {
+	public ResponseEntity<ResponseStructure<ResumeDto>> addResume(Resume resume, int applicantId) {
 
 		Applicant existingApplicant = applicantDao.findApplicantById(applicantId);
-		if(existingApplicant!= null)
-		{
-		resume = resumeDao.addResume(resume);
-		resumeDto = dtoConfig.setResumeDtoAttributes(resume);
-		ResponseStructure<ResumeDto> responseStructure = new ResponseStructure<>();
-		responseStructure.setStatus(HttpStatus.CREATED.value());
-		responseStructure.setMessage("Resume added Successfully!!");
-		responseStructure.setData(resumeDto);
-		return new ResponseEntity<ResponseStructure<ResumeDto>>(responseStructure, HttpStatus.CREATED);
-	}
-		else 
+		if (existingApplicant != null) {
+			existingApplicant.setResume(resume);
+			applicantDao.addApplicant(existingApplicant);
+			resume = resumeDao.addResume(resume);
+			resumeDto = dtoConfig.setResumeDtoAttributes(resume);
+			ResponseStructure<ResumeDto> responseStructure = new ResponseStructure<>();
+			responseStructure.setStatus(HttpStatus.CREATED.value());
+			responseStructure.setMessage("Resume added Successfully!!");
+			responseStructure.setData(resumeDto);
+			return new ResponseEntity<ResponseStructure<ResumeDto>>(responseStructure, HttpStatus.CREATED);
+		} else
 			throw new IdNotFoundException("Applicant doesn't exist with given id");
-			
+
 	}
 
 	public ResponseEntity<ResponseStructure<ResumeDto>> findResumeById(int id) {

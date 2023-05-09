@@ -13,6 +13,8 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -30,8 +32,7 @@ public class Resume {
 	private LocalDateTime uploadDateTime;
 
 	@OneToMany(mappedBy = "resume")
+	@JsonIgnore
 	private List<JobApplication> jobApplication;
-	
+
 }
-
-

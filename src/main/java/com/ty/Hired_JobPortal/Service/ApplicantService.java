@@ -125,7 +125,7 @@ public class ApplicantService {
 		if (existingApplicant != null) {
 			ResponseStructure<ApplicantDto> responseStructure = new ResponseStructure<>();
 
-			ApplicantDto  applicantDto = dtoConfig.setApplicantDtoAttributes(existingApplicant);
+			ApplicantDto applicantDto = dtoConfig.setApplicantDtoAttributes(existingApplicant);
 			responseStructure.setStatus(HttpStatus.FOUND.value());
 			responseStructure.setMessage("Applicant Found!!");
 			responseStructure.setData(applicantDto);
@@ -144,8 +144,6 @@ public class ApplicantService {
 			List<Applicant> applicants = existingJob.getApplicant();
 			existingJob.setApplicant(applicants);
 			for (Applicant applicant : applicants) {
-				List<Job> jobs = applicant.getJob();
-				applicant.setJob(jobs);
 				ApplicantDto applicantDto = dtoConfig.setApplicantDtoAttributes(applicant);
 				applicantLists.add(applicantDto);
 			}

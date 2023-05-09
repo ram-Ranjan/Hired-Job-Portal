@@ -2,13 +2,11 @@ package com.ty.Hired_JobPortal.DTO;
 
 import java.util.List;
 
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.springframework.stereotype.Component;
 
-import com.ty.Hired_JobPortal.Entity.Job;
 import com.ty.Hired_JobPortal.Entity.JobApplication;
 import com.ty.Hired_JobPortal.Entity.Notification;
 import com.ty.Hired_JobPortal.Entity.Resume;
@@ -40,7 +38,5 @@ public class ApplicantDto {
 	@OneToMany
 	private List<Notification> notification;
 	
-	@ManyToMany
-	private List<Job> job;
 
 }

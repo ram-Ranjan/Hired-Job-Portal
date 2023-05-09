@@ -26,17 +26,17 @@ public class EmployerService {
 	public ResponseEntity<ResponseStructure<EmployerDto>> addEmployer(Employer employer) {
 
 		Employer existingEmployer = employerDao.findByEmployerEmail(employer.getEmployerEmail());
-		if(existingEmployer==null) {
-		employer = employerDao.addEmployer(employer);
-		employerDto = dtoConfig.setEmployerDtoAttributes(employer);
-		ResponseStructure<EmployerDto> responseStructure = new ResponseStructure<>();
-		responseStructure.setStatus(HttpStatus.CREATED.value());
-		responseStructure.setMessage("Employer added Successfully!!");
-		responseStructure.setData(employerDto);
-		return new ResponseEntity<ResponseStructure<EmployerDto>>(responseStructure, HttpStatus.CREATED);
+		if (existingEmployer == null) {
+			employer = employerDao.addEmployer(employer);
+			employerDto = dtoConfig.setEmployerDtoAttributes(employer);
+			ResponseStructure<EmployerDto> responseStructure = new ResponseStructure<>();
+			responseStructure.setStatus(HttpStatus.CREATED.value());
+			responseStructure.setMessage("Employer added Successfully!!");
+			responseStructure.setData(employerDto);
+			return new ResponseEntity<ResponseStructure<EmployerDto>>(responseStructure, HttpStatus.CREATED);
 		}
 		throw new EmailNotFoundException("Employer Email already existing");
-		}
+	}
 
 	public ResponseEntity<ResponseStructure<EmployerDto>> getEmployer(int employerId) {
 		Employer existingEmployer = employerDao.findEmployerById(employerId);
@@ -88,8 +88,8 @@ public class EmployerService {
 			throw new IdNotFoundException("Failed to delete Employer!!");
 		}
 	}
-	
-	public ResponseEntity<ResponseStructure<EmployerDto>> findByEmployerEmail(String employerEmail){
+
+	public ResponseEntity<ResponseStructure<EmployerDto>> findByEmployerEmail(String employerEmail) {
 		ResponseStructure<EmployerDto> responseStructure = new ResponseStructure<>();
 		Employer existingEmployer = employerDao.findByEmployerEmail(employerEmail);
 
@@ -104,7 +104,8 @@ public class EmployerService {
 			throw new EmailNotFoundException("Failed to find the Employer with Email!!");
 		}
 	}
-	public ResponseEntity<ResponseStructure<EmployerDto>> findByEmployerName(String employerName){
+
+	public ResponseEntity<ResponseStructure<EmployerDto>> findByEmployerName(String employerName) {
 		ResponseStructure<EmployerDto> responseStructure = new ResponseStructure<>();
 		Employer existingEmployer = employerDao.findByEmployerName(employerName);
 
