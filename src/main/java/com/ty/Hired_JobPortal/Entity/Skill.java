@@ -30,9 +30,6 @@ public class Skill {
 	@NotBlank(message = "skillDescription shouldn't be blank")
 	@NotNull(message = "skillDescription shouldn't be null")
 	private String skillDescription;
-	@NotBlank(message = "levelRequired shouldn't be blank")
-	@NotNull(message = "levelRequired shouldn't be null")
-	private String levelRequired;
 	
 	
 	@JsonIgnore
