@@ -15,8 +15,16 @@ import com.ty.Hired_JobPortal.DTO.DtoConfig;
 import com.ty.Hired_JobPortal.DTO.JobDto;
 import com.ty.Hired_JobPortal.Entity.Employer;
 import com.ty.Hired_JobPortal.Entity.Job;
-import com.ty.Hired_JobPortal.Exception.IdNotFoundException;
-import com.ty.Hired_JobPortal.Exception.NameNotFoundException;
+import com.ty.Hired_JobPortal.Entity.Skill;
+import com.ty.Hired_JobPortal.Exception.IdNotFoundForEmployerException;
+import com.ty.Hired_JobPortal.Exception.IdNotFoundForJobException;
+import com.ty.Hired_JobPortal.Exception.IdNotFoundForSkillException;
+import com.ty.Hired_JobPortal.Exception.LocationNotFoundForJobException;
+import com.ty.Hired_JobPortal.Exception.NameNotFoundForCompanyException;
+import com.ty.Hired_JobPortal.Exception.NameNotFoundForEmployerException;
+import com.ty.Hired_JobPortal.Exception.NameNotFoundForJobException;
+import com.ty.Hired_JobPortal.Exception.NameNotFoundForSkillException;
+
 
 @Service
 public class JobService {
@@ -48,7 +56,7 @@ public class JobService {
 			responseStructure.setData(jobDto);
 			return new ResponseEntity<ResponseStructure<JobDto>>(responseStructure, HttpStatus.CREATED);
 		} else {
-			throw new IdNotFoundException("Employer Not Found with given Id!!");
+			throw new IdNotFoundForEmployerException("Employer Not Found with given Id!!");
 		}
 	}
 
@@ -65,7 +73,7 @@ public class JobService {
 			responseStructure.setData(jobDto);
 			return new ResponseEntity<ResponseStructure<JobDto>>(responseStructure, HttpStatus.FOUND);
 		} else {
-			throw new IdNotFoundException("Failed to find Job!!");
+			throw new IdNotFoundForJobException("Failed to find Job!!");
 		}
 	}
 
@@ -85,13 +93,13 @@ public class JobService {
 
 			return new ResponseEntity<ResponseStructure<JobDto>>(responseStructure, HttpStatus.OK);
 		} else {
-			throw new IdNotFoundException("Failed to Update Job!!");
+			throw new IdNotFoundForJobException("Failed to Update Job!!");
 		}
 
 	}
 
-	public ResponseEntity<ResponseStructure<JobDto>> deleteJob(int employerId) {
-		Job existingJob = jobDao.deleteJobById(employerId);
+	public ResponseEntity<ResponseStructure<JobDto>> deleteJob(int jobId) {
+		Job existingJob = jobDao.deleteJobById(jobId);
 
 		if (existingJob != null) {
 			jobDto = dtoConfig.setJobDtoAttributes(existingJob);
@@ -103,7 +111,7 @@ public class JobService {
 
 			return new ResponseEntity<ResponseStructure<JobDto>>(responseStructure, HttpStatus.OK);
 		} else {
-			throw new IdNotFoundException("Failed to delete Job!!");
+			throw new IdNotFoundForJobException("Failed to delete Job!!");
 		}
 	}
 
@@ -126,7 +134,7 @@ public class JobService {
 			return new ResponseEntity<ResponseStructure<List<JobDto>>>(responseStructure, HttpStatus.FOUND);
 
 		} else
-			throw new NameNotFoundException("Failed to find any Job with the CompanyName!!");
+			throw new NameNotFoundForJobException("Failed to find any Job with the CompanyName!!");
 	}
 
 	public ResponseEntity<ResponseStructure<List<JobDto>>> findAllJobsByCompanyName(String companyName) {
@@ -146,7 +154,7 @@ public class JobService {
 
 			return new ResponseEntity<ResponseStructure<List<JobDto>>>(responseStructure, HttpStatus.FOUND);
 		} else
-			throw new NameNotFoundException("Failed to find any Job with the Company Name!!");
+			throw new NameNotFoundForCompanyException("Failed to find any Job with the Company Name!!");
 	}
 
 	public ResponseEntity<ResponseStructure<List<JobDto>>> findAllJobsByJobLocation(String jobLocation) {
@@ -164,9 +172,10 @@ public class JobService {
 			responseStructure.setData(jobLists);
 			return new ResponseEntity<ResponseStructure<List<JobDto>>>(responseStructure, HttpStatus.FOUND);
 		} else {
-			throw new NameNotFoundException("Failed to find any Job with the Job Location!!");
+			throw new LocationNotFoundForJobException("Failed to find any Job with the Job Location!!");
 		}
 	}
+
 
 	public ResponseEntity<ResponseStructure<List<JobDto>>> findAllJobsByEmployerId(int employerId) {
 		ResponseStructure<List<JobDto>> responseStructure = new ResponseStructure<>();
@@ -186,9 +195,9 @@ public class JobService {
 				return new ResponseEntity<ResponseStructure<List<JobDto>>>(responseStructure, HttpStatus.FOUND);
 
 			} else
-				throw new IdNotFoundException("Failed to find any Job !!");
+				throw new IdNotFoundForJobException("Failed to find any Job !!");
 		} else
-			throw new NameNotFoundException("Failed to find any Job with the Employer Name!!");
+			throw new NameNotFoundForEmployerException("Failed to find any Job with the Employer Name!!");
 
 	}
 

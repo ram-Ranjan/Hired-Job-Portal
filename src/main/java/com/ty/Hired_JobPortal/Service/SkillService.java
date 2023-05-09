@@ -14,7 +14,10 @@ import com.ty.Hired_JobPortal.DTO.SkillDto;
 import com.ty.Hired_JobPortal.Entity.Applicant;
 import com.ty.Hired_JobPortal.Entity.Job;
 import com.ty.Hired_JobPortal.Entity.Skill;
-import com.ty.Hired_JobPortal.Exception.IdNotFoundException;
+import com.ty.Hired_JobPortal.Exception.IdNotFoundForApplicantException;
+import com.ty.Hired_JobPortal.Exception.IdNotFoundForEmployerException;
+import com.ty.Hired_JobPortal.Exception.IdNotFoundForJobException;
+import com.ty.Hired_JobPortal.Exception.IdNotFoundForSkillException;
 
 @Service
 public class SkillService {
@@ -60,8 +63,10 @@ public class SkillService {
 			responseStructure.setMessage("Skill added Successfully!!");
 			responseStructure.setData(existingJob.getSkill());
 			return new ResponseEntity<ResponseStructure<SkillDto>>(responseStructure, HttpStatus.CREATED);
-		} else {
-			throw new IdNotFoundException("Failed to find the Job with passed JobId!!");
+		}
+		else {
+			throw new IdNotFoundForJobException("Failed to find the Job with passed JobId!!");
+
 		}
 	}
 
@@ -90,8 +95,10 @@ public class SkillService {
 			responseStructure.setMessage("Skill added Successfully!!");
 			responseStructure.setData(existingApplicant.getSkill());
 			return new ResponseEntity<ResponseStructure<SkillDto>>(responseStructure, HttpStatus.CREATED);
-		} else
-			throw new IdNotFoundException("Failed to find the Applicant with passed ApplicantId!!");
+		}
+		else 
+			throw new IdNotFoundForApplicantException("Failed to find the Applicant with passed ApplicantId!!");
+
 	}
 
 	public ResponseEntity<ResponseStructure<SkillDto>> getSkill(int skillId) {
@@ -105,7 +112,7 @@ public class SkillService {
 			responseStructure.setData(skillDto);
 			return new ResponseEntity<ResponseStructure<SkillDto>>(responseStructure, HttpStatus.CREATED);
 		} else {
-			throw new IdNotFoundException("Failed to find the Skill!!");
+			throw new IdNotFoundForSkillException("Failed to find the Skill!!");
 		}
 	}
 
@@ -124,7 +131,7 @@ public class SkillService {
 
 			return new ResponseEntity<ResponseStructure<SkillDto>>(responseStructure, HttpStatus.OK);
 		} else {
-			throw new IdNotFoundException("Failed to Update Skill!!");
+			throw new IdNotFoundForSkillException("Failed to Update Skill!!");
 		}
 
 	}
@@ -140,7 +147,7 @@ public class SkillService {
 			responseStructure.setData(skillDto);
 			return new ResponseEntity<ResponseStructure<SkillDto>>(responseStructure, HttpStatus.OK);
 		} else {
-			throw new IdNotFoundException("Failed to delete Skill!!");
+			throw new IdNotFoundForSkillException("Failed to delete Skill!!");
 		}
 	}
 

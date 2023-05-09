@@ -1,15 +1,13 @@
 package com.ty.Hired_JobPortal.Exception;
 
-public class IdNotFoundException extends RuntimeException {
-	
+public class NameNotFoundForJobException extends RuntimeException {
 	private String message;
 
-	public IdNotFoundException(String message) {
+	public NameNotFoundForJobException(String message) {
 		this.message = message;
 	}
 
 	public String getMessage() {
 		return message;
 	}
-
 }

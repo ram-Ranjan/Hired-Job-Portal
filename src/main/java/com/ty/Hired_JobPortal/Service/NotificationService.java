@@ -16,7 +16,8 @@ import com.ty.Hired_JobPortal.DTO.NotificationDto;
 import com.ty.Hired_JobPortal.Entity.Applicant;
 import com.ty.Hired_JobPortal.Entity.Employer;
 import com.ty.Hired_JobPortal.Entity.Notification;
-import com.ty.Hired_JobPortal.Exception.IdNotFoundException;
+import com.ty.Hired_JobPortal.Exception.IdNotFoundForEmployerException;
+import com.ty.Hired_JobPortal.Exception.IdNotFoundForNotificationException;
 
 @Service
 public class NotificationService {
@@ -54,24 +55,32 @@ public class NotificationService {
 
 	public ResponseEntity<ResponseStructure<List<Notification>>> getNotificationbyEmployerId(int employerId) {
 
-		Employer employer = employerDao.findEmployerById(employerId);
-		if (employer != null) {
-			List<Notification> existingNotifications = notificationDao.findNotificationByEmployer(employer);
-			if (existingNotifications != null) {
-				for (Notification notification : existingNotifications) {
-					notificationDto = dtoConfig.setNotificationDtoAttributes(notification);
-					notificationDto.setEmployer(employer);
-				}
-				ResponseStructure<List<Notification>> responseStructure = new ResponseStructure<>();
-				responseStructure.setStatus(HttpStatus.FOUND.value());
-				responseStructure.setMessage("Notification Found!!");
-				responseStructure.setData(notificationDto);
-				return new ResponseEntity<ResponseStructure<List<Notification>>>(responseStructure, HttpStatus.CREATED);
-			} else {
-				throw new IdNotFoundException("Failed to find the Notification!!");
-			}
+			ResponseStructure<NotificationDto> responseStructure = new ResponseStructure<>();
+			responseStructure.setStatus(HttpStatus.FOUND.value());
+			responseStructure.setMessage("Notification Found!!");
+			responseStructure.setData(notificationDto);
+			return new ResponseEntity<ResponseStructure<NotificationDto>>(responseStructure, HttpStatus.CREATED);
 		} else {
-			throw new IdNotFoundException("Failed to find the Applicant Id!!");
+			throw new IdNotFoundForNotificationException("Failed to find the Notification!!");
+		}
+	}
+
+	public ResponseEntity<ResponseStructure<NotificationDto>> updateNotification(Notification updatedNotification,
+			int notificationId) {
+		Notification existingNotification = notificationDao.findNotificationById(notificationId);
+
+		if (existingNotification != null) {
+			updatedNotification.setNotificationId(existingNotification.getNotificationId());
+			existingNotification = notificationDao.updateNotification(updatedNotification);
+			notificationDto = dtoConfig.setNotificationDtoAttributes(existingNotification);
+
+			ResponseStructure<NotificationDto> responseStructure = new ResponseStructure<>();
+			responseStructure.setStatus(HttpStatus.OK.value());
+			responseStructure.setMessage("Notification Updated!!");
+			responseStructure.setData(notificationDto);
+			return new ResponseEntity<ResponseStructure<NotificationDto>>(responseStructure, HttpStatus.CREATED);
+		} else {
+			throw new IdNotFoundForNotificationException("Failed to Update the Notification!!");
 		}
 	}
 
@@ -86,7 +95,7 @@ public class NotificationService {
 			responseStructure.setData(notificationDto);
 			return new ResponseEntity<ResponseStructure<NotificationDto>>(responseStructure, HttpStatus.CREATED);
 		} else {
-			throw new IdNotFoundException("Failed to Delete the Notification!!");
+			throw new IdNotFoundForNotificationException("Failed to Delete the Notification!!");
 		}
 	}
 }

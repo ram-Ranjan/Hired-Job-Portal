@@ -10,9 +10,10 @@ import com.ty.Hired_JobPortal.DAO.EmployerDao;
 import com.ty.Hired_JobPortal.DTO.DtoConfig;
 import com.ty.Hired_JobPortal.DTO.EmployerDto;
 import com.ty.Hired_JobPortal.Entity.Employer;
-import com.ty.Hired_JobPortal.Exception.EmailNotFoundException;
-import com.ty.Hired_JobPortal.Exception.EmployerNameNotFoundException;
-import com.ty.Hired_JobPortal.Exception.IdNotFoundException;
+import com.ty.Hired_JobPortal.Exception.EmailAlreadyExistingForEmployerException;
+import com.ty.Hired_JobPortal.Exception.EmailNotFoundForEmployerException;
+import com.ty.Hired_JobPortal.Exception.IdNotFoundForEmployerException;
+import com.ty.Hired_JobPortal.Exception.NameNotFoundForEmployerException;
 
 @Service
 public class EmployerService {
@@ -35,7 +36,8 @@ public class EmployerService {
 			responseStructure.setData(employerDto);
 			return new ResponseEntity<ResponseStructure<EmployerDto>>(responseStructure, HttpStatus.CREATED);
 		}
-		throw new EmailNotFoundException("Employer Email already existing");
+		throw new EmailAlreadyExistingForEmployerException("Employer Email already existing");
+
 	}
 
 	public ResponseEntity<ResponseStructure<EmployerDto>> getEmployer(int employerId) {
@@ -50,7 +52,7 @@ public class EmployerService {
 			responseStructure.setData(employerDto);
 			return new ResponseEntity<ResponseStructure<EmployerDto>>(responseStructure, HttpStatus.FOUND);
 		} else {
-			throw new IdNotFoundException("Failed to find the Employer!!");
+			throw new IdNotFoundForEmployerException("Failed to find the Employer!!");
 		}
 	}
 
@@ -69,7 +71,7 @@ public class EmployerService {
 
 			return new ResponseEntity<ResponseStructure<EmployerDto>>(responseStructure, HttpStatus.OK);
 		} else {
-			throw new IdNotFoundException("Failed to Update Employer!!");
+			throw new IdNotFoundForEmployerException("Failed to Update Employer!!");
 		}
 
 	}
@@ -85,7 +87,7 @@ public class EmployerService {
 			responseStructure.setData(employerDto);
 			return new ResponseEntity<ResponseStructure<EmployerDto>>(responseStructure, HttpStatus.OK);
 		} else {
-			throw new IdNotFoundException("Failed to delete Employer!!");
+			throw new IdNotFoundForEmployerException("Failed to delete Employer!!");
 		}
 	}
 
@@ -101,7 +103,7 @@ public class EmployerService {
 			responseStructure.setData(employerDto);
 			return new ResponseEntity<ResponseStructure<EmployerDto>>(responseStructure, HttpStatus.FOUND);
 		} else {
-			throw new EmailNotFoundException("Failed to find the Employer with Email!!");
+			throw new EmailNotFoundForEmployerException("Failed to find the Employer with Email!!");
 		}
 	}
 
@@ -117,7 +119,7 @@ public class EmployerService {
 			responseStructure.setData(employerDto);
 			return new ResponseEntity<ResponseStructure<EmployerDto>>(responseStructure, HttpStatus.FOUND);
 		} else {
-			throw new EmployerNameNotFoundException("Failed to find the Employer with Name!!");
+			throw new NameNotFoundForEmployerException("Failed to find the Employer with Name!!");
 		}
 	}
 
