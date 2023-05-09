@@ -13,6 +13,8 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Getter;
 import lombok.Setter;
 @Entity
@@ -25,18 +27,17 @@ public class Notification {
 	@NotBlank(message = "Work Experience shouldn't be blank")
 	@NotNull(message = "Work Experience shouldn't be null")
 	private String notificationMessage;
-	@NotBlank(message = "Notification Type shouldn't be blank")
-	@NotNull(message = "Notification Type shouldn't be null")
-	private String notificationType;
 	@DateTimeFormat
 	private	LocalDateTime notificationTime;
 	
 	@ManyToOne
 	@JoinColumn(name = "employerId")
+	@JsonIgnore
 	private Employer employer;
 	
 	@ManyToOne 
 	@JoinColumn(name = "applicantId")
+	@JsonIgnore
 	private Applicant applicant;
 	
 }

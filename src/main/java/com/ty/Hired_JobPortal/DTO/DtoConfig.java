@@ -34,6 +34,10 @@ public class DtoConfig {
 		applicantDto.setApplicantContactInfo(applicant.getApplicantContactInfo());
 		applicantDto.setApplicantEmail((applicant.getApplicantEmail()));
 		applicantDto.setApplicantGender(applicant.getApplicantGender());
+		applicantDto.setResume(applicant.getResume());
+		applicantDto.setSkill(applicant.getSkill());
+		applicantDto.setJobApplication(applicant.getJobApplication());
+		applicantDto.setNotification(applicant.getNotification());
 		return applicantDto;
 	}
 
@@ -80,14 +84,12 @@ public class DtoConfig {
 		notificationDto.setNotificationId(notification.getNotificationId());
 		notificationDto.setNotificationMessage(notification.getNotificationMessage());
 		notificationDto.setNotificationTime(notification.getNotificationTime());
-		notificationDto.setNotificationType(notification.getNotificationType());
 		return notificationDto;
 	}
 
 	public SkillDto setSkillDtoAttributes(Skill skill) {
 		skillDto.setSkillId(skill.getSkillId());
 		skillDto.setSkillName(skill.getSkillName());
-		skillDto.setJob(skill.getJobs());
 
 		return skillDto;
 

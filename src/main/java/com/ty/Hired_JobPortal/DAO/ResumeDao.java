@@ -9,8 +9,8 @@ import com.ty.Hired_JobPortal.Entity.Resume;
 import com.ty.Hired_JobPortal.Repo.ResumeRepo;
 
 @Repository
-public class ResumeDao{
-	
+public class ResumeDao {
+
 	@Autowired
 	private ResumeRepo resumeRepo;
 
