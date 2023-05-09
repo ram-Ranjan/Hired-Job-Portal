@@ -179,7 +179,7 @@ public class JobService {
 		List<JobDto> jobLists = new ArrayList<>();
 
 		if (existingSkill != null) {
-			List<Job> existingJobs = existingSkill.getJob();
+			List<Job> existingJobs = existingSkill.getJobs();
 
 			if (existingJobs != null) {
 				for (Job job : existingJobs) {

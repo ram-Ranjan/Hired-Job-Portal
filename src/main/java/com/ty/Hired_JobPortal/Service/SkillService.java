@@ -46,7 +46,7 @@ public class SkillService {
 			List<Skill> skills=new ArrayList<>();
 			skills.add(skill);
 			existingJob.setSkill(skills);
-			skill.setJob(jobs);
+			skill.setJobs(jobs);
 			skill = skillDao.addSkill(skill);	
 			
 			skillDto = dtoConfig.setSkillDtoAttributes(skill);
@@ -67,7 +67,9 @@ public class SkillService {
 		ResponseStructure<SkillDto> responseStructure = new ResponseStructure<>();
 		Applicant existingApplicant = applicantDao.findApplicantById(applicantId);
 		if (existingApplicant != null) {
-			skill.setApplicant(existingApplicant);
+			List<Applicant> applicants = skill.getApplicants();
+			applicants.add(existingApplicant);
+			skill.setApplicants(applicants);
 			skill = skillDao.addSkill(skill);	
 			
 			List<Skill> skills = new ArrayList<>();
