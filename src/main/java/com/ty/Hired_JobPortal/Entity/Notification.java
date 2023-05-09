@@ -25,9 +25,6 @@ public class Notification {
 	@NotBlank(message = "Work Experience shouldn't be blank")
 	@NotNull(message = "Work Experience shouldn't be null")
 	private String notificationMessage;
-	@NotBlank(message = "Notification Type shouldn't be blank")
-	@NotNull(message = "Notification Type shouldn't be null")
-	private String notificationType;
 	@DateTimeFormat
 	private	LocalDateTime notificationTime;
 	

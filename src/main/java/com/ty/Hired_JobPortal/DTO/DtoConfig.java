@@ -41,6 +41,7 @@ public class DtoConfig {
 		jobApplicationDto.setJobApplicationId(jobApplication.getJobApplicationId());
 		jobApplicationDto.setJobApplicationAppliedDate((jobApplication.getJobApplicationAppliedDate()));
 		jobApplicationDto.setNoticePeriod(jobApplication.getNoticePeriod());
+		jobApplicationDto.setJobApplicationReference(jobApplication.getJobApplicationReference());
 		jobApplicationDto.setJobApplicationWorkExperience(jobApplication.getJobApplicationWorkExperience());
 		return jobApplicationDto;
 	}
@@ -80,7 +81,6 @@ public class DtoConfig {
 		notificationDto.setNotificationId(notification.getNotificationId());
 		notificationDto.setNotificationMessage(notification.getNotificationMessage());
 		notificationDto.setNotificationTime(notification.getNotificationTime());
-		notificationDto.setNotificationType(notification.getNotificationType());
 		return notificationDto;
 	}
 
