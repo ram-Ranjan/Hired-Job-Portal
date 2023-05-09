@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
@@ -27,21 +28,13 @@ public class Skill {
 	@NotBlank(message = "skillName shouldn't be blank")
 	@NotNull(message = "skillName shouldn't be null")
 	private String skillName;
-	@NotBlank(message = "skillDescription shouldn't be blank")
-	@NotNull(message = "skillDescription shouldn't be null")
-	private String skillDescription;
-	@NotBlank(message = "levelRequired shouldn't be blank")
-	@NotNull(message = "levelRequired shouldn't be null")
-	private String levelRequired;
-	
 	
 	@JsonIgnore
 	@ManyToMany(cascade = CascadeType.ALL,mappedBy = "skill")
-	private List<Job> job;
+	private List<Job> jobs;
 	
-	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "applicantId")
-	private Applicant applicant;
+	@ManyToMany
+	@JoinTable
+	private List<Applicant> applicants;
 	
 }

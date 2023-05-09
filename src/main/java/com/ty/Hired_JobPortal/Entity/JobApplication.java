@@ -37,10 +37,8 @@ public class JobApplication {
 	@NotNull(message = "Work Experience shouldn't be null")
 	private String jobApplicationWorkExperience;
 	
-	
-	@OneToOne(cascade = CascadeType.ALL)
-	private Notification notification;
-	@OneToOne(cascade = CascadeType.ALL)
+
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Job job;
 	
 

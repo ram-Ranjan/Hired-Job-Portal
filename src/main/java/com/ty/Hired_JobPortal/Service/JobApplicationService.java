@@ -1,5 +1,6 @@
 package com.ty.Hired_JobPortal.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,11 +13,13 @@ import com.ty.Hired_JobPortal.Config.ResponseStructure;
 import com.ty.Hired_JobPortal.DAO.ApplicantDao;
 import com.ty.Hired_JobPortal.DAO.JobApplicationDao;
 import com.ty.Hired_JobPortal.DAO.JobDao;
+import com.ty.Hired_JobPortal.DAO.NotificationDao;
 import com.ty.Hired_JobPortal.DTO.DtoConfig;
 import com.ty.Hired_JobPortal.DTO.JobApplicationDto;
 import com.ty.Hired_JobPortal.Entity.Applicant;
 import com.ty.Hired_JobPortal.Entity.Job;
 import com.ty.Hired_JobPortal.Entity.JobApplication;
+import com.ty.Hired_JobPortal.Entity.Notification;
 import com.ty.Hired_JobPortal.Exception.IdNotFoundException;
 
 @Service
@@ -32,19 +35,32 @@ public class JobApplicationService {
 	private DtoConfig dtoConfig;
 	@Autowired
 	private JobDao jobDao;
+	@Autowired
+	private NotificationDao notificationDao;
 
 	public ResponseEntity<ResponseStructure<JobApplicationDto>> addJobApplication(JobApplication jobApplication,
 			int applicantId, int jobId) {
 		ResponseStructure<JobApplicationDto> responseStructure = new ResponseStructure<>();
 		Applicant existingApplicant = applicantDao.findApplicantById(applicantId);
-		
+
 		if (existingApplicant != null) {
 			Job existingJob = jobDao.findJobById(jobId);
 			if (existingJob != null) {
-				List<Applicant> applicants = new ArrayList<>();
+
+				List<Applicant> applicants = existingJob.getApplicant();
 				applicants.add(existingApplicant);
-				List<Job> jobs = new ArrayList<>();
+				List<Job> jobs = existingApplicant.getJob();
 				jobs.add(existingJob);
+				jobDao.updateJob(existingJob);
+				applicantDao.addApplicant(existingApplicant);
+
+				Notification notification = new Notification();
+				notification.setNotificationMessage("Job Applied for " + existingJob.getJobName());
+				notification.setNotificationTime(LocalDateTime.now());
+				notification.setEmployer(existingJob.getEmployer());
+				notification.setApplicant(existingApplicant);
+				notificationDao.addNotification(notification);
+				
 				jobApplication = jobApplicationDao.addJobApplication(jobApplication);
 				jobApplicationDto = dtoConfig.setJobApplicationDtoAttributes(jobApplication);
 

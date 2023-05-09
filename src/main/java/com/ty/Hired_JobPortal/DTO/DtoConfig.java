@@ -21,12 +21,11 @@ public class DtoConfig {
 	@Autowired
 	ResumeDto resumeDto;
 	@Autowired
-	EmployerDto employerDto; 
+	EmployerDto employerDto;
 	@Autowired
 	NotificationDto notificationDto;
 	@Autowired
 	SkillDto skillDto;
-	
 
 	public ApplicantDto setApplicantDtoAttributes(Applicant applicant) {
 		applicantDto.setApplicantId(applicant.getApplicantId());
@@ -56,17 +55,17 @@ public class DtoConfig {
 		resumeDto.setUploadDateTime(resume.getUploadDateTime());
 		return resumeDto;
 	}
-	public EmployerDto setEmployerDtoAttributes(Employer employer)
-	{
+
+	public EmployerDto setEmployerDtoAttributes(Employer employer) {
 		employerDto.setEmployerId(employer.getEmployerId());
 		employerDto.setEmployerName(employer.getEmployerName());
 		employerDto.setEmployerEmail(employer.getEmployerEmail());
 		employerDto.setEmployerContact(employer.getEmployerContact());
 		return employerDto;
 	}
-	public JobDto setJobDtoAttributes(Job job)
-	{
-		JobDto jobDto=new JobDto();
+
+	public JobDto setJobDtoAttributes(Job job) {
+		JobDto jobDto = new JobDto();
 		jobDto.setJobId(job.getJobId());
 		jobDto.setJobName(job.getJobName());
 		jobDto.setCompanyName(job.getCompanyName());
@@ -78,10 +77,10 @@ public class DtoConfig {
 		jobDto.setJobCategory(job.getJobCategory());
 		jobDto.setEmployer(job.getEmployer());
 		return jobDto;
-		
+
 	}
-	public NotificationDto setNotificationDtoAttributes(Notification notification)
-	{
+
+	public NotificationDto setNotificationDtoAttributes(Notification notification) {
 		notificationDto.setNotificationId(notification.getNotificationId());
 		notificationDto.setNotificationMessage(notification.getNotificationMessage());
 		notificationDto.setNotificationTime(notification.getNotificationTime());
@@ -89,15 +88,12 @@ public class DtoConfig {
 		return notificationDto;
 	}
 
-	public SkillDto setSkillDtoAttributes(Skill skill)
-	{
+	public SkillDto setSkillDtoAttributes(Skill skill) {
 		skillDto.setSkillId(skill.getSkillId());
 		skillDto.setSkillName(skill.getSkillName());
-		skillDto.setSkillDescription(skill.getSkillDescription());
-		skillDto.setLevelRequired(skill.getLevelRequired());
-		skillDto.setJob(skill.getJob());
+		skillDto.setJob(skill.getJobs());
 		return skillDto;
-		
+
 	}
 
 }
