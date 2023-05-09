@@ -18,7 +18,6 @@ import lombok.Setter;
 public class NotificationDto {
 	private int notificationId;
 	private String notificationMessage;
-	private String notificationType;
 	private LocalDateTime notificationTime;
 
 	@ManyToOne
