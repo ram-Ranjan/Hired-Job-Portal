@@ -36,7 +36,7 @@ public class Skill {
 	@ManyToMany(cascade = CascadeType.ALL,mappedBy = "skill")
 	private List<Job> job;
 	
-	
+	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "applicantId")
 	private Applicant applicant;
