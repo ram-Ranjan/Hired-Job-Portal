@@ -25,10 +25,7 @@ public class ApplicantDto {
 	private String applicantFirstName;
 	private String applicantLastName;
 	private String applicantEmail;
-	private long applicantContact;
-	private String applicantAddress;
-	private int applicantPostalCode;
-	private String applicantWorkStatus;
+	private long applicantContactInfo;
 	private String applicantGender;
 	
 	@OneToMany

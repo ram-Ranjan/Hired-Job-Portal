@@ -42,9 +42,16 @@ public class JobApplicationService {
 			Job existingJob = jobDao.findJobById(jobId);
 			if (existingJob != null) {
 				List<Applicant> applicants = new ArrayList<>();
+				List<JobApplication> jobApplications = new ArrayList<>();
+				jobApplications.add(jobApplication);
+				existingApplicant.setJobApplication(jobApplications);
+				
 				applicants.add(existingApplicant);
+				
 				List<Job> jobs = new ArrayList<>();
 				jobs.add(existingJob);
+				jobApplication.setJob(existingJob);
+				
 				jobApplication = jobApplicationDao.addJobApplication(jobApplication);
 				jobApplicationDto = dtoConfig.setJobApplicationDtoAttributes(jobApplication);
 

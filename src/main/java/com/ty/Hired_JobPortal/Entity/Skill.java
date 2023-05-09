@@ -30,16 +30,13 @@ public class Skill {
 	@NotBlank(message = "skillDescription shouldn't be blank")
 	@NotNull(message = "skillDescription shouldn't be null")
 	private String skillDescription;
-	@NotBlank(message = "levelRequired shouldn't be blank")
-	@NotNull(message = "levelRequired shouldn't be null")
-	private String levelRequired;
 	
 	
 	@JsonIgnore
 	@ManyToMany(cascade = CascadeType.ALL,mappedBy = "skill")
 	private List<Job> job;
 	
-	
+	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "applicantId")
 	private Applicant applicant;

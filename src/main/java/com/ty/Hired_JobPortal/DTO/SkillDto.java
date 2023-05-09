@@ -20,7 +20,6 @@ public class SkillDto {
 	private int skillId;
 	private String skillName;
 	private String skillDescription;
-	private String levelRequired;
 
 	@ManyToMany
 	private List<Job> job;

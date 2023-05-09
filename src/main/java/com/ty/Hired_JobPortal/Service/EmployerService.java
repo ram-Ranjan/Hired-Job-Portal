@@ -96,9 +96,7 @@ public class EmployerService {
 		if (existingEmployer != null) {
 			responseStructure.setStatus(HttpStatus.FOUND.value());
 			responseStructure.setMessage("Employer Found!!");
-			employerDto.setEmployerId(existingEmployer.getEmployerId());
-			employerDto.setEmployerName(existingEmployer.getEmployerName());
-			employerDto.setEmployerContact(existingEmployer.getEmployerContact());
+			employerDto = dtoConfig.setEmployerDtoAttributes(existingEmployer);
 			employerDto.setJob(existingEmployer.getJob());
 			responseStructure.setData(employerDto);
 			return new ResponseEntity<ResponseStructure<EmployerDto>>(responseStructure, HttpStatus.FOUND);
@@ -113,9 +111,7 @@ public class EmployerService {
 		if (existingEmployer != null) {
 			responseStructure.setStatus(HttpStatus.FOUND.value());
 			responseStructure.setMessage("Employer Found!!");
-			employerDto.setEmployerId(existingEmployer.getEmployerId());
-			employerDto.setEmployerName(existingEmployer.getEmployerName());
-			employerDto.setEmployerContact(existingEmployer.getEmployerContact());
+			employerDto = dtoConfig.setEmployerDtoAttributes(existingEmployer);
 			employerDto.setJob(existingEmployer.getJob());
 			responseStructure.setData(employerDto);
 			return new ResponseEntity<ResponseStructure<EmployerDto>>(responseStructure, HttpStatus.FOUND);

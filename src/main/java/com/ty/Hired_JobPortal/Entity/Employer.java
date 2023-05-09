@@ -37,7 +37,7 @@ public class Employer {
 	private String employerPassword;
 	@Min(value = 6000000000l, message = "Customer contact must be ten digits and start with 6,7,8 or  9")
     @Max(value = 9999999999L, message = "Customer contact must be ten digits and start with 6,7,8 or  9")
-	private long employerContact;
+	private long employerContactInfo;
 
 	@OneToMany(mappedBy = "employer")
 	@JsonIgnore

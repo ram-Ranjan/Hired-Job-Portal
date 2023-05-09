@@ -66,11 +66,15 @@ public class SkillService {
 	public ResponseEntity<ResponseStructure<SkillDto>> addSkillByApplicant(Skill skill, int applicantId) {
 		ResponseStructure<SkillDto> responseStructure = new ResponseStructure<>();
 		Applicant existingApplicant = applicantDao.findApplicantById(applicantId);
-		
 		if (existingApplicant != null) {
 			skill.setApplicant(existingApplicant);
 			skill = skillDao.addSkill(skill);	
+			
+			List<Skill> skills = new ArrayList<>();
+			skills.add(skill);
+			existingApplicant.setSkill(skills);
 			skillDto = dtoConfig.setSkillDtoAttributes(skill);
+			skillDto.setApplicant(existingApplicant);
 			responseStructure.setStatus(HttpStatus.CREATED.value());
 			responseStructure.setMessage("Skill added Successfully!!");
 			responseStructure.setData(skillDto);
@@ -78,7 +82,6 @@ public class SkillService {
 		}
 		else 
 			throw new IdNotFoundException("Failed to find the Applicant with passed ApplicantId!!");
-		
 	}
 
 	public ResponseEntity<ResponseStructure<SkillDto>> getSkill(int skillId) {

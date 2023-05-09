@@ -43,8 +43,9 @@ public class Job {
 	private String salary;
 	@PastOrPresent(message = "Date posted is invalid ")
 	private LocalDate datePosted;
+	@NotBlank(message = "Job Category shouldn't be blank")
 	@NotNull(message = "isFilled shouln't be null")
-	private boolean jobFilled;
+	private String jobStatus;
 	@NotBlank(message = "Job Category shouldn't be blank")
 	@NotNull(message = "Job Category shouldn't be null")
 	private String jobCategory;
