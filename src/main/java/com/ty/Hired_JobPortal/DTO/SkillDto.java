@@ -19,7 +19,6 @@ import lombok.Setter;
 public class SkillDto {
 	private int skillId;
 	private String skillName;
-	private String skillDescription;
 
 	@ManyToMany
 	private List<Job> job;
