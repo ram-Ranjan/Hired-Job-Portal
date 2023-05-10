@@ -31,8 +31,8 @@ public class DtoConfig {
 		applicantDto.setApplicantId(applicant.getApplicantId());
 		applicantDto.setApplicantFirstName((applicant.getApplicantFirstName()));
 		applicantDto.setApplicantLastName(applicant.getApplicantLastName());
-		applicantDto.setApplicantContactInfo(applicant.getApplicantContactInfo());
 		applicantDto.setApplicantEmail((applicant.getApplicantEmail()));
+		applicantDto.setApplicantContactInfo(applicant.getApplicantContactInfo());
 		applicantDto.setApplicantGender(applicant.getApplicantGender());
 		applicantDto.setResume(applicant.getResume());
 		applicantDto.setSkill(applicant.getSkill());
@@ -90,7 +90,6 @@ public class DtoConfig {
 	public SkillDto setSkillDtoAttributes(Skill skill) {
 		skillDto.setSkillId(skill.getSkillId());
 		skillDto.setSkillName(skill.getSkillName());
-
 		return skillDto;
 
 	}

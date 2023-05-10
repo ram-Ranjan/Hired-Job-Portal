@@ -19,7 +19,7 @@ public class ResumeDto {
 	private int resumeId;
 	private String filePath;
 	private LocalDateTime uploadDateTime;
-	
+
 	@OneToMany
 	private List<JobApplication> jobApplicantion;
 

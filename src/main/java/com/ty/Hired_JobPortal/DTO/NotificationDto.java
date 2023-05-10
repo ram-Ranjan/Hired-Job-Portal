@@ -22,8 +22,8 @@ public class NotificationDto {
 
 	@ManyToOne
 	private Employer employer;
-	
-	@ManyToOne 
+
+	@ManyToOne
 	private Applicant applicant;
 
 }
