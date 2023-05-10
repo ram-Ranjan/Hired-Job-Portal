@@ -31,7 +31,7 @@ public class ApplicantController {
 	@Autowired
 	ApplicantService applicantService;
 
-	@ApiOperation(value = "Save Applicant", notes = "API is used to save Applicant ")
+	@ApiOperation(value = "Add Applicant", notes = "API is used to save Applicant ")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "succesfully created"),
 			@ApiResponse(code = 400, message = "Id not found for the given Applicant ID") })
 	@PostMapping
