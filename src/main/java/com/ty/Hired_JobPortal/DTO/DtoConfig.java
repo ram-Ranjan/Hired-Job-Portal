@@ -45,7 +45,6 @@ public class DtoConfig {
 		jobApplicationDto.setJobApplicationId(jobApplication.getJobApplicationId());
 		jobApplicationDto.setJobApplicationAppliedDate((jobApplication.getJobApplicationAppliedDate()));
 		jobApplicationDto.setNoticePeriod(jobApplication.getNoticePeriod());
-		jobApplicationDto.setJobApplicationReference(jobApplication.getJobApplicationReference());
 		jobApplicationDto.setJobApplicationWorkExperience(jobApplication.getJobApplicationWorkExperience());
 		return jobApplicationDto;
 	}
