@@ -29,9 +29,6 @@ public class JobApplication {
 	private LocalDateTime jobApplicationAppliedDate;
 	@PositiveOrZero
 	private int noticePeriod;
-	@NotBlank(message = "Job Reference shouldn't be blank")
-	@NotNull(message = "Job Reference shouldn't be null")
-	private String jobApplicationReference;
 	@NotBlank(message = "Work Experience shouldn't be blank")
 	@NotNull(message = "Work Experience shouldn't be null")
 	private String jobApplicationWorkExperience;
