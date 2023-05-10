@@ -21,7 +21,6 @@ public class JobApplicationDto {
 	private int jobApplicationId;
 	private LocalDateTime jobApplicationAppliedDate;
 	private int noticePeriod;
-	private String jobApplicationReference;
 	private String jobApplicationWorkExperience;
 	
 	@OneToOne 
