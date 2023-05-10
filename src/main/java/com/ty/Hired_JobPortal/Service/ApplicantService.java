@@ -23,7 +23,6 @@ import com.ty.Hired_JobPortal.Exception.EmailAlreadyExistingForApplicantExceptio
 import com.ty.Hired_JobPortal.Exception.EmailNotFoundForApplicantException;
 import com.ty.Hired_JobPortal.Exception.IdNotFoundForApplicantException;
 import com.ty.Hired_JobPortal.Exception.IdNotFoundForJobException;
-import com.ty.Hired_JobPortal.Exception.NameNotFoundForEmployerException;
 
 @Service
 public class ApplicantService {
@@ -33,7 +32,7 @@ public class ApplicantService {
 	@Autowired
 	private ApplicantDto applicantDto;
 
-	@Autowired
+	@Autowired	
 	private JobDao jobDao;
 	@Autowired
 	private DtoConfig dtoConfig;
