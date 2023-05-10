@@ -6,7 +6,9 @@ import javax.persistence.OneToMany;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ty.Hired_JobPortal.Entity.Job;
+import com.ty.Hired_JobPortal.Entity.Notification;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -21,6 +23,9 @@ public class EmployerDto {
 	private long employerContactInfo;
 
 	@OneToMany
+	@JsonIgnore
 	private List<Job> job;
 
+	@OneToMany
+	private List<Notification> notification;
 }

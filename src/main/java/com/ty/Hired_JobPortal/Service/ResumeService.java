@@ -27,21 +27,19 @@ public class ResumeService {
 	private DtoConfig dtoConfig;
 
 	public ResponseEntity<ResponseStructure<ResumeDto>> addResume(Resume resume, int applicantId) {
-
-		Applicant existingApplicant = applicantDao.findApplicantById(applicantId);
-		if(existingApplicant!= null)
-		{
-		resume = resumeDao.addResume(resume);
-		resumeDto = dtoConfig.setResumeDtoAttributes(resume);
 		ResponseStructure<ResumeDto> responseStructure = new ResponseStructure<>();
-		responseStructure.setStatus(HttpStatus.CREATED.value());
-		responseStructure.setMessage("Resume added Successfully!!");
-		responseStructure.setData(resumeDto);
-		return new ResponseEntity<ResponseStructure<ResumeDto>>(responseStructure, HttpStatus.CREATED);
-	}
-		else 
+		Applicant existingApplicant = applicantDao.findApplicantById(applicantId);
+		if (existingApplicant != null) {
+
+			existingApplicant.setResume(resume);
+			resume = resumeDao.addResume(resume);
+			resumeDto = dtoConfig.setResumeDtoAttributes(resume);
+			responseStructure.setStatus(HttpStatus.CREATED.value());
+			responseStructure.setMessage("Resume added Successfully!!");
+			responseStructure.setData(resumeDto);
+			return new ResponseEntity<ResponseStructure<ResumeDto>>(responseStructure, HttpStatus.CREATED);
+		} else
 			throw new IdNotFoundForApplicantException("Applicant doesn't exist with given id");
-			
 
 	}
 

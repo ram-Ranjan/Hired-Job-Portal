@@ -64,18 +64,18 @@ public class NotificationService {
 					notificationDto = dtoConfig.setNotificationDtoAttributes(notification);
 					notificationDto.setEmployer(employer);
 				}
-			ResponseStructure<List<Notification>> responseStructure = new ResponseStructure<>();
-			responseStructure.setStatus(HttpStatus.FOUND.value());
-			responseStructure.setMessage("Notification Found!!");
-			responseStructure.setData(notificationDto);
-			return new ResponseEntity<ResponseStructure<List<Notification>>>(responseStructure, HttpStatus.CREATED);
+				ResponseStructure<List<Notification>> responseStructure = new ResponseStructure<>();
+				responseStructure.setStatus(HttpStatus.FOUND.value());
+				responseStructure.setMessage("Notification Found!!");
+				responseStructure.setData(notificationDto);
+				return new ResponseEntity<ResponseStructure<List<Notification>>>(responseStructure, HttpStatus.CREATED);
+			} else {
+				throw new IdNotFoundForNotificationException("Failed to find the Notification!!");
+			}
 		} else {
-			throw new IdNotFoundForNotificationException("Failed to find the Notification!!");
-		}}else {
 			throw new IdNotFoundForEmployerException("Failed to find the Employer!!");
 		}
-}
-
+	}
 
 	public ResponseEntity<ResponseStructure<NotificationDto>> deleteNotification(int notificationId) {
 		Notification existingNotification = notificationDao.deleteNotificationById(notificationId);

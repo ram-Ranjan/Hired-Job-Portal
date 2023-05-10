@@ -2,6 +2,7 @@ package com.ty.Hired_JobPortal.DTO;
 
 import java.util.List;
 
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -25,18 +26,17 @@ public class ApplicantDto {
 	private String applicantEmail;
 	private long applicantContactInfo;
 	private String applicantGender;
-	
-	@OneToMany
+
+	@ManyToMany
 	private List<Skill> skill;
-	
-	@OneToOne 
+
+	@OneToOne // uni
 	private Resume resume;
-	
-	@OneToMany
+
+	@OneToMany // uni
 	private List<JobApplication> jobApplication;
-	
+
 	@OneToMany
 	private List<Notification> notification;
-	
 
 }
