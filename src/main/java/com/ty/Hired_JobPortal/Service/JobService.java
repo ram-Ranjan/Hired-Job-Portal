@@ -15,15 +15,12 @@ import com.ty.Hired_JobPortal.DTO.DtoConfig;
 import com.ty.Hired_JobPortal.DTO.JobDto;
 import com.ty.Hired_JobPortal.Entity.Employer;
 import com.ty.Hired_JobPortal.Entity.Job;
-import com.ty.Hired_JobPortal.Entity.Skill;
 import com.ty.Hired_JobPortal.Exception.IdNotFoundForEmployerException;
 import com.ty.Hired_JobPortal.Exception.IdNotFoundForJobException;
-import com.ty.Hired_JobPortal.Exception.IdNotFoundForSkillException;
 import com.ty.Hired_JobPortal.Exception.LocationNotFoundForJobException;
 import com.ty.Hired_JobPortal.Exception.NameNotFoundForCompanyException;
 import com.ty.Hired_JobPortal.Exception.NameNotFoundForEmployerException;
 import com.ty.Hired_JobPortal.Exception.NameNotFoundForJobException;
-import com.ty.Hired_JobPortal.Exception.NameNotFoundForSkillException;
 
 
 @Service

@@ -13,7 +13,6 @@ import com.ty.Hired_JobPortal.DTO.ResumeDto;
 import com.ty.Hired_JobPortal.Entity.Applicant;
 import com.ty.Hired_JobPortal.Entity.Resume;
 import com.ty.Hired_JobPortal.Exception.IdNotFoundForApplicantException;
-import com.ty.Hired_JobPortal.Exception.IdNotFoundForEmployerException;
 import com.ty.Hired_JobPortal.Exception.IdNotFoundForResumeException;
 
 @Service

@@ -15,7 +15,6 @@ import com.ty.Hired_JobPortal.Entity.Applicant;
 import com.ty.Hired_JobPortal.Entity.Job;
 import com.ty.Hired_JobPortal.Entity.Skill;
 import com.ty.Hired_JobPortal.Exception.IdNotFoundForApplicantException;
-import com.ty.Hired_JobPortal.Exception.IdNotFoundForEmployerException;
 import com.ty.Hired_JobPortal.Exception.IdNotFoundForJobException;
 import com.ty.Hired_JobPortal.Exception.IdNotFoundForSkillException;
 
