@@ -74,8 +74,7 @@ public class NotificationService {
 		}}else {
 			throw new IdNotFoundForEmployerException("Failed to find the Employer!!");
 		}
-	}
-
+}
 
 
 	public ResponseEntity<ResponseStructure<NotificationDto>> deleteNotification(int notificationId) {

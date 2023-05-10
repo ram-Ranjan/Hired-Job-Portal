@@ -40,23 +40,23 @@ public class EmployerDao {
 			return employer;
 		}
 	}
+
 	public Employer findByEmployerEmail(String employerEmail) {
 		Optional<Employer> optional = employerRepo.findByEmployerEmail(employerEmail);
-		if(optional.isEmpty()) {
+		if (optional.isEmpty()) {
 			return null;
-		}
-		else {
+		} else {
 			return optional.get();
 		}
 	}
+
 	public Employer findByEmployerName(String employerName) {
 		Optional<Employer> optional = employerRepo.findByEmployerName(employerName);
-		if(optional.isEmpty()) {
+		if (optional.isEmpty()) {
 			return null;
-		}
-		else {
+		} else {
 			return optional.get();
 		}
 	}
-	
+
 }
