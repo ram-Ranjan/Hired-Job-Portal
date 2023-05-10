@@ -20,7 +20,6 @@ import com.ty.Hired_JobPortal.Entity.Job;
 import com.ty.Hired_JobPortal.Entity.JobApplication;
 import com.ty.Hired_JobPortal.Entity.Notification;
 import com.ty.Hired_JobPortal.Exception.IdNotFoundForApplicantException;
-import com.ty.Hired_JobPortal.Exception.IdNotFoundForEmployerException;
 import com.ty.Hired_JobPortal.Exception.IdNotFoundForJobApplicationException;
 import com.ty.Hired_JobPortal.Exception.IdNotFoundForJobException;
 

@@ -16,6 +16,7 @@ import com.ty.Hired_JobPortal.DTO.NotificationDto;
 import com.ty.Hired_JobPortal.Entity.Applicant;
 import com.ty.Hired_JobPortal.Entity.Employer;
 import com.ty.Hired_JobPortal.Entity.Notification;
+import com.ty.Hired_JobPortal.Exception.IdNotFoundForApplicantException;
 import com.ty.Hired_JobPortal.Exception.IdNotFoundForEmployerException;
 import com.ty.Hired_JobPortal.Exception.IdNotFoundForNotificationException;
 
@@ -48,46 +49,41 @@ public class NotificationService {
 				responseStructure.setData(existingNotifications);
 				return new ResponseEntity<ResponseStructure<List<Notification>>>(responseStructure, HttpStatus.CREATED);
 			} else
-				throw new IdNotFoundException("Failed to find the Notification!!");
+				throw new IdNotFoundForNotificationException("Failed to find the Notification!!");
 		} else
-			throw new IdNotFoundException("Failed to find the Applicant Id!!");
+			throw new IdNotFoundForApplicantException("Failed to find the Applicant Id!!");
 	}
 
 	public ResponseEntity<ResponseStructure<List<Notification>>> getNotificationbyEmployerId(int employerId) {
 
-			ResponseStructure<NotificationDto> responseStructure = new ResponseStructure<>();
+		Employer employer = employerDao.findEmployerById(employerId);
+		if (employer != null) {
+			List<Notification> existingNotifications = notificationDao.findNotificationByEmployer(employer);
+			if (existingNotifications != null) {
+				for (Notification notification : existingNotifications) {
+					notificationDto = dtoConfig.setNotificationDtoAttributes(notification);
+					notificationDto.setEmployer(employer);
+				}
+			ResponseStructure<List<Notification>> responseStructure = new ResponseStructure<>();
 			responseStructure.setStatus(HttpStatus.FOUND.value());
 			responseStructure.setMessage("Notification Found!!");
 			responseStructure.setData(notificationDto);
-			return new ResponseEntity<ResponseStructure<NotificationDto>>(responseStructure, HttpStatus.CREATED);
+			return new ResponseEntity<ResponseStructure<List<Notification>>>(responseStructure, HttpStatus.CREATED);
 		} else {
 			throw new IdNotFoundForNotificationException("Failed to find the Notification!!");
+		}}else {
+			throw new IdNotFoundForEmployerException("Failed to find the Employer!!");
 		}
 	}
 
-	public ResponseEntity<ResponseStructure<NotificationDto>> updateNotification(Notification updatedNotification,
-			int notificationId) {
-		Notification existingNotification = notificationDao.findNotificationById(notificationId);
 
-		if (existingNotification != null) {
-			updatedNotification.setNotificationId(existingNotification.getNotificationId());
-			existingNotification = notificationDao.updateNotification(updatedNotification);
-			notificationDto = dtoConfig.setNotificationDtoAttributes(existingNotification);
-
-			ResponseStructure<NotificationDto> responseStructure = new ResponseStructure<>();
-			responseStructure.setStatus(HttpStatus.OK.value());
-			responseStructure.setMessage("Notification Updated!!");
-			responseStructure.setData(notificationDto);
-			return new ResponseEntity<ResponseStructure<NotificationDto>>(responseStructure, HttpStatus.CREATED);
-		} else {
-			throw new IdNotFoundForNotificationException("Failed to Update the Notification!!");
-		}
-	}
 
 	public ResponseEntity<ResponseStructure<NotificationDto>> deleteNotification(int notificationId) {
 		Notification existingNotification = notificationDao.deleteNotificationById(notificationId);
 
 		if (existingNotification != null) {
+			existingNotification.setApplicant(null);
+			existingNotification.setEmployer(null);
 			notificationDto = dtoConfig.setNotificationDtoAttributes(existingNotification);
 			ResponseStructure<NotificationDto> responseStructure = new ResponseStructure<>();
 			responseStructure.setStatus(HttpStatus.OK.value());
