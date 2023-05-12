@@ -79,5 +79,12 @@ public class ApplicantController {
 	public ResponseEntity<ResponseStructure<List<ApplicantDto>>> findByApplicantJobId(@RequestParam int jobId) {
 		return applicantService.findApplicantByJobId(jobId);
 	}
+	@ApiOperation(value = "Applicant Login", notes = "API is used to Login Applicant ")
+	@ApiResponses(value = { @ApiResponse(code = 201, message = "succesfully Logged In"),
+			@ApiResponse(code = 400, message = "Id not found for the given Applicant ID") })
+	@GetMapping("/login")
+	public ResponseEntity<ResponseStructure<ApplicantDto>> employerLogin(@RequestParam String applicantEmail,@RequestParam String applicantPassword) {
+		return applicantService.applicantLogin(applicantEmail,applicantPassword);
+	}
 
 }

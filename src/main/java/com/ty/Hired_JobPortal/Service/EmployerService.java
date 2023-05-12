@@ -10,7 +10,9 @@ import com.ty.Hired_JobPortal.DAO.EmployerDao;
 import com.ty.Hired_JobPortal.DTO.DtoConfig;
 import com.ty.Hired_JobPortal.DTO.EmployerDto;
 import com.ty.Hired_JobPortal.Entity.Employer;
+import com.ty.Hired_JobPortal.Exception.ApplicantCredentialsInvalidException;
 import com.ty.Hired_JobPortal.Exception.EmailAlreadyExistingForEmployerException;
+import com.ty.Hired_JobPortal.Exception.EmailNotFoundForApplicantException;
 import com.ty.Hired_JobPortal.Exception.EmailNotFoundForEmployerException;
 import com.ty.Hired_JobPortal.Exception.IdNotFoundForEmployerException;
 import com.ty.Hired_JobPortal.Exception.NameNotFoundForEmployerException;
@@ -120,6 +122,26 @@ public class EmployerService {
 			return new ResponseEntity<ResponseStructure<EmployerDto>>(responseStructure, HttpStatus.FOUND);
 		} else {
 			throw new NameNotFoundForEmployerException("Failed to find the Employer with Name!!");
+		}
+	}
+
+	public ResponseEntity<ResponseStructure<EmployerDto>> employerLogin(String employerEmail, String employerPassword) {
+		Employer existingEmployer = employerDao.findByEmployerEmail(employerEmail);
+
+		if (existingEmployer != null) {
+
+			if (existingEmployer.getEmployerPassword() == employerPassword) {
+				ResponseStructure<EmployerDto> responseStructure = new ResponseStructure<>();
+
+				EmployerDto employerDto = dtoConfig.setEmployerDtoAttributes(existingEmployer);
+				responseStructure.setStatus(HttpStatus.FOUND.value());
+				responseStructure.setMessage("Applicant Found!!");
+				responseStructure.setData(employerDto);
+				return new ResponseEntity<ResponseStructure<EmployerDto>>(responseStructure, HttpStatus.FOUND);
+			} else
+				throw new ApplicantCredentialsInvalidException("Incorrect Password, please recheck your password");
+		} else {
+			throw new EmailNotFoundForApplicantException("Failed to find the Applicant with given Email!!");
 		}
 	}
 
