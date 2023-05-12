@@ -26,7 +26,7 @@ public class NotificationController {
 	private NotificationService notificationService;
 
 
-	@ApiOperation(value = "Get Notification", notes = "API is used to save Notification ")
+	@ApiOperation(value = "Get Notification by Applicant ", notes = "API is used to save Notification ")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "succesfully found"),
 			@ApiResponse(code = 400, message = "Id not found for the given Notification ID") })
 	@GetMapping("/applicant")
@@ -35,7 +35,7 @@ public class NotificationController {
 	}
 	
 
-	@ApiOperation(value = "Get Notification", notes = "API is used to save Notification ")
+	@ApiOperation(value = "Get Notification by Employer", notes = "API is used to save Notification ")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "succesfully found"),
 			@ApiResponse(code = 400, message = "Id not found for the given Notification ID") })
 	@GetMapping("/employer")

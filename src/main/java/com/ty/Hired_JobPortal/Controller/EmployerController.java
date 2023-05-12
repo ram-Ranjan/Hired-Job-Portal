@@ -68,6 +68,13 @@ public class EmployerController {
 	public ResponseEntity<ResponseStructure<EmployerDto>> findByEmployerEmail(@RequestParam String employerEmail) {
 		return employerService.findByEmployerEmail(employerEmail);
 	}
+	@ApiOperation(value = "Employer Login", notes = "API is used to Login Employer ")
+	@ApiResponses(value = { @ApiResponse(code = 201, message = "succesfully Logged In"),
+			@ApiResponse(code = 400, message = "Id not found for the given Employer ID") })
+	@GetMapping("/login")
+	public ResponseEntity<ResponseStructure<EmployerDto>> employerLogin(@RequestParam String employerEmail,@RequestParam String employerPassword) {
+		return employerService.employerLogin(employerEmail,employerPassword);
+	}
 
 	@ApiOperation(value = "Find Employer by Name", notes = "API is used to save Employer ")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "succesfully found"),

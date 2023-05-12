@@ -21,6 +21,6 @@ public class ResumeDto {
 	private LocalDateTime uploadDateTime;
 
 	@OneToMany
-	private List<JobApplication> jobApplicantion;
+	private List<JobApplication> jobApplication;
 
 }

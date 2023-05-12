@@ -31,7 +31,7 @@ public class ApplicantController {
 	@Autowired
 	ApplicantService applicantService;
 
-	@ApiOperation(value = "Save Applicant", notes = "API is used to save Applicant ")
+	@ApiOperation(value = "Add Applicant", notes = "API is used to save Applicant ")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "succesfully created"),
 			@ApiResponse(code = 400, message = "Id not found for the given Applicant ID") })
 	@PostMapping
@@ -78,6 +78,13 @@ public class ApplicantController {
 	@GetMapping("/jobId")
 	public ResponseEntity<ResponseStructure<List<ApplicantDto>>> findByApplicantJobId(@RequestParam int jobId) {
 		return applicantService.findApplicantByJobId(jobId);
+	}
+	@ApiOperation(value = "Applicant Login", notes = "API is used to Login Applicant ")
+	@ApiResponses(value = { @ApiResponse(code = 201, message = "succesfully Logged In"),
+			@ApiResponse(code = 400, message = "Id not found for the given Applicant ID") })
+	@GetMapping("/login")
+	public ResponseEntity<ResponseStructure<ApplicantDto>> employerLogin(@RequestParam String applicantEmail,@RequestParam String applicantPassword) {
+		return applicantService.applicantLogin(applicantEmail,applicantPassword);
 	}
 
 }

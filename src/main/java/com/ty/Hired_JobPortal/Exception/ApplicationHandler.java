@@ -110,7 +110,24 @@ public class ApplicationHandler extends ResponseEntityExceptionHandler {
 		responseStructure.setData(ex.getMessage());
 		return new ResponseEntity<ResponseStructure<String>>(responseStructure, HttpStatus.NOT_FOUND);
 	}
+	
+	@ExceptionHandler(ApplicantCredentialsInvalidException.class)
+	public ResponseEntity<ResponseStructure<String>> applicantCredentialsInvalidException(ApplicantCredentialsInvalidException ex) {
+		ResponseStructure<String> responseStructure = new ResponseStructure<>();
+		responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
+		responseStructure.setMessage("Incorrect Password!!");
+		responseStructure.setData(ex.getMessage());
+		return new ResponseEntity<ResponseStructure<String>>(responseStructure, HttpStatus.NOT_FOUND);
+	}
 
+	@ExceptionHandler(EmployerCredentialsInvalidException.class)
+	public ResponseEntity<ResponseStructure<String>> employerCredentialsInvalidException(EmployerCredentialsInvalidException ex) {
+		ResponseStructure<String> responseStructure = new ResponseStructure<>();
+		responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
+		responseStructure.setMessage("Incorrect Password!!");
+		responseStructure.setData(ex.getMessage());
+		return new ResponseEntity<ResponseStructure<String>>(responseStructure, HttpStatus.NOT_FOUND);
+	}
 	@ExceptionHandler(IdNotFoundForNotificationException.class)
 	public ResponseEntity<ResponseStructure<String>> idNotFoundForNotificationException(
 			IdNotFoundForNotificationException ex) {
